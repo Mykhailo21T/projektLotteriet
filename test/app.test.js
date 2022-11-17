@@ -1,7 +1,7 @@
 const assert = require('chai').assert
 const {addDeltager} = require('../app.js')
 
-let list = 
+let list = []
 beforeEach(function (){
     list.length = 0
 })
