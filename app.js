@@ -29,5 +29,3 @@ exports.addDeltager = (navn, id, liste) => {
 
     liste.push(deltager)
 }
-
-//.
