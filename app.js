@@ -28,23 +28,6 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('assets'))
 
 
-let deltagerListe = []
-
-
-
-function addDeltager(deltager, liste){
-    liste = []
-    liste.push(deltager)
-    deltagerListe = liste
-}
-
-addDeltager("per", deltagerListe)
-
-console.log(deltagerListe);
-//test
-
-//exports.addDeltager = addDeltager()
-
 async function addDeltager(deltager) {
   // car = {brand: 'Citroen', model: 'Xantia'}
   const docRef = await addDoc(collection(db, "Medlemmer"), deltager)
@@ -69,3 +52,6 @@ app.get('/addDeltager', (request, response)=>{
 app.listen(8000, ()=>{
   console.log("lytter på port 8000");
 })
+
+
+
