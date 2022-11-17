@@ -7,7 +7,9 @@ let deltagerListe = []
 
 
 function addDeltager(deltager, liste){
+    liste = []
     liste.push(deltager)
+    deltagerListe = liste
 }
 
 addDeltager("per", deltagerListe)
