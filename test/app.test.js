@@ -1,6 +1,10 @@
-const assert = require('chai').assert
-const { expect } = require('chai')
-const {addDeltager} = require('../func.js')
+import chai from 'chai'
+const expect = chai.expect
+const assert = chai.assert
+
+import { addDeltager } from '../func.js'
+
+
 
 let list = []
 beforeEach(function (){

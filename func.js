@@ -20,7 +20,7 @@ console.log(deltagerListe);
 
 const _addDeltager = (navn, id, liste) => {
     let deltager = new Object();
-    deltager.name = navn;
+    deltager.navn = navn;
     deltager.id = id;
 
     liste.push(deltager);
