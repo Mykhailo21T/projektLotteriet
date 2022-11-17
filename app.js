@@ -18,9 +18,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const appFirebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(appFirebase);
+const db = getFirestore(appFirebase)
 
-const express = require('express')
+import express, { request, response } from 'express'
 const app = express()
 app.set('view engine', 'pug')
 app.use(express.json())
@@ -43,4 +43,29 @@ addDeltager("per", deltagerListe)
 console.log(deltagerListe);
 //test
 
-exports.addDeltager = addDeltager()
+//exports.addDeltager = addDeltager()
+
+async function addDeltager(deltager) {
+  // car = {brand: 'Citroen', model: 'Xantia'}
+  const docRef = await addDoc(collection(db, "Medlemmer"), deltager)
+  console.log("Document witten with ID: ", docRef.id);
+  return docRef.id
+}
+
+app.get('/addDeltager', (request, response)=>{
+  response.render('addDeltager', {})
+  })
+  
+  app.post('/addDeltager', async (request, response)=>{
+    const fornavn = request.body.fornavn
+    const efternavn = request.body.efternavn
+    // ALT hvad der kommer fra brugeren er en string
+    // I skal lave en fandens masse check
+    // STOL ALDRIG PÅ BRUGERDATA
+    let id = await addDeltager({fornavn: fornavn, efternavn: efternavn})
+    //response.redirect('/Medlemmer')
+  })
+
+app.listen(8000, ()=>{
+  console.log("lytter på port 8000");
+})
