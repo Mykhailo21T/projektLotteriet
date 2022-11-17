@@ -5,16 +5,27 @@ let app = express()
 let deltagerListe = []
 
 
+function addDeltager(navn, id, liste){
+    let deltager = new Object()
+    deltager.name = navn;
+    deltager.id = id;
 
-function addDeltager(deltager, liste){
-    liste = []
     liste.push(deltager)
-    deltagerListe = liste
+
 }
 
-addDeltager("per", deltagerListe)
+addDeltager("per", "1", deltagerListe)
+addDeltager("søren", "2", deltagerListe)
 
 console.log(deltagerListe);
 //test
 
-exports.addDeltager = addDeltager()
+
+
+exports.addDeltager = (navn, id, liste) => {
+    let deltager = new Object()
+    deltager.name = navn;
+    deltager.id = id;
+
+    liste.push(deltager)
+}

@@ -1,4 +1,5 @@
 const assert = require('chai').assert
+const { expect } = require('chai')
 const {addDeltager} = require('../app.js')
 
 let list = []
@@ -11,14 +12,22 @@ describe('When adding a Deltager', () =>{
     it('Should add the deltager', () =>{
 
         //assign
-        let konkretDeltager = "Knud Knudsen"
-        let konkretDeltager2 = "Per Hansen"
+        let deltager = new Object()
+        let deltager2 = new Object()
+
+        deltager.navn = "Knud Knudsen"
+        deltager.id = "1"
+
+        deltager2.navn = "Per Hansen"
+        deltager2.id = "2"
+
         //act
-        addDeltager(konkretDeltager, list)
-        addDeltager(konkretDeltager2, list)
+        addDeltager(deltager.navn, deltager.id, list)
+        addDeltager(deltager2.navn, deltager2.id, list)
 
         //assert
-        assert.equal(list.includes(konkretDeltager), "Knud knudsen")
-        assert.equal(list.includes(konkretDeltager2), "Per Hansen")
+        expect(list[0]).to.equal(deltager)
+        
+
     })
 })
