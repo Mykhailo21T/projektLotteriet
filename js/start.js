@@ -8,3 +8,5 @@ function kage () {
 let x = "k"
 
 kage()
+
+console.log("Commit test");
