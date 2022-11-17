@@ -6,3 +6,5 @@ function kage () {
 }
 
 let x = "k"
+
+kage()
