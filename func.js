@@ -3,26 +3,52 @@ let deltagerListe = []
 
 function addDeltager(navn, id, liste){
     let deltager = new Object()
-    deltager.name = navn;
+    deltager.navn = navn;
     deltager.id = id;
 
     liste.push(deltager)
 
 }
 
-addDeltager("per", "1", deltagerListe)
-addDeltager("søren", "2", deltagerListe)
+function addTalrækkeTilDeltager(deltagerID, talArray, liste){
+    
+ }
 
-console.log(deltagerListe);
+ function manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray){
+
+ }
+
+function findRandomTal(){
+
+}
+
+
+
 //test
 
 
+const _addTalrækkeTilDeltager = (deltagerID, tal) => {
+    addTalrækkeTilDeltager(deltagerID, tal)
+};
+export { _addTalrækkeTilDeltager as addTalrækkeTilDeltager };
+
 
 const _addDeltager = (navn, id, liste) => {
-    let deltager = new Object();
-    deltager.navn = navn;
-    deltager.id = id;
-
-    liste.push(deltager);
+   
+    addDeltager(navn, id, liste)
 };
 export { _addDeltager as addDeltager };
+
+
+const _findRandomTal = () => {
+   
+    findRandomTal()
+};
+export { _findRandomTal as findRandomTal };
+
+const _manuelVinderrække = (vinderTalArray, deltagerMedTalrækkeArray) => {
+   
+    manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray)
+};
+export { _manuelVinderrække as manuelVinderrække };
+
