@@ -28,24 +28,59 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('assets'))
 
 
-async function addDeltager(deltager) {
-  // car = {brand: 'Citroen', model: 'Xantia'}
-  const docRef = await addDoc(collection(db, "Medlemmer"), deltager)
+// Firebase funktioner
+
+let medlemmerCollection = collection(db, 'medlemmer')
+
+async function getMedlemmer() {
+  let medlemmerQueryDocs = await getDocs(medlemmerCollection)
+  let medlemmer = medlemmerQueryDocs.docs.map(doc => {
+      let data = doc.data()
+      data.docID = doc.id
+      return data
+  })
+  return medlemmer
+}
+
+async function getmedlem(id) {
+  const docRef = doc(db, "medlemmer", id)
+  const medlemQueryDocument = await getDoc(docRef)
+  let medlem = medlemQueryDocument.data()
+  medlem.docID = medlemQueryDocument.id
+  return medlem
+}
+
+async function addMedlem(medlem) {
+  // Medlem = {Fornavn: 'Hans', Efternavn: 'Hansen'}
+  const docRef = await addDoc(collection(db, "Medlemmer"), medlem)
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
 
-app.get('/addDeltager', (request, response)=>{
-  response.render('addDeltager', {})
+// Express Endpoint
+
+app.get('/medlemmer', async (request, response)=>{
+  const medlemmer = await getMedlemmer()
+  response.render('medlemmer', {medlemmer: medlemmer})
+})
+
+app.get('/medlem/:id', async (request, response)=>{
+  const medlemID = request.params.id
+  const medlem = await getMedlem(medlemID)
+  response.render('medlem', {bil: medlem})
+})
+
+app.get('/addMedlem', (request, response)=>{
+  response.render('addMedlem', {})
   })
   
-  app.post('/addDeltager', async (request, response)=>{
+  app.post('/addMedlem', async (request, response)=>{
     const fornavn = request.body.fornavn
     const efternavn = request.body.efternavn
     // ALT hvad der kommer fra brugeren er en string
     // I skal lave en fandens masse check
     // STOL ALDRIG PÅ BRUGERDATA
-    let id = await addDeltager({fornavn: fornavn, efternavn: efternavn})
+    let id = await addMedlem({fornavn: fornavn, efternavn: efternavn})
     //response.redirect('/Medlemmer')
   })
 
