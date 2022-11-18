@@ -28,12 +28,47 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('assets'))
 
 
+// Firebase funktioner
+
+let medlemmerCollection = collection(db, 'medlemmer')
+
+async function getMedlemmer() {
+  let medlemmerQueryDocs = await getDocs(medlemmerCollection)
+  let medlemmer = medlemmerQueryDocs.docs.map(doc => {
+      let data = doc.data()
+      data.docID = doc.id
+      return data
+  })
+  return medlemmer
+}
+
+async function getmedlem(id) {
+  const docRef = doc(db, "medlemmer", id)
+  const medlemQueryDocument = await getDoc(docRef)
+  let medlem = medlemQueryDocument.data()
+  medlem.docID = medlemQueryDocument.id
+  return medlem
+}
+
 async function addMedlem(medlem) {
   // Medlem = {Fornavn: 'Hans', Efternavn: 'Hansen'}
-  const docRef = await addDoc(collection(db, "Medlemmer"), Medlem)
+  const docRef = await addDoc(collection(db, "Medlemmer"), medlem)
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
+
+// Express Endpoint
+
+app.get('/medlemmer', async (request, response)=>{
+  const medlemmer = await getMedlemmer()
+  response.render('medlemmer', {medlemmer: medlemmer})
+})
+
+app.get('/medlem/:id', async (request, response)=>{
+  const medlemID = request.params.id
+  const medlem = await getMedlem(medlemID)
+  response.render('medlem', {bil: medlem})
+})
 
 app.get('/addMedlem', (request, response)=>{
   response.render('addMedlem', {})
