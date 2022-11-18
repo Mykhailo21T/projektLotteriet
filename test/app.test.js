@@ -3,7 +3,8 @@ const expect = chai.expect
 const assert = chai.assert
 
 import { addDeltager } from '../func.js'
-
+import { opretTalrække } from '../func.js'
+import { vælgTalPåForhånd } from '../func.js'
 
 
 let list = []
@@ -17,6 +18,9 @@ beforeEach(function(){
     deltager2.navn = "Per Hansen"
     deltager2.id = "2"
     deltager2.talrække = []
+
+
+    
 }
 )
 
