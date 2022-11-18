@@ -12,9 +12,11 @@ let deltager2 = new Object
 beforeEach(function(){
     deltager.navn = "Knud Knudsen"
     deltager.id = "1"
+    deltager.talrække = []
 
     deltager2.navn = "Per Hansen"
     deltager2.id = "2"
+    deltager2.talrække = []
 }
 )
 
