@@ -1,22 +1,25 @@
+import { arrayUnion } from "firebase/firestore"
+
 let deltagerListe = []
 let talrække = []
 
 function addDeltager(navn, id, liste){
-    let deltager = {"navn":navn, "id": id, "talrækker": []}
+    let deltager = {navn:navn, id: id, talrækker: []}
     
 
     liste.push(deltager)
 
 }
-addDeltager("per", 1, deltagerListe)
-let test = deltagerListe.find(deltager => deltager.id === 1)
-//
 
 
-function findDeltager(id) {                                                 // Finder og returnerer deltager med ID som parameter.
-  let deltager = deltagerListe.find(deltager => deltager.id === id)     
+
+
+
+function findDeltager(id, listeToSearch) {                                                 // Finder og returnerer deltager med ID som parameter.
+  let deltager = listeToSearch.find(deltager => deltager.id === id)     
   return deltager
 }
+
 
 
 
@@ -33,7 +36,7 @@ function opretTalrække(talrække){                                           //
     let min = Math.ceil(1)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
     let max = Math.floor(25)                                                // (I parametret talrækkke anvendes talrækken valgteTal)
     
-    let temp = []
+    
     while (talrække.length<5) {
         let tal = Math.floor(Math.random()*(max-min+1)+min)
     
@@ -42,23 +45,25 @@ function opretTalrække(talrække){                                           //
          }
     
         }
-    temp = talrække
-    return temp
+        
+        
+    return talrække
 }
-
-let temp = []
-console.log(temp);
-console.log("tal array: " + opretTalrække(temp));
     
 
-function addTalrækkeTilDeltager(deltagerID){                                // Finder deltager, og opretter en talrække, med eventuelt brugervalgte tal,
-    let deltager = findDeltager(deltagerID)                                 // som tilføjes til deltagerens talrække.
-    let talrække = opretTalrække()
+function addTalrækkeTilDeltager(deltagerID, talrækkeArrau, arrayToSearchIn){                 // Finder deltager, og opretter en talrække, med eventuelt brugervalgte tal,
+    let deltager = findDeltager(deltagerID, arrayToSearchIn)                                 // som tilføjes til deltagerens talrække.
+    let talrække = opretTalrække(talrækkeArrau)
 
     deltager.talrækker.push(talrække)
-    valgteTal = []
+ 
 }
 
+let emptyArray = []
+addDeltager("per", 1, deltagerListe)
+let test = findDeltager(1, deltagerListe)
+addTalrækkeTilDeltager(1, emptyArray, deltagerListe)
+console.log(test.talrækker);
 
 
 
@@ -68,8 +73,17 @@ function addTalrækkeTilDeltager(deltagerID){                                // 
 //test
 
 
-const _addTalrækkeTilDeltager = (deltagerID, tal) => {
-    addTalrækkeTilDeltager(deltagerID, tal)
+
+const _findDeltager = (id, listeToSearch) => {
+   
+    return findDeltager(id, listeToSearch)
+};
+export { _findDeltager as findDeltager };
+
+
+
+const _addTalrækkeTilDeltager = (deltagerID, talrækkeArrau,arrayToSearchIn) => {
+    addTalrækkeTilDeltager(deltagerID, talrækkeArrau,arrayToSearchIn)
 };
 export { _addTalrækkeTilDeltager as addTalrækkeTilDeltager };
 
@@ -92,12 +106,6 @@ const _manuelVinderrække = (vinderTalArray, deltagerMedTalrækkeArray) => {
     manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray)
 };
 export { _manuelVinderrække as manuelVinderrække };
-
-const _findDeltager = (id) => {
-   
-    findDeltager(id)
-};
-export { _findDeltager as findDeltager };
 
 const _vælgTalPåForhånd = (tal) => {
    

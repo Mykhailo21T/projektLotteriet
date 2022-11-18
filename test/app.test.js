@@ -2,9 +2,15 @@ import chai from 'chai'
 const expect = chai.expect
 const assert = chai.assert
 
+
+
 import { addDeltager } from '../func.js'
 import { opretTalrække } from '../func.js'
 import { vælgTalPåForhånd } from '../func.js'
+import { addTalrækkeTilDeltager } from '../func.js'
+
+import { findDeltager } from '../func.js'
+
 
 
 let list = []
@@ -12,11 +18,12 @@ let deltager = new Object;
 let deltager2 = new Object
 beforeEach(function(){
     deltager.navn = "Knud Knudsen"
-    deltager.id = "1"
+    deltager.id = 1
     deltager.talrække = []
+    
 
     deltager2.navn = "Per Hansen"
-    deltager2.id = "2"
+    deltager2.id = 2
     deltager2.talrække = []
 
 }
@@ -61,35 +68,82 @@ describe('US1: When adding a Deltager', () =>{
     })
 
    
+    list = []
 })
 
-import { addTalrækkeTilDeltager } from '../func.js'
 
-import { findDeltager } from '../func.js'
 
 describe("US2: Should show talrækker connected to a deltager", ()=>{
 
     
-    it('Should see talrækker a deltager have', ()=>{
-        //assign
+    it('Should find a konkrete deltager by the id', ()=>{
+        //assign 
+
+        addDeltager(deltager.navn, deltager.id, list)
+        addDeltager(deltager2.navn, deltager2.id, list)
         
+        
+        
+        //act & assert
+       
+        let konkretDeltager1 = findDeltager(1, list);
+        let konkretDeltager2 = findDeltager(2, list)
+    
+        
+       
+        assert.equal(konkretDeltager1.id, 1)
+        assert.equal(konkretDeltager1.navn, "Knud Knudsen")
+        assert.equal(konkretDeltager2.id, 2)
+        assert.equal(konkretDeltager2.navn, "Per Hansen")
+     
+
+        list=[]
+    })
+    it.only('Should add talrække to konkrete deltager', () =>{
+        //assign
         let talrække1 = [1,2,3,4,5]
         let talrække2 = [20,22,12,8,6]
+        let talrække3HalfEmpty = [23,2,8]
+        let talrækkeEmpty = []
 
+        addDeltager(deltager.navn, deltager.id, list)
+        addDeltager(deltager2.navn, deltager2.id, list)
 
+        let konkretDeltager1 = findDeltager(1, list);
+        let konkretDeltager2 = findDeltager(2, list);
         //act
-        addTalrækkeTilDeltager(deltager.id, talrække1)
-        addTalrækkeTilDeltager(deltager2.id,talrække2)
-        addTalrækkeTilDeltager(deltager2.id,talrække1)
-     
+        addTalrækkeTilDeltager(1, talrække1,list)
+        addTalrækkeTilDeltager(2, talrække1,list)
+        addTalrækkeTilDeltager(2, talrække2,list)
+        addTalrækkeTilDeltager(2, talrække3HalfEmpty,list)
+        addTalrækkeTilDeltager(2, talrækkeEmpty,list)
         //assert
-        let konkretDeltager1 = findDeltager(deltager.id)
-        assert.equal(konkretDeltager1.talrækker[0], talrække1)
 
-        let konkretDeltager2 = findDeltager(deltager2.id)
-        assert.equal(konkretDeltager2.talrækker[0],talrække2)
-        assert.equal(konkretDeltager2.talrækker[1],talrække1)
-        
+
+        assert.equal(konkretDeltager1.talrækker.length, 1)
+        assert.equal(konkretDeltager2.talrækker.length,4)
+
+        //Tests that the method fills the array with 5 numbers
+        assert.equal(konkretDeltager2.talrækker[2].length, 5)
+        assert.equal(konkretDeltager2.talrækker[3].length, 5)
+
+      
+        //Checks that the same number doesnt occur in the same talrække
+        let checkIfFailed = false
+        for(let i =0; i < konkretDeltager2.talrækker.length; i++){
+            let testArray = konkretDeltager2.talrækker[i]
+            for(let j = 0; j < testArray.length-1; j++){
+                for(let q =j+1; q<testArray.length;q++){
+                    console.log("First tal: " + testArray[j] + " Second tal: " + testArray[q]);
+                if(testArray[j] === testArray[q]){
+                    checkIfFailed = true
+                    break
+                }
+            }
+        }
+        }
+        assert.isFalse(checkIfFailed)
+
 
     })
 
@@ -98,26 +152,6 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
 import { manuelVinderrække } from '../func.js'
 describe('US3: Should be able to manually add a winning talrække', ()=>{
 
-    it('Should be able to set manual winning række', () =>{
-      //assign
-      let winner = [5,2,23,6,3]
-
-      /* her skal der knyttes en deltager liste på med deres talrækker der kan tjekkes på */
-
-      //act
-      let manualTry = manuelVinderrække(winner , null)
-
-      assert.equal(manualTry.length, 5)
-  
-      let failed = false;
-      for(let i = 0; i < manualTry.length;i++){
-          if(manualTry[i] < 0 || manualTry > 25){
-              failed = true;
-          }
-      }
-      assert.isFalse(failed)
-
-    })
   
 
     
@@ -125,38 +159,39 @@ describe('US3: Should be able to manually add a winning talrække', ()=>{
 })
 
 
-import { findRandomTal } from '../func.js'
 
-describe('US4: Should return an array with 3 tandom numbers',()=>{
-    it('should have an array of 3 numbers',()=>{
+
+describe('US4: Should return an array with 5 numbers',()=>{
+    it('should have an array of 5 numbers',()=>{
         //assign
 
         let testArray = []
+        let testArrayPartialFilled = [4,3,1]
         //act
-//        let randomNumberArrayHopefully = opretTalrække(testArray)
 
-        testArray = opretTalrække(testArray)
-
+        opretTalrække(testArray)
+        opretTalrække(testArrayPartialFilled)
 
         //assert
-        //assert.isArray(testArray)
-       
-        
-        
+        assert.equal(testArray.length, 5)
 
-        assert.isTrue(testArray.length === 5)
+        assert.equal(testArrayPartialFilled.length, 5)
+        assert.equal(testArrayPartialFilled[0],4)
+        assert.equal(testArrayPartialFilled[1],3)
+        assert.equal(testArrayPartialFilled[2],1)
 
+        //Checking that the arrays only has numbers between 1 and 25, and that no number appears twice in the array
         let failed = false
-        for(let i = 0; i<=randomNumberArrayHopefully.length-1;i++){
-            if(randomNumberArrayHopefully[i] === randomNumberArrayHopefully[i+1] ||
-                randomNumberArrayHopefully[i] < 1 || randomNumberArrayHopefully[i+1]<1 || randomNumberArrayHopefully[i]>25 || 
-                randomNumberArrayHopefully[i+1] >25){
+        for(let i = 0; i<=testArray.length-1;i++){
+            if(testArray[i] === testArray[i+1] ||
+                testArray[i] < 1 || testArray[i+1]<1 || testArray[i]>25 || 
+                testArray[i+1] >25){
                 failed = true 
                 break
             }
             
         }
-    //    assert.isFalse(failed)
+      assert.isFalse(failed)
 
         
     })
