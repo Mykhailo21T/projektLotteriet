@@ -1,6 +1,5 @@
 let deltagerListe = []
 
-
 function addDeltager(navn, id, liste){
     let deltager = new Object()
     deltager.navn = navn;
@@ -10,16 +9,27 @@ function addDeltager(navn, id, liste){
     liste.push(deltager)
 
 }
+let kajList = [{navn: "per"}, {navn: "ole"}, {navn: "sanne"}]
+addDeltager("per", 1, deltagerListe)
+console.log(kajList.includes({navn: "ole"}));
 
 function addTalrækkeTilDeltager(deltagerID, talArray, liste){
     
- }
+}
 
- function manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray){
+function manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray){
 
- }
+}
 
 function findRandomTal(){
+let min = math.ceil(1)
+let max = math.floor(25)
+let talrække = []
+
+while (talrække.length>4) {
+    
+}
+
 
 }
 

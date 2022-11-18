@@ -28,16 +28,16 @@ describe('US1: When adding a Deltager', () =>{
         addDeltager(deltager2.navn, deltager2.id, list)
 
         //assert
-      
-        assert.isTrue(list.includes({navn: deltager.navn, id: deltager.id}))
-        assert.isTrue(list.includes({navn: deltager2.navn, id: deltager2.id}))
+        const liste = list
+        assert.isNotEmpty(liste)
+        assert.isTrue(liste.includes(deltager))
+        
+       // assert.isTrue(list.includes({navn: deltager.navn, id: deltager.id}))
+        //assert.isTrue(list.includes({navn: deltager2.navn, id: deltager2.id}))
 
         
        
 
-    }),
-    it('List shouldnt be empty', () =>{
-        assert.isTrue(list.length > 0)
     })
 
    
