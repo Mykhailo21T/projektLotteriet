@@ -87,3 +87,4 @@ const _findDeltager = (id) => {
 export { _findDeltager as findDeltager };
 
 
+
