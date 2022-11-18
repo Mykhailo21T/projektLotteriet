@@ -31,14 +31,30 @@ describe('US1: When adding a Deltager', () =>{
 
         //assert
         const liste = list
-        assert.isNotEmpty(liste)
-        assert.isTrue(liste.includes(deltager))
-        
-       // assert.isTrue(list.includes({navn: deltager.navn, id: deltager.id}))
-        //assert.isTrue(list.includes({navn: deltager2.navn, id: deltager2.id}))
+        assert.isNotEmpty(liste, "List is not empty")
 
+
+        let found = false
+        for(let i of list){
+            if(i.id == deltager.id && i.navn == deltager.navn){
+                found = true
+                break
+            }
+        }
+
+        assert.isTrue(found, "Deltager 1 er fundet")
+
+        found = false
+        for(let i of list){
+            if(i.id == deltager2.id && i.navn == deltager2.navn){
+                found = true
+                break
+            }
+        }
         
-       
+       assert.isTrue(found, "Deltager 2 fundet")
+       assert.isNotEmpty(list)
+       assert.equal(list.length,2)
 
     })
 
@@ -63,9 +79,9 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
         addTalrækkeTilDeltager(deltager2.id,talrække1, list)
      
         //assert
-        expect(list).to.contain({deltagerID: deltager.id, talrække: [talrække1]})
-        expect(list).to.contain({deltagerID: deltager2.id, talrække: [talrække2]})
-        expect(list).to.contain({deltagerID: deltager2.id, talrække: [talrække1]})
+        for()
+    
+
 
     
         let failed = false
