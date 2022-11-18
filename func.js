@@ -14,6 +14,12 @@ console.log(deltagerListe);
 console.log(test.navn);
 
 
+function findDeltager(id) {
+  let deltager = deltagerListe.find(deltager => deltager.id === id)     
+  return deltager
+}
+
+
 
 function findRandomTal(){
     let min = Math.ceil(1)
@@ -31,7 +37,7 @@ function findRandomTal(){
     return talrække
 }
 
-function manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray){
+function manuelVinderrække(talArray){
 
 }
     
