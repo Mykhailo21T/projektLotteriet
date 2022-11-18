@@ -79,8 +79,7 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
         addTalrækkeTilDeltager(deltager2.id,talrække1, list)
      
         //assert
-        for()
-    
+   
 
 
     

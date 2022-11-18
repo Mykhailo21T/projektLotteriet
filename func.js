@@ -1,17 +1,17 @@
 let deltagerListe = []
 
 function addDeltager(navn, id, liste){
-    let deltager = new Object()
-    deltager.navn = navn;
-    deltager.id = id;
-    deltager.talrække = []
+    let deltager = {"navn":navn, "id": id, "talrækker": []}
+    
 
     liste.push(deltager)
 
 }
-let kajList = [{navn: "per"}, {navn: "ole"}, {navn: "sanne"}]
 addDeltager("per", 1, deltagerListe)
-console.log(kajList.includes({navn: "ole"}));
+let test = deltagerListe.find(deltager => deltager.id === 1)
+console.log(deltagerListe);
+console.log(test.navn);
+
 
 function addTalrækkeTilDeltager(deltagerID, talArray, liste){
     
