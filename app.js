@@ -42,7 +42,7 @@ async function getMedlemmer() {
   return medlemmer
 }
 
-async function getmedlem(id) {
+async function getMedlem(id) {
   const docRef = doc(db, "medlemmer", id)
   const medlemQueryDocument = await getDoc(docRef)
   let medlem = medlemQueryDocument.data()
@@ -65,9 +65,10 @@ app.get('/medlemmer', async (request, response)=>{
 })
 
 app.get('/medlem/:id', async (request, response)=>{
+  console.log("den får id");
   const medlemID = request.params.id
   const medlem = await getMedlem(medlemID)
-  response.render('medlem', {bil: medlem})
+  response.render('medlem', {medlem: medlem})
 })
 
 app.get('/addMedlem', (request, response)=>{
