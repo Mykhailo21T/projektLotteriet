@@ -29,7 +29,6 @@ describe('US1: When adding a Deltager', () =>{
 
         //assert
       
-        expect(list[0]).to.deep.equal()
         assert.isTrue(list.includes({navn: deltager.navn, id: deltager.id}))
         assert.isTrue(list.includes({navn: deltager2.navn, id: deltager2.id}))
 
@@ -86,27 +85,29 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
 import { manuelVinderrække } from '../func.js'
 describe('US3: Should be able to manually add a winning talrække', ()=>{
 
-    it('Should be able to set manual winning række'){
-        //assign
-        let winner = [5,2,23,6,3]
+    it('Should be able to set manual winning række', () =>{
+      //assign
+      let winner = [5,2,23,6,3]
 
-        /* her skal der knyttes en deltager liste på med deres talrækker der kan tjekkes på */
+      /* her skal der knyttes en deltager liste på med deres talrækker der kan tjekkes på */
 
-        //act
-        let manualTry = manuelVinderrække(winner , null)
+      //act
+      let manualTry = manuelVinderrække(winner , null)
 
-        assert.equal(manualTry.length, 5)
+      assert.equal(manualTry.length, 5)
+  
+      let failed = false;
+      for(let i = 0; i < manualTry.length;i++){
+          if(manualTry[i] < 0 || manualTry > 25){
+              failed = true;
+          }
+      }
+      assert.isFalse(failed)
+
+    })
+  
+
     
-        let failed = false;
-        for(let i = 0; i < manualTry.length;i++){
-            if(manualTry[i] < 0 || manualTry > 25){
-                failed = true;
-            }
-        }
-        assert.isFalse(failed)
-
-
-    }
 
 })
 
