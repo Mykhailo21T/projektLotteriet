@@ -28,24 +28,24 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('assets'))
 
 
-async function addDeltager(deltager) {
-  // car = {brand: 'Citroen', model: 'Xantia'}
-  const docRef = await addDoc(collection(db, "Medlemmer"), deltager)
+async function addMedlem(medlem) {
+  // Medlem = {Fornavn: 'Hans', Efternavn: 'Hansen'}
+  const docRef = await addDoc(collection(db, "Medlemmer"), Medlem)
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
 
-app.get('/addDeltager', (request, response)=>{
-  response.render('addDeltager', {})
+app.get('/addMedlem', (request, response)=>{
+  response.render('addMedlem', {})
   })
   
-  app.post('/addDeltager', async (request, response)=>{
+  app.post('/addMedlem', async (request, response)=>{
     const fornavn = request.body.fornavn
     const efternavn = request.body.efternavn
     // ALT hvad der kommer fra brugeren er en string
     // I skal lave en fandens masse check
     // STOL ALDRIG PÅ BRUGERDATA
-    let id = await addDeltager({fornavn: fornavn, efternavn: efternavn})
+    let id = await addMedlem({fornavn: fornavn, efternavn: efternavn})
     //response.redirect('/Medlemmer')
   })
 
