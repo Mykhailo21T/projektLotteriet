@@ -9,6 +9,7 @@ function addDeltager(navn, id, liste){
 }
 addDeltager("per", 1, deltagerListe)
 let test = deltagerListe.find(deltager => deltager.id === 1)
+//
 console.log(deltagerListe);
 console.log(test.navn);
 
