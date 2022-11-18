@@ -13,25 +13,35 @@ let kajList = [{navn: "per"}, {navn: "ole"}, {navn: "sanne"}]
 addDeltager("per", 1, deltagerListe)
 console.log(kajList.includes({navn: "ole"}));
 
-function addTalrækkeTilDeltager(deltagerID, talArray, liste){
+
+function findRandomTal(){
+    let min = Math.ceil(1)
+    let max = Math.floor(25)
+    let talrække = []
     
+    while (talrække.length<5) {
+        let tal = Math.floor(Math.random()*(max-min+1)+min)
+    
+        if (!talrække.includes(tal)) {
+            talrække.push(tal) 
+         }
+    
+        }
+    return talrække
 }
 
 function manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray){
 
 }
+    
 
-function findRandomTal(){
-let min = math.ceil(1)
-let max = math.floor(25)
-let talrække = []
-
-while (talrække.length>4) {
+function addTalrækkeTilDeltager(deltagerID, talArray, liste){
     
 }
 
 
-}
+
+
 
 
 
