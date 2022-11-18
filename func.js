@@ -1,4 +1,5 @@
 let deltagerListe = []
+let valgteTal = []
 
 function addDeltager(navn, id, liste){
     let deltager = {"navn":navn, "id": id, "talrækker": []}
@@ -18,13 +19,22 @@ function findDeltager(id) {
   let deltager = deltagerListe.find(deltager => deltager.id === id)     
   return deltager
 }
+console.log(findDeltager(1))
+
+
+function vælgTalPåForhånd(tal) {
+    if (valgteTal<5) {
+        valgteTal.push(tal)
+    }
+    else throw Error("Talrækken er fuld")
+}
 
 
 
-function findRandomTal(){
+function findRandomTal(talrække){                         // Opretter og tilføjer tal, der ikke findes i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
     let min = Math.ceil(1)
     let max = Math.floor(25)
-    let talrække = []
+    
     
     while (talrække.length<5) {
         let tal = Math.floor(Math.random()*(max-min+1)+min)
@@ -37,13 +47,22 @@ function findRandomTal(){
     return talrække
 }
 
-function manuelVinderrække(talArray){
 
+function opretTalrække() {
+    let talrække = valgteTal
+
+    if (talrække<5) {
+        findRandomTal(talrække)
+    }
+    return talrække
 }
     
 
-function addTalrækkeTilDeltager(deltagerID, talArray, liste){
-    
+function addTalrækkeTilDeltager(deltagerID){
+    let deltager = findDeltager(deltagerID)
+    let talrække = opretTalrække()
+
+    deltager.talrækker.push(talrække)
 }
 
 
