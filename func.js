@@ -5,6 +5,7 @@ function addDeltager(navn, id, liste){
     let deltager = new Object()
     deltager.navn = navn;
     deltager.id = id;
+    deltager.talrække = []
 
     liste.push(deltager)
 
