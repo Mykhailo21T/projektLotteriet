@@ -46,12 +46,12 @@ async function getMedlem(id) {
   const docRef = doc(db, "medlemmer", id)
   const medlemQueryDocument = await getDoc(docRef)
   let medlem = medlemQueryDocument.data()
-  medlem.docID = medlemQueryDocument.id
+  medlem.medlemsID = medlemQueryDocument.id
   return medlem
 }
 
 async function addMedlem(medlem) {
-  // Medlem = {Fornavn: 'Hans', Efternavn: 'Hansen'}
+  // Medlem = {medlemsID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
   const docRef = await addDoc(collection(db, "Medlemmer"), medlem)
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
@@ -64,10 +64,9 @@ app.get('/medlemmer', async (request, response)=>{
   response.render('medlemmer', {medlemmer: medlemmer})
 })
 
-app.get('/medlem/:id', async (request, response)=>{
-  console.log("den får id");
-  const medlemID = request.params.id
-  const medlem = await getMedlem(medlemID)
+app.get('/medlem/:medlemsID', async (request, response)=>{
+  const medlemsID = request.params.id
+  const medlem = await getMedlem(medlemsID)
   response.render('medlem', {medlem: medlem})
 })
 
@@ -76,12 +75,13 @@ app.get('/addMedlem', (request, response)=>{
   })
   
   app.post('/addMedlem', async (request, response)=>{
+    const medlemsID = request.body.medlemsID
     const fornavn = request.body.fornavn
     const efternavn = request.body.efternavn
     // ALT hvad der kommer fra brugeren er en string
     // I skal lave en fandens masse check
     // STOL ALDRIG PÅ BRUGERDATA
-    let id = await addMedlem({fornavn: fornavn, efternavn: efternavn})
+    let id = await addMedlem({medlemsID: medlemsID, fornavn: fornavn, efternavn: efternavn})
     //response.redirect('/Medlemmer')
   })
 
