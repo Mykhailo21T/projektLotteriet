@@ -11,15 +11,13 @@ function addDeltager(navn, id, liste){
 addDeltager("per", 1, deltagerListe)
 let test = deltagerListe.find(deltager => deltager.id === 1)
 //
-console.log(deltagerListe);
-console.log(test.navn);
 
 
 function findDeltager(id) {                                                 // Finder og returnerer deltager med ID som parameter.
   let deltager = deltagerListe.find(deltager => deltager.id === id)     
   return deltager
 }
-console.log(findDeltager(1))
+
 
 
 function vælgTalPåForhånd(tal, list) {
@@ -35,6 +33,7 @@ function opretTalrække(talrække){                                           //
     let min = Math.ceil(1)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
     let max = Math.floor(25)                                                // (I parametret talrækkke anvendes talrækken valgteTal)
     
+    let temp = []
     while (talrække.length<5) {
         let tal = Math.floor(Math.random()*(max-min+1)+min)
     
@@ -43,8 +42,13 @@ function opretTalrække(talrække){                                           //
          }
     
         }
-    return talrække
+    temp = talrække
+    return temp
 }
+
+let temp = []
+console.log(temp);
+console.log("tal array: " + opretTalrække(temp));
     
 
 function addTalrækkeTilDeltager(deltagerID){                                // Finder deltager, og opretter en talrække, med eventuelt brugervalgte tal,

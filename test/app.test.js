@@ -19,8 +19,6 @@ beforeEach(function(){
     deltager2.id = "2"
     deltager2.talrække = []
 
-
-    
 }
 )
 
@@ -131,13 +129,20 @@ import { findRandomTal } from '../func.js'
 
 describe('US4: Should return an array with 3 tandom numbers',()=>{
     it('should have an array of 3 numbers',()=>{
-//assign
+        //assign
 
+        let testArray = []
         //act
-        let randomNumberArrayHopefully = findRandomTal()
+//        let randomNumberArrayHopefully = opretTalrække(testArray)
+
+        testArray = opretTalrække(testArray)
 
         //assert
-        assert.isTrue(randomNumberArrayHopefully.length === 3)
+        //assert.isArray(testArray)
+       
+        
+
+        assert.isTrue(testArray.length === 5)
 
         let failed = false
         for(let i = 0; i<=randomNumberArrayHopefully.length-1;i++){
@@ -149,7 +154,7 @@ describe('US4: Should return an array with 3 tandom numbers',()=>{
             }
             
         }
-        assert.isFalse(failed)
+    //    assert.isFalse(failed)
 
         
     })
