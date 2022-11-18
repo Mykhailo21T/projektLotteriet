@@ -1,4 +1,5 @@
 let deltagerListe = []
+let talrække = []
 
 function addDeltager(navn, id, liste){
     let deltager = {"navn":navn, "id": id, "talrækker": []}
@@ -14,17 +15,25 @@ console.log(deltagerListe);
 console.log(test.navn);
 
 
-function findDeltager(id) {
+function findDeltager(id) {                                                 // Finder og returnerer deltager med ID som parameter.
   let deltager = deltagerListe.find(deltager => deltager.id === id)     
   return deltager
+}
+console.log(findDeltager(1))
+
+
+function vælgTalPåForhånd(tal, list) {
+
+    if (list<5 && tal<26 && tal>0 && !list.includes(tal)) {                 // Tilføjer selvvalgt tal mellem 1 og 25 til liste, 
+        list.push(tal)                                                      // såfremt tallet ikke allerede er på listen, og 
+    }                                                                       // listens længde er mindre end 5.
 }
 
 
 
-function findRandomTal(){
-    let min = Math.ceil(1)
-    let max = Math.floor(25)
-    let talrække = []
+function opretTalrække(talrække){                                           // Opretter og tilføjer tal mellem 1 og 25, der ikke findes 
+    let min = Math.ceil(1)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
+    let max = Math.floor(25)                                                // (I parametret talrækkke anvendes talrækken valgteTal)
     
     while (talrække.length<5) {
         let tal = Math.floor(Math.random()*(max-min+1)+min)
@@ -36,14 +45,14 @@ function findRandomTal(){
         }
     return talrække
 }
-
-function manuelVinderrække(talArray){
-
-}
     
 
-function addTalrækkeTilDeltager(deltagerID, talArray, liste){
-    
+function addTalrækkeTilDeltager(deltagerID){                                // Finder deltager, og opretter en talrække, med eventuelt brugervalgte tal,
+    let deltager = findDeltager(deltagerID)                                 // som tilføjes til deltagerens talrække.
+    let talrække = opretTalrække()
+
+    deltager.talrækker.push(talrække)
+    valgteTal = []
 }
 
 
@@ -79,4 +88,23 @@ const _manuelVinderrække = (vinderTalArray, deltagerMedTalrækkeArray) => {
     manuelVinderrække(vinderTalArray, deltagerMedTalrækkeArray)
 };
 export { _manuelVinderrække as manuelVinderrække };
+
+const _findDeltager = (id) => {
+   
+    findDeltager(id)
+};
+export { _findDeltager as findDeltager };
+
+const _vælgTalPåForhånd = (tal) => {
+   
+    vælgTalPåForhånd(tal)
+};
+export { _vælgTalPåForhånd as vælgTalPåForhånd };
+
+const _opretTalrække = (talRække) => {
+   
+    opretTalrække(talRække)
+};
+export { _opretTalrække as opretTalrække };
+
 

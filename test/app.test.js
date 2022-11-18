@@ -3,7 +3,8 @@ const expect = chai.expect
 const assert = chai.assert
 
 import { addDeltager } from '../func.js'
-
+import { opretTalrække } from '../func.js'
+import { vælgTalPåForhånd } from '../func.js'
 
 
 let list = []
@@ -17,6 +18,9 @@ beforeEach(function(){
     deltager2.navn = "Per Hansen"
     deltager2.id = "2"
     deltager2.talrække = []
+
+
+    
 }
 )
 
@@ -63,9 +67,11 @@ describe('US1: When adding a Deltager', () =>{
 
 import { addTalrækkeTilDeltager } from '../func.js'
 
+import { findDeltager } from '../func.js'
+
 describe("US2: Should show talrækker connected to a deltager", ()=>{
 
-    list = []
+    
     it('Should see talrækker a deltager have', ()=>{
         //assign
         
@@ -74,25 +80,17 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
 
 
         //act
-        addTalrækkeTilDeltager(deltager.id, talrække1, list)
-        addTalrækkeTilDeltager(deltager2.id,talrække2, list)
-        addTalrækkeTilDeltager(deltager2.id,talrække1, list)
+        addTalrækkeTilDeltager(deltager.id, talrække1)
+        addTalrækkeTilDeltager(deltager2.id,talrække2)
+        addTalrækkeTilDeltager(deltager2.id,talrække1)
      
         //assert
-   
+        let konkretDeltager1 = findDeltager(deltager.id)
+        assert.equal(konkretDeltager1.talrækker[0], talrække1)
 
-
-    
-        let failed = false
-        for(let outer =0; outer< list[0].length-1; outer++){
-            for(let inner = outer+1; inner < list[0].length; inner++){
-                if(list[0].talrække[outer] === list[0].talrække[inner]){
-                    failed = true
-                    return failed
-                }
-            }
-        }
-        assert.isNotTrue(failed, "There shouldnt be two of the same talrækker in one deltager")
+        let konkretDeltager2 = findDeltager(deltager2.id)
+        assert.equal(konkretDeltager2.talrækker[0],talrække2)
+        assert.equal(konkretDeltager2.talrækker[1],talrække1)
         
 
     })
@@ -134,24 +132,7 @@ import { findRandomTal } from '../func.js'
 describe('US4: Should return an array with 3 tandom numbers',()=>{
     it('should have an array of 3 numbers',()=>{
 //assign
-/* Woops kom til at lave den da jeg skulle teste.... det sker jo
 
-        let min= 1
-        let max = 25
-        const number = ()=>{ 
-            let selectedNumbers = []
-            let restart = false;
-            
-            while(selectedNumbers.length <3 || restart == true){
-                restart = false
-                let number = Math.floor(Math.random() * (max - min) + min)
-                if(!selectedNumbers.includes(number)){
-                    selectedNumbers.push(number)
-                } else restart = true
-            }
-            return selectedNumbers
-        }
-*/
         //act
         let randomNumberArrayHopefully = findRandomTal()
 
