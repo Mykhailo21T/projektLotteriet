@@ -1,5 +1,5 @@
 let deltagerListe = []
-let valgteTal = []
+let talrække = []
 
 function addDeltager(navn, id, liste){
     let deltager = {"navn":navn, "id": id, "talrækker": []}
@@ -22,20 +22,18 @@ function findDeltager(id) {                                                 // F
 console.log(findDeltager(1))
 
 
-function vælgTalPåForhånd(tal) {
-    if (valgteTal<5 && tal<26 && tal>0 && !valgteTal.includes(tal)) {        // Tilføjer selvvalgt tal mellem 1 og 25 til valgteTal, 
-        valgteTal.push(tal)                                                  // såfremt tallet ikke allerede er på listen, og 
-    }                                                                        // listens længde er mindre end 5.
-    else throw Error("Talrækken er fuld")
+function vælgTalPåForhånd(tal, list) {
+
+    if (list<5 && tal<26 && tal>0 && !list.includes(tal)) {                 // Tilføjer selvvalgt tal mellem 1 og 25 til liste, 
+        list.push(tal)                                                      // såfremt tallet ikke allerede er på listen, og 
+    }                                                                       // listens længde er mindre end 5.
 }
 
 
 
 function opretTalrække(talrække){                                           // Opretter og tilføjer tal mellem 1 og 25, der ikke findes 
     let min = Math.ceil(1)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
-    let max = Math.floor(25)
-
-    talrække = valgteTal
+    let max = Math.floor(25)                                                // (I parametret talrækkke anvendes talrækken valgteTal)
     
     while (talrække.length<5) {
         let tal = Math.floor(Math.random()*(max-min+1)+min)
@@ -54,6 +52,7 @@ function addTalrækkeTilDeltager(deltagerID){                                // 
     let talrække = opretTalrække()
 
     deltager.talrækker.push(talrække)
+    valgteTal = []
 }
 
 
