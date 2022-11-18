@@ -80,3 +80,10 @@ const _manuelVinderrække = (vinderTalArray, deltagerMedTalrækkeArray) => {
 };
 export { _manuelVinderrække as manuelVinderrække };
 
+const _findDeltager = (id) => {
+   
+    findDeltager(id)
+};
+export { _findDeltager as findDeltager };
+
+
