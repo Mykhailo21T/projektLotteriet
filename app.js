@@ -30,7 +30,7 @@ app.use(express.static('assets'))
 
 // Firebase funktioner
 
-let medlemmerCollection = collection(db, 'medlemmer')
+let medlemmerCollection = collection(db, 'Medlemmer')
 
 async function getMedlemmer() {
   let medlemmerQueryDocs = await getDocs(medlemmerCollection)
@@ -43,16 +43,16 @@ async function getMedlemmer() {
 }
 
 async function getMedlem(id) {
-  const docRef = doc(db, "medlemmer", id)
+  const docRef = doc(db, "Medlemmer", id)
   const medlemQueryDocument = await getDoc(docRef)
   let medlem = medlemQueryDocument.data()
-  medlem.medlemsID = medlemQueryDocument.id
+  medlem.docID = medlemQueryDocument.id
   return medlem
 }
 
 async function addMedlem(medlem) {
   // Medlem = {medlemsID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
-  const docRef = await addDoc(collection(db, "Medlemmer"), medlem)
+  const docRef = await addDoc(collection(db, "Medlemmer", medlem.medlemsID), medlem)
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
