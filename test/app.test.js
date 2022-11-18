@@ -137,10 +137,11 @@ describe('US4: Should return an array with 3 tandom numbers',()=>{
 
         testArray = opretTalrække(testArray)
 
-        
+
         //assert
         //assert.isArray(testArray)
        
+        
         
 
         assert.isTrue(testArray.length === 5)
