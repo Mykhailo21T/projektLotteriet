@@ -15,7 +15,7 @@ console.log(deltagerListe);
 console.log(test.navn);
 
 
-function findDeltager(id) {
+function findDeltager(id) {                                                 // Finder og returnerer deltager med ID som parameter.
   let deltager = deltagerListe.find(deltager => deltager.id === id)     
   return deltager
 }
@@ -23,18 +23,19 @@ console.log(findDeltager(1))
 
 
 function vælgTalPåForhånd(tal) {
-    if (valgteTal<5) {
-        valgteTal.push(tal)
-    }
+    if (valgteTal<5 && tal<26 && tal>0 && !valgteTal.includes(tal)) {        // Tilføjer selvvalgt tal mellem 1 og 25 til valgteTal, 
+        valgteTal.push(tal)                                                  // såfremt tallet ikke allerede er på listen, og 
+    }                                                                        // listens længde er mindre end 5.
     else throw Error("Talrækken er fuld")
 }
 
 
 
-function findRandomTal(talrække){                         // Opretter og tilføjer tal, der ikke findes i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
-    let min = Math.ceil(1)
+function opretTalrække(talrække){                                           // Opretter og tilføjer tal mellem 1 og 25, der ikke findes 
+    let min = Math.ceil(1)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
     let max = Math.floor(25)
-    
+
+    talrække = valgteTal
     
     while (talrække.length<5) {
         let tal = Math.floor(Math.random()*(max-min+1)+min)
@@ -46,20 +47,10 @@ function findRandomTal(talrække){                         // Opretter og tilfø
         }
     return talrække
 }
-
-
-function opretTalrække() {
-    let talrække = valgteTal
-
-    if (talrække<5) {
-        findRandomTal(talrække)
-    }
-    return talrække
-}
     
 
-function addTalrækkeTilDeltager(deltagerID){
-    let deltager = findDeltager(deltagerID)
+function addTalrækkeTilDeltager(deltagerID){                                // Finder deltager, og opretter en talrække, med eventuelt brugervalgte tal,
+    let deltager = findDeltager(deltagerID)                                 // som tilføjes til deltagerens talrække.
     let talrække = opretTalrække()
 
     deltager.talrækker.push(talrække)
