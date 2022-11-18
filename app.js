@@ -46,13 +46,13 @@ async function getMedlem(id) {
   const docRef = doc(db, "Medlemmer", id)
   const medlemQueryDocument = await getDoc(docRef)
   let medlem = medlemQueryDocument.data()
-  //medlem.docID = medlemQueryDocument.id
+  medlem.docID = medlemQueryDocument.id
   return medlem
 }
 
 async function addMedlem(medlem) {
   // Medlem = {medlemsID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
-  const docRef = await addDoc(collection(db, "Medlemmer"), medlem)
+  const docRef = await addDoc(collection(db, "Medlemmer", medlem.medlemsID), medlem)
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
