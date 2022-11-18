@@ -96,5 +96,16 @@ const _findDeltager = (id) => {
 };
 export { _findDeltager as findDeltager };
 
+const _vælgTalPåForhånd = (tal) => {
+   
+    vælgTalPåForhånd(tal)
+};
+export { _vælgTalPåForhånd as vælgTalPåForhånd };
+
+const _opretTalrække = (talRække) => {
+   
+    opretTalrække(talRække)
+};
+export { _opretTalrække as opretTalrække };
 
 
