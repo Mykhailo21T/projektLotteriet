@@ -5,10 +5,8 @@ let talrække = []
 
 function addDeltager(navn, id, liste){
     let deltager = {navn:navn, id: id, talrækker: []}
-    
-
     liste.push(deltager)
-
+    return deltager
 }
 
 
@@ -59,19 +57,29 @@ function addTalrækkeTilDeltager(deltagerID, talrækkeArrau, arrayToSearchIn){  
  
 }
 
-let emptyArray = []
-addDeltager("per", 1, deltagerListe)
-let test = findDeltager(1, deltagerListe)
-addTalrækkeTilDeltager(1, emptyArray, deltagerListe)
-console.log(test.talrækker);
+//Antal vindertal er et en identifier til at finde ud af om der skal søges efter vindere med 3,2 eller 1 vindertal
+//Deltager listen er den samlet liste af alle deltagere
+//Vindertal er et array af 3 tal
+//Hver talrække hos hver deltager skal tjekkes. Rækkefølgen af tal i deltagerns talrække og vinderrækken er ikke sorteret
+//skal returnere et array med alle dem der har vundet (Deres faktisk deltager opjekt vi finder med findDeltager)
 
 
+function findVinder(antalVindertal, deltagerListe, vinderTal){
+let vindere = []
+
+return vindere
+}
 
 
 
 
 //test
 
+const _findVinder = (antalVindertal, deltagerListe, vinderTal) => {
+   
+    return findVinder(antalVindertal, deltagerListe, vinderTal)
+};
+export { _findVinder as findVinder };
 
 
 const _findDeltager = (id, listeToSearch) => {
