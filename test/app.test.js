@@ -233,12 +233,12 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          let antalVindetal = 3
  
          //act
-         let faktiskeVinder = findVinder(antalVindetal,list,vinderRække)
+         let faktiskeVindere = findVinder(antalVindetal,list,vinderRække)
  
          //assert
-         assert.equal(faktiskeVinder[0], vinder1)
-         assert.equal(faktiskeVinder[1], vinder2)
-         assert.equal(faktiskeVinder.length, 2)
+         assert.equal(faktiskeVindere[0], vinder1)
+         assert.equal(faktiskeVindere[1], vinder2)
+         assert.equal(faktiskeVindere.length, 2)
                 
         //en check function der tjekker hver deltagers talrækkers tal individuelt og ser om de matcher et tal i vinderrækken
         //Hvis deltageren har det valgte antal rigtige tal i en af sine rækker bliver deltageren puttet i liste af samlede vindere
@@ -246,13 +246,15 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          let vindere = []
 
             for(let i = 0; i < list.length; i++){
-                let temp = []
-                for(let j = 0; j<list[i].talrækker.length; j++){
+                for(let j = 0; j<list[i].talrækker[j].length; j++){
+                    let temp = []
                      if(temp.length < antalVindetal){
-                         for(let q in vinderRække){
-                             if(list[i].talrækker[j] == q){
-                                 temp.push(q)
-                        } 
+                         for(let q of vinderRække){
+                            for(let k of list[i].talrækker[j]) {
+                                if (k == q){
+                                    temp.push(k)
+                                }
+                            }
                     }
                 } 
                 if(temp.length == antalVindetal){
