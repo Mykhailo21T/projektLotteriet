@@ -70,31 +70,54 @@ let vindere = []
 let counter = 0
 
 
-for (deltager of deltagerListe) {
-    for (let talrækkeIndex = 0; talrækkeIndex<deltager.talrækker; talrækkeIndex++) {
+
+for (let deltager of deltagerListe) {
+  
+    for (let talrækkeIndex = 0; talrækkeIndex<deltager.talrækker.length; talrækkeIndex++) {
+        
+        counter=0
         for (let vindertalIndex = 0; vindertalIndex<antalVindertal; vindertalIndex++){
+            console.log("counter: " + counter);
+            console.log("vindertal: " + antalVindertal);
            
-            if (counter == antalVindertal) {
-                vindere.push[deltager]
-                counter = 0
-                break
-            }
+       
            
-            for (let talIndex = 0; talIndex<deltager.talrækker.length; talIndex++) {
-                let talrække = deltagerListe.talrækker[talrækkeIndex]
-
-                if (talrække[talIndex] == vinderTal[vindertalIndex] && counter>vinderTal) {
+            for (let talIndex = 0; talIndex<5; talIndex++) {
+                let talrække = deltager.talrækker[talrækkeIndex]
+               
+                if (talrække[talIndex] == vinderTal[vindertalIndex] ) {
+                    
+                    
                     counter++ 
+
+                    break
                 }
-
-
                 }
             }
         }
+        if (counter == antalVindertal) {
+            console.log("KOM HER INd");
+            console.log(deltager);
+            let xxx = deltager
+            vindere.push(xxx)
+            counter = 0
+            break
+        }
     }
+
+
+
    return vindere
 }
 
+addDeltager("knud",1,deltagerListe)
+addTalrækkeTilDeltager(1,[1,2,3,4,5],deltagerListe)
+
+
+
+let x = findVinder(3,deltagerListe,[3,4,5])
+
+console.log(x);
 
 
 
