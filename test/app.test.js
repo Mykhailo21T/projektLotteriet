@@ -230,10 +230,10 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          addTalrækkeTilDeltager(3,talrække3,list)
          addTalrækkeTilDeltager(4,talrække4,list)
  
-         let antalVindetal = 3
+         let antalVindertal = 3
  
          //act
-         let faktiskeVindere = findVinder(antalVindetal,list,vinderRække)
+         let faktiskeVindere = findVinder(antalVindertal,list,vinderRække)
  
          //assert
          assert.equal(faktiskeVindere[0], vinder1)
@@ -242,13 +242,13 @@ describe('US3: Should be able to manually add a winning talrække and find a win
                 
         //en check function der tjekker hver deltagers talrækkers tal individuelt og ser om de matcher et tal i vinderrækken
         //Hvis deltageren har det valgte antal rigtige tal i en af sine rækker bliver deltageren puttet i liste af samlede vindere
-         function findVindereMedVindertal(vinderRække,antalVindetal,list){
+         function findVindereMedVindertal(vinderRække,antalVindertal,list){
          let vindere = []
 
             for(let i = 0; i < list.length; i++){
                 for(let j = 0; j<list[i].talrækker[j].length; j++){
                     let temp = []
-                     if(temp.length < antalVindetal){
+                     if(temp.length < antalVindertal){
                          for(let q of vinderRække){
                             for(let k of list[i].talrækker[j]) {
                                 if (k == q){
@@ -257,7 +257,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
                             }
                     }
                 } 
-                if(temp.length == antalVindetal){
+                if(temp.length == antalVindertal){
                     vindere.push(findDeltager(list[i].id,list))
                }
                
@@ -271,7 +271,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
         }
 
         let Vindere1 = findVindereMedVindertal(vinderRække,3,list)
-        let vindere2 = findVindereMedVindertal(vinder1, 2, list)
+        let vindere2 = findVindereMedVindertal(vinderRække, 2, list)
 
         assert.equal(Vindere1.length, 2)
         assert.equal(vindere2.length, 3)

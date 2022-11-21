@@ -67,7 +67,32 @@ function addTalrækkeTilDeltager(deltagerID, talrækkeArrau, arrayToSearchIn){  
 function findVinder(antalVindertal, deltagerListe, vinderTal){
 let vindere = []
 
-return vindere
+let counter = 0
+
+
+for (deltager of deltagerListe) {
+    for (let talrækkeIndex = 0; talrækkeIndex<deltager.talrækker; talrækkeIndex++) {
+        for (let vindertalIndex = 0; vindertalIndex<antalVindertal; vindertalIndex++){
+           
+            if (counter == antalVindertal) {
+                vindere.push[deltager]
+                counter = 0
+                break
+            }
+           
+            for (let talIndex = 0; talIndex<deltager.talrækker.length; talIndex++) {
+                let talrække = deltagerListe.talrækker[talrækkeIndex]
+
+                if (talrække[talIndex] == vinderTal[vindertalIndex] && counter>vinderTal) {
+                    counter++ 
+                }
+
+
+                }
+            }
+        }
+    }
+   return vindere
 }
 
 
