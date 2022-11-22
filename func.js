@@ -76,6 +76,12 @@ for (let deltager of deltagerListe) {
         counter = 0
 
         for (let vindertalIndex = 0; vindertalIndex<antalVindertal; vindertalIndex++){
+            console.log("counter: " + counter);
+            console.log("vindertal: " + antalVindertal);
+           
+       
+           
+>>>>>>> b7e7fb6ebec4d83ee72ebb8785d604670cdf80bf
            
             for (let talIndex = 0; talIndex<5; talIndex++) {
                 let talrække = deltager.talrækker[talrækkeIndex]
@@ -88,12 +94,17 @@ for (let deltager of deltagerListe) {
             }
         }
         if (counter == antalVindertal) {
+            console.log("KOM HER INd");
+            console.log(deltager);
             let xxx = deltager
             vindere.push(xxx)
             counter = 0
-            break
+            
         }
     }
+
+
+
    return vindere
 }
 
@@ -104,7 +115,7 @@ addTalrækkeTilDeltager(1,[1,2,3,4,5],deltagerListe)
 
 let x = findVinder(3,deltagerListe,[3,4,5])
 
-console.log(x);
+
 
 
 
@@ -133,7 +144,7 @@ export { _addTalrækkeTilDeltager as addTalrækkeTilDeltager };
 
 const _addDeltager = (navn, id, liste) => {
    
-    return addDeltager(navn, id, liste)
+    addDeltager(navn, id, liste)
 };
 export { _addDeltager as addDeltager };
 

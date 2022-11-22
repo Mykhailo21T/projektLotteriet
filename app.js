@@ -31,7 +31,8 @@ app.use(express.static('assets'))
 // Firebase funktioner
 
 let medlemmerCollection = collection(db, 'Medlemmer')
-
+let lotterierCollection = collection(db,'Lotterier')
+///medlemmer start///////////////////////////////////
 async function getMedlemmer() {
   let medlemmerQueryDocs = await getDocs(medlemmerCollection)
   let medlemmer = medlemmerQueryDocs.docs.map(doc => {
@@ -56,6 +57,31 @@ async function addMedlem(medlem) {
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
+///medlemmer slut////////////////////////////////////
+///lotterier start///////////////////////////////////
+async function getLotterier() { // henter lotterier fra db Lotterier i firebase
+  let lotterierQueryDocs = await getDocs(lotterierCollection)
+  let lotterier = lotterierQueryDocs.docs.map(doc => {
+      let data = doc.data()
+      data.docID = doc.id
+      return data
+  })
+  return lotterier
+}
+app.get('/lotteri/:id', async (request, response)=>{ // viser indhold af hvert enkelte lotteri
+  const lID = request.params.id
+  const lotteri = await getLotteri(lID)
+  response.render('lotteri', {lotteri: lotteri})
+})
+async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterier i firebase
+  const docRef = doc(db, "Lotterier", id)
+  const lotteriQueryDocument = await getDoc(docRef)
+  let lotteri = lotteriQueryDocument.data()
+  lotteri.docID = lotteriQueryDocument.id
+  return lotteri
+}
+
+///lotterier slut///////////////////////////////////
 
 // Express Endpoint
 
@@ -72,18 +98,29 @@ app.get('/medlem/:id', async (request, response)=>{
 
 app.get('/addMedlem', (request, response)=>{
   response.render('addMedlem', {})
-  })
+})
   
-  app.post('/addMedlem', async (request, response)=>{
-    const medlemsID = request.body.medlemsID
-    const Fornavn = request.body.Fornavn
-    const Efternavn = request.body.Efternavn
-    // ALT hvad der kommer fra brugeren er en string
-    // I skal lave en fandens masse check
-    // STOL ALDRIG PÅ BRUGERDATA
-    let id = await addMedlem({medlemsID: medlemsID, Fornavn: Fornavn, Efternavn: Efternavn})
-    response.redirect('/medlemmer')
-  })
+app.post('/addMedlem', async (request, response)=>{
+  const medlemsID = request.body.medlemsID
+  const Fornavn = request.body.Fornavn
+  const Efternavn = request.body.Efternavn
+  // ALT hvad der kommer fra brugeren er en string
+  // I skal lave en fandens masse check
+  // STOL ALDRIG PÅ BRUGERDATA
+  let id = await addMedlem({medlemsID: medlemsID, Fornavn: Fornavn, Efternavn: Efternavn})
+  response.redirect('/medlemmer')
+})
+
+app.get('/',(req,res)=>{
+  res.render('start')
+})
+
+app.get('/lotterier', async (req,res)=>{
+  //TODO getLotterier funktion
+  //done_TODO opret lotterier.pug
+  const alleLotterier = await getLotterier();
+  res.render('lotterier',{lotterier:alleLotterier})
+})
 
 app.listen(8000, ()=>{
   console.log("lytter på port 8000");
@@ -91,3 +128,5 @@ app.listen(8000, ()=>{
 
 
 
+///tilføje deltagere til lotteri
+// TODO tilføje talrækker til lotteri

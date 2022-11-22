@@ -1,0 +1,13 @@
+html 
+    head 
+        title lotteri
+    body 
+        h1= 'dato: '+lotteri.Dato 
+        h1= 'vindertal: '+lotteri.Vindertal
+        h1= 'talrækker: '+lotteri.Talrækker 
+            for tr in lotteri.Talrækker 
+                li= tr.Tallerne + ' af '+tr.Deltager
+        h1= 'deltagere: '+lotteri.Deltagere
+            for deltager in lotteri.Deltagere
+                li
+                    a(href='/medlem/' + deltager)= deltager

@@ -155,7 +155,7 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
 
 describe('US3: Should be able to manually add a winning talrække and find a winner', ()=>{
 
-    it.only('Should find one vinder with 3 vindertal', ()=>{
+    it('Should find one vinder with 3 vindertal', ()=>{
         //assign
         let vinderRække = [12,3,6]
 
@@ -174,39 +174,13 @@ describe('US3: Should be able to manually add a winning talrække and find a win
         let antalVindetal = 3
 
         //act
+        
           let faktiskeVinder = findVinder(antalVindetal,list,vinderRække)
 
         //assert
-        /*assert.equal(faktiskeVinder[0], vinderen)
-        assert.equal(faktiskeVinder.length, 1)*/
-
-        let vinderensVindertal = []
-        let stopSearch = false;
-
-
-        //en check function der tjekker hver deltagers talrækkers tal individuelt og ser om de matcher et tal i vinderrækken
-        function findVindereMedVindertal(vinderensVindertal,antalVindetal,list, vinderRække){
-        while(vinderensVindertal.length < antalVindetal || stopSearch == false){
-            for(let i = 0; i < list.length; i++){
-                for(let j = 0; j < list[i].talrækker.length; j++){
-                    vinderensVindertal = []
-                    for( let q in vinderRække){
-                        if(list[i].talrækker[j] == q){
-                            vinderensVindertal.push(q)
-                        }
-                    }
-                }
-            }
-            stopSearch == true
-        }
-    }
-    
-        findVindereMedVindertal(vinderensVindertal, antalVindetal,list,vinderRække)
-        assert.isTrue(vinderensVindertal.includes(12))
-        assert.isTrue(vinderensVindertal.includes(3))
-        assert.isTrue(vinderensVindertal.includes(6))
         
-
+        assert.equal(faktiskeVinder[0], vinderen)
+        assert.equal(faktiskeVinder.length, 1)
         
     })
 
@@ -233,49 +207,15 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          let antalVindertal = 3
  
          //act
+         
          let faktiskeVindere = findVinder(antalVindertal,list,vinderRække)
  
          //assert
+         
          assert.equal(faktiskeVindere[0], vinder1)
          assert.equal(faktiskeVindere[1], vinder2)
          assert.equal(faktiskeVindere.length, 2)
-                
-        //en check function der tjekker hver deltagers talrækkers tal individuelt og ser om de matcher et tal i vinderrækken
-        //Hvis deltageren har det valgte antal rigtige tal i en af sine rækker bliver deltageren puttet i liste af samlede vindere
-         function findVindereMedVindertal(vinderRække,antalVindertal,list){
-         let vindere = []
-
-            for(let i = 0; i < list.length; i++){
-                for(let j = 0; j<list[i].talrækker[j].length; j++){
-                    let temp = []
-                     if(temp.length < antalVindertal){
-                         for(let q of vinderRække){
-                            for(let k of list[i].talrækker[j]) {
-                                if (k == q){
-                                    temp.push(k)
-                                }
-                            }
-                    }
-                } 
-                if(temp.length == antalVindertal){
-                    vindere.push(findDeltager(list[i].id,list))
-               }
-               
-                temp = []
-
-            }
-            
-        }
-
-        return vindere
-        }
-
-        let Vindere1 = findVindereMedVindertal(vinderRække,3,list)
-        let vindere2 = findVindereMedVindertal(vinderRække, 2, list)
-
-        assert.equal(Vindere1.length, 2)
-        assert.equal(vindere2.length, 3)
-
+     
 
     })
 })

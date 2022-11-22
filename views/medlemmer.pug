@@ -1,9 +1,12 @@
 html 
     head 
         title Medlemmer 
+        script(src="js/function.js")
     body 
         ul 
             each medlem in medlemmer
                 li
                     a(href='/medlem/' + medlem.docID)= medlem.Fornavn
+                    a(href='javascript:tilføDeltager(\''+ medlem.docID +'\')') Tilføj
+          
                     
