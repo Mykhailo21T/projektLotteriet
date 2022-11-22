@@ -32,6 +32,7 @@ app.use(express.static('assets'))
 
 let medlemmerCollection = collection(db, 'Medlemmer')
 let lotterierCollection = collection(db,'Lotterier')
+let deltagereCollection = collection(db, 'GameParticipants')
 ///medlemmer start///////////////////////////////////
 async function getMedlemmer() {
   let medlemmerQueryDocs = await getDocs(medlemmerCollection)
@@ -90,6 +91,26 @@ async function addLotteri(lotteri) {
 }
 ///lotterier slut///////////////////////////////////
 
+///deltagere start//////////////////////////////////
+async function getDeltagere() { // henter lotterier fra db Lotterier i firebase
+  let lotterierQueryDocs = await getDocs(deltagereCollection)
+  let deltagere = lotterierQueryDocs.docs.map(doc => {
+      let data = doc.data()
+      data.docID = doc.id
+      return data
+  })
+  return deltagere
+}
+
+async function getDeltager(id) {
+  const docRef = doc(db, "GameParticipants", id)
+  const deltagerQueryDocument = await getDoc(docRef)
+  let deltager = deltagerQueryDocument.data()
+  deltager.docID = deltagerQueryDocument.id
+  return deltager
+}
+///deltagere slut///////////////////////////////////
+
 // Express Endpoint
 
 app.get('/medlemmer', async (request, response)=>{
@@ -124,15 +145,38 @@ app.get('/addLotteri', (request, response)=>{
 
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
-  const map = new Map();
-  const array = [];
-  const vindertal= [5];
   console.log(date);
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addLotteri({date:date, Deltagere: new Map(), Talrække: [], Vindertal: []})
+  let id = await addLotteri({date:date, Deltagere: null, Talrække: null, Vindertal: null})
   response.redirect('/lotterier')
+})
+
+app.get('/addDeltagere', async (request, response)=>{
+  const medlemmer = await getMedlemmer()
+  response.render('addDeltagere', {medlemmer: medlemmer})
+})
+
+app.post('/addDeltagere', async (request, response)=>{
+  //const date = request.body.date
+  //console.log(date);
+  // ALT hvad der kommer fra brugeren er en string
+  // I skal lave en fandens masse check
+  // STOL ALDRIG PÅ BRUGERDATA
+  //let id = await addLotteri({date:date, Deltagere: null, Talrække: null, Vindertal: null})
+  response.redirect('/deltagere')
+})
+
+app.get('/deltagere', async (req,res)=>{
+  const deltagere = await getDeltagere()
+  res.render('deltagere',{deltagere:deltagere})
+})
+
+app.get('/deltager/:id', async (request, response)=>{
+  const mID = request.params.id
+  const deltager = await getDeltager(mID)
+  response.render('deltager', {deltager: deltager})
 })
 
 app.get('/',(req,res)=>{

@@ -1,0 +1,10 @@
+html 
+    head 
+        title Deltagere 
+    body 
+        ul 
+            each deltager in deltagere
+                li
+                    a(href='/deltager/' + deltager.docID)= deltager.member
+                    
+                    

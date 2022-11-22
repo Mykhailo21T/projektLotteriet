@@ -1,13 +1,12 @@
 html 
     head 
         title lotteri
+        script(src="js/function.js") 
     body 
-        h1= 'dato: '+lotteri.Dato 
+        h1= 'date: '+lotteri.date 
         h1= 'vindertal: '+lotteri.Vindertal
+            button(type='submit',value='tilfoejVT',onClick='javascript:tilfoejVT('+lotteri.docID+')') TilføjVT
         h1= 'talrækker: '+lotteri.Talrækker 
-            for tr in lotteri.Talrækker 
-                li= tr.Tallerne + ' af '+tr.Deltager
+            button(type='submit',value='tilfoejTR',onClick='javascript:købTR('+lotteri.docID+')') KøbTR
         h1= 'deltagere: '+lotteri.Deltagere
-            for deltager in lotteri.Deltagere
-                li
-                    a(href='/medlem/' + deltager)= deltager
+            button(type='submit',value='tilfoejD',onClick='javascript:tilføjDeltager('+lotteri.docID+')') TilføjD
