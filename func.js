@@ -8,7 +8,7 @@ function addDeltager(navn, id, liste){
     liste.push(deltager)
     return deltager
 }
-
+//gameParticipant
 
 
 
@@ -17,6 +17,7 @@ function findDeltager(id, listeToSearch) {                                      
   let deltager = listeToSearch.find(deltager => deltager.id === id)     
   return deltager
 }
+//locateParticipant
 
 
 
@@ -27,6 +28,7 @@ function vælgTalPåForhånd(tal, list) {
         list.push(tal)                                                      // såfremt tallet ikke allerede er på listen, og 
     }                                                                       // listens længde er mindre end 5.
 }
+//prepickNumber
 
 
 
@@ -81,7 +83,6 @@ for (let deltager of deltagerListe) {
            
        
            
->>>>>>> b7e7fb6ebec4d83ee72ebb8785d604670cdf80bf
            
             for (let talIndex = 0; talIndex<5; talIndex++) {
                 let talrække = deltager.talrækker[talrækkeIndex]
