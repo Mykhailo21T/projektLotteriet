@@ -96,10 +96,9 @@ for (let deltager of deltagerListe) {
         }
         if (counter == antalVindertal) {
             
-            let xxx = deltager
-            vindere.push(xxx)
+            vindere.push(deltager)
             counter = 0
-            break
+            
         }
     }
 
