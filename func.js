@@ -119,6 +119,7 @@ let x = findVinder(3,deltagerListe,[3,4,5])
 
 
 
+import {GameParticipant, addParticipant, locateParticipant, prepickNumber, createNumberArr, addNumberArrToParticipant} from "./classes.js/gameParticipant.js"
 
 //test
 

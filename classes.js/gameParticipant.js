@@ -5,9 +5,10 @@ let numberArr = []
 //let id = -1
 
 class GameParticipant {
-    constructor(name, id, participantArr) {
+    constructor(name, id, arrOfNumberArr) {
         this.name = name
         this.id = id
+        this.numberArr = numberArr
         this.participantArr = participantArr
     }
 
@@ -28,6 +29,33 @@ class GameParticipant {
         }  
     }
 
-    createTalrække()
+    createNumberArr(arr) {
+        let min = Math.ceil(1)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
+        let max = Math.floor(25)                                                // (I parametret talrækkke anvendes talrækken valgteTal)
+        
+        
+        while (arr.length<5) {
+            let number = Math.floor(Math.random()*(max-min+1)+min)
+        
+            if (!number.includes(tal)) {
+                number.push(tal) 
+             }
+        
+            }
+            
+            
+        return arr
+    }
+
+    addNumberArrToParticipant(participantID, arrOfNumberArr, locationArr) {
+        let gameParticipant = locateParticipant(participantID, locationArr)
+        let numberArr = this.createNumberArr(arrOfNumberArr)
+
+        gameParticipant.arrOfNumberArr.push(numberArr)
+    }
 
 }
+
+
+
+export {GameParticipant, addParticipant, locateParticipant, prepickNumber, createNumberArr, addNumberArrToParticipant}
