@@ -58,6 +58,7 @@ async function addMedlem(medlem) {
   return docRef.id
 }
 ///medlemmer slut////////////////////////////////////
+
 ///lotterier start///////////////////////////////////
 async function getLotterier() { // henter lotterier fra db Lotterier i firebase
   let lotterierQueryDocs = await getDocs(lotterierCollection)
@@ -81,6 +82,12 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   return lotteri
 }
 
+async function addLotteri(lotteri) {
+  // lotteri = {date: dato}
+  const docRef = await addDoc(collection(db, "Lotterier"), lotteri)//,
+  console.log("Document witten with ID: ", docRef.id);
+  return docRef.id
+}
 ///lotterier slut///////////////////////////////////
 
 // Express Endpoint
@@ -111,6 +118,23 @@ app.post('/addMedlem', async (request, response)=>{
   response.redirect('/medlemmer')
 })
 
+app.get('/addLotteri', (request, response)=>{
+  response.render('addLotteri', {})
+})
+
+app.post('/addLotteri', async (request, response)=>{
+  const date = request.body.date
+  const map = new Map();
+  const array = [];
+  const vindertal= [5];
+  console.log(date);
+  // ALT hvad der kommer fra brugeren er en string
+  // I skal lave en fandens masse check
+  // STOL ALDRIG PÅ BRUGERDATA
+  let id = await addLotteri({date:date, Deltagere: new Map(), Talrække: [], Vindertal: []})
+  response.redirect('/lotterier')
+})
+
 app.get('/',(req,res)=>{
   res.render('start')
 })
@@ -130,3 +154,11 @@ app.listen(8000, ()=>{
 
 ///tilføje deltagere til lotteri
 // TODO tilføje talrækker til lotteri
+
+
+
+
+
+
+
+

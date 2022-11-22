@@ -175,10 +175,12 @@ describe('US3: Should be able to manually add a winning talrække and find a win
 
         //act
         
+        //adds the winning array to the function to find winners
           let faktiskeVinder = findVinder(antalVindetal,list,vinderRække)
 
         //assert
         
+        //there should be only one winner, who was designated under "vinderen"
         assert.equal(faktiskeVinder[0], vinderen)
         assert.equal(faktiskeVinder.length, 1)
         
