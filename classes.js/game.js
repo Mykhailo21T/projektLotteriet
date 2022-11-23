@@ -9,11 +9,8 @@ class Game {
         this.winnerArray = winnerArray;
         this.date = date
         this.participantList = participantList
+        this.findVinder = findVinder()
     }
-}
-
-function setWinnerArrayForGame( winnerArray){
-    this.winnerArray = winnerArray;
 }
 
 
@@ -31,7 +28,7 @@ function findVinder(){
     
     
     
-    for (let deltager of this.participantList) {
+    for (let deltager of participantList) {
         for (let talrækkeIndex = 0; talrækkeIndex<deltager.talrækker.length; talrækkeIndex++) {      
             counter = 0
     
@@ -68,5 +65,5 @@ function findVinder(){
     }
     
 
-    export {Game, findVinder, setWinnerArrayForGame}
+    export {Game}
     
