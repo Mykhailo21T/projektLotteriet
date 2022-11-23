@@ -2,6 +2,9 @@ html
     head 
         title Medlemmer 
     body 
+        a(href='/')= '<Tilbage'
+        br
+        a(href='/addMedlem')= 'Opret medlem'
         ul 
             each medlem in medlemmer
                 li
