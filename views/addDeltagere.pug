@@ -1,13 +1,11 @@
 html 
     head 
         title Deltagere 
-        script(src="js/function.js")
     body 
-        form(action="/addDeltagere", method="post") 
             ul 
                 each medlem in medlemmer
-                    li
+                    li 
                         a(href='/medlem/' + medlem.docID)= medlem.Fornavn
-                        a(href='javascript:tilføDeltager(\''+ medlem.docID +'\')') Tilføj
+                        a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
           
                     

@@ -1,4 +1,5 @@
 import { async } from "@firebase/util"
+import { render } from "pug";
 
 async function tilføjDeltager(id){
     const responce = await fetch ('/tilføjDeltager/'+id,{
@@ -16,6 +17,7 @@ async function tilføjVT(id){
 
 }
 
-async function tilføjDeltager(id){
+function addDeltager(){
+  console.log(123);
 
 }
