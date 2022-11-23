@@ -3,6 +3,7 @@ html
         title lotteri
         script(src="js/function.js") 
     body 
+        a(href='/lotterier')= '<Tilbage'
         h1= 'date: '+lotteri.date 
         h1= 'vindertal: '+lotteri.Vindertal
             button(type='submit',value='tilfoejVT',onClick='javascript:tilfoejVT('+lotteri.docID+')') TilføjVT
