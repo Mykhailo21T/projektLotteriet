@@ -4,25 +4,32 @@ html
         link(rel="stylesheet" type="text/css" href="/css/udtraekning.css")
     body 
 
-        textarea(class="item-a",name="1", cols="1", rows="1")
-        textarea(class="item-a",name="2", cols="1", rows="1")
-        textarea(class="item-a",name="3", cols="1", rows="1")
-        textarea(class="item-b",name="talraekker", cols="10", rows="10") 
-        br
-        button tryk  
-        label.v-checkbox     
-            v.label 1
-            input(type='radio',name='vtSelector')
-        label.v-checkbox     
-            v.label 2
-            input(type='radio',name='vtSelector')
-        label.v-checkbox     
-            v.label 3
-            input(type='radio',name='vtSelector',checked)
-        label.v-checkbox     
-            v.label Manualt
-            input(type='radio',name='autoMan')
-        label.v-checkbox     
-            v.label Automatisk
-            input(type='radio',name='autoMan', checked)
-        button generer
+    .container
+        .textFeild1
+            textarea(class="textFeild1",name="1", cols="6", rows="4")
+        .textFeild2
+            textarea(class="textFeild2",name="2", cols="6", rows="4")
+        .textFeild3
+            textarea(class="textFeild3",name="3", cols="6", rows="4")
+        .item-b
+            textarea(class="item-b",name="talraekker", cols="10", rows="10") 
+            br
+        .item-d
+            button tryk  
+        .item-c
+            label.v-checkbox     
+                v.label 1
+                input(type='radio',name='vtSelector')
+            label.v-checkbox     
+                v.label 2
+                input(type='radio',name='vtSelector')
+            label.v-checkbox     
+                v.label 3
+                input(type='radio',name='vtSelector',checked)
+        .item-e
+            label.v-checkbox     
+                v.label Manualt
+                input(type='radio',name='autoMan')
+            label.v-checkbox     
+                v.label Automatisk
+                input(type='radio',name='autoMan', checked)
