@@ -1,0 +1,28 @@
+html 
+    head
+        title sortering
+        link(rel="stylesheet" type="text/css" href="/css/udtraekning.css")
+    body 
+
+        textarea(class="item-a",name="1", cols="1", rows="1")
+        textarea(class="item-a",name="2", cols="1", rows="1")
+        textarea(class="item-a",name="3", cols="1", rows="1")
+        textarea(class="item-b",name="talraekker", cols="10", rows="10") 
+        br
+        button tryk  
+        label.v-checkbox     
+            v.label 1
+            input(type='radio',name='vtSelector')
+        label.v-checkbox     
+            v.label 2
+            input(type='radio',name='vtSelector')
+        label.v-checkbox     
+            v.label 3
+            input(type='radio',name='vtSelector',checked)
+        label.v-checkbox     
+            v.label Manualt
+            input(type='radio',name='autoMan')
+        label.v-checkbox     
+            v.label Automatisk
+            input(type='radio',name='autoMan', checked)
+        button generer

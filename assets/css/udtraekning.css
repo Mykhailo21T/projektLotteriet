@@ -1,0 +1,30 @@
+body{
+    background-color: aqua;
+}
+
+.container {
+    display: grid;
+    background-color: #3e2723;
+    padding: 10px;
+    border-radius: 10px;
+    grid-template-columns: [col1] 10% [col2] 60% [col3] 30%;
+    grid-template-rows: [row1start]auto [row1end] auto;
+    grid-template-areas: 
+        ". main sidebar "
+        "selectionFooter mainFooter sidebarFooter";
+}
+.item-a {
+    grid-area: main;
+}
+.item-b {
+    grid-area: sidebar;
+}
+.item-c {
+    grid-area: sidebarFooter;
+}
+.item-d {
+    grid-area: mainFooter;
+}
+.item-e {
+    grid-area: selectionFooter;
+}

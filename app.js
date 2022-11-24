@@ -181,6 +181,10 @@ app.post('/addDeltagere', async (request, response)=>{
   response.redirect('/deltagere')
 })
 
+app.get('/sortering',(req,res)=>{
+  res.render('sortering')
+})
+
 app.get('/deltagere', async (req,res)=>{
   const deltagere = await getDeltagere()
   res.render('deltagere',{deltagere:deltagere})
