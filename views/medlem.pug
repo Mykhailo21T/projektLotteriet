@@ -1,7 +1,11 @@
 html 
     head 
         title medlem
+        link(rel="stylesheet" type="text/css" href="/css/medlem.css")
     body 
-        h1= medlem.Fornavn 
-        p= medlem.Efternavn
-        p= medlem.medlemsID
+        .h1 MEDLEMS-INFO
+        p= 'Fornavn: ' + medlem.Fornavn 
+        p= 'Efternavn: ' +medlem.Efternavn
+        p= 'Medlems-ID: ' +medlem.medlemsID
+
+        a.button(href='/medlemmer') Tilbage
