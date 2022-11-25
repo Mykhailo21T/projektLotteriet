@@ -200,7 +200,8 @@ describe('US4: Should return an array with 5 numbers',()=>{
 
         opretTalrække(testArray)
         opretTalrække(testArrayPartialFilled)
-
+   
+        
         //assert
         assert.equal(testArray.length, 5)
 
