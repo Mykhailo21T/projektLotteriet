@@ -1,12 +1,13 @@
 html 
     head 
         title Medlemmer 
-        script(src="js/function.js")
     body 
+        a(href='/')= '<Tilbage'
+        br
+        a(href='/addMedlem')= 'Opret medlem'
         ul 
             each medlem in medlemmer
                 li
                     a(href='/medlem/' + medlem.docID)= medlem.Fornavn
-                    a(href='javascript:tilføDeltager(\''+ medlem.docID +'\')') Tilføj
-          
+                    
                     

@@ -3,6 +3,7 @@ html
     title Add medlem
     style
   body 
+    a(href='/medlemmer')= '<Tilbage'
     form(action="/addMedlem", method="post") 
       input(type="number", name="medlemsID", placeholder="Skriv ID")
       input(type="text", name="Fornavn", placeholder="Skriv fornavn")

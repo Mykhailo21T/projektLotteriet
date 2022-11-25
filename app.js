@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -32,6 +32,7 @@ app.use(express.static('assets'))
 
 let medlemmerCollection = collection(db, 'Medlemmer')
 let lotterierCollection = collection(db,'Lotterier')
+let deltagereCollection = collection(db, 'GameParticipants')
 ///medlemmer start///////////////////////////////////
 async function getMedlemmer() {
   let medlemmerQueryDocs = await getDocs(medlemmerCollection)
@@ -90,6 +91,38 @@ async function addLotteri(lotteri) {
 }
 ///lotterier slut///////////////////////////////////
 
+///deltagere start//////////////////////////////////
+async function getDeltagere() { // henter lotterier fra db Lotterier i firebase
+  let lotterierQueryDocs = await getDocs(deltagereCollection)
+  let deltagere = lotterierQueryDocs.docs.map(doc => {
+      let data = doc.data()
+      data.docID = doc.id
+      return data
+  })
+  return deltagere
+}
+
+async function getDeltager(id) { //henter deltager med bestemt id
+  const docRef = doc(db, "GameParticipants", id)
+  const deltagerQueryDocument = await getDoc(docRef)
+  let deltager = deltagerQueryDocument.data()
+  deltager.docID = deltagerQueryDocument.id
+  return deltager
+}
+
+async function addDeltager(lID,mID){
+  let lot = await getLotteri(lID)
+  let delt = await getMedlem(mID)
+  const docRef = await addDoc(collection(db,"GameParticipants"),delt) // man skal ikke glemme "collection"!
+  const docRefNy = doc(db, "GameParticipants", docRef.id)
+  const updt = await updateDoc(docRefNy,{game:`/Lotterier/${lot.docID}`,member:`/Medlemmer/${delt.docID}`,rows:[{1:"",2:"",3:"",4:"",5:""}]})
+  console.log(125);
+  return await getDeltager(docRef.id)
+}
+
+
+///deltagere slut///////////////////////////////////
+
 // Express Endpoint
 
 app.get('/medlemmer', async (request, response)=>{
@@ -124,20 +157,45 @@ app.get('/addLotteri', (request, response)=>{
 
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
-  const map = new Map();
-  const array = [];
-  const vindertal= [5];
   console.log(date);
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addLotteri({date:date, Deltagere: new Map(), Talrække: [], Vindertal: []})
+  let id = await addLotteri({date:date, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""})
   response.redirect('/lotterier')
 })
 
-app.get('/',(req,res)=>{
-  res.render('start')
+app.get('/lotteri/:id/addDeltagere', async (request, response)=>{ //ok
+  const medlemmer = await getMedlemmer()
+  const lotteri = await getLotteri(request.params.id)
+  response.render('addDeltagere', {medlemmer: medlemmer,lotteri:lotteri})
 })
+
+app.post('/addDeltagere', async (request, response)=>{
+  //const date = request.body.date
+  //console.log(date);
+  // ALT hvad der kommer fra brugeren er en string
+  // I skal lave en fandens masse check
+  // STOL ALDRIG PÅ BRUGERDATA
+  //let id = await addLotteri({date:date, Deltagere: null, Talrække: null, Vindertal: null})
+  response.redirect('/deltagere')
+})
+
+app.get('/sortering',(req,res)=>{
+  res.render('sortering')
+})
+
+app.get('/deltagere', async (req,res)=>{
+  const deltagere = await getDeltagere()
+  res.render('deltagere',{deltagere:deltagere})
+})
+
+app.get('/deltager/:id', async (request, response)=>{
+  const mID = request.params.id
+  const deltager = await addDeltager(mID)
+  response.render('deltager', {deltager: deltager})
+})
+
 
 app.get('/lotterier', async (req,res)=>{
   //TODO getLotterier funktion
@@ -145,7 +203,22 @@ app.get('/lotterier', async (req,res)=>{
   const alleLotterier = await getLotterier();
   res.render('lotterier',{lotterier:alleLotterier})
 })
+app.get('/lotteri/:id', async (request, response)=>{
+  const lID = request.params.id
+  const lotteri = await getLotteri(lID)
+  response.render('lotteri', {lotteri: lotteri})
+})
 
+app.get('/:lid/:mid', async (request, response)=>{ //ok
+  const lID = request.params.lid
+  const mID = request.params.mid
+  const deltager = await addDeltager(lID,mID)
+  response.render('deltager', {deltager: deltager})
+})
+
+app.get('/',(req,res)=>{
+  res.render('start')
+})
 app.listen(8000, ()=>{
   console.log("lytter på port 8000");
 })
@@ -155,7 +228,12 @@ app.listen(8000, ()=>{
 ///tilføje deltagere til lotteri
 // TODO tilføje talrækker til lotteri
 
+/*
+const cityRef = db.collection('cities').doc('DC');
 
+// Set the 'capital' field of the city
+const res = await cityRef.update({capital: true});
+*/
 
 
 

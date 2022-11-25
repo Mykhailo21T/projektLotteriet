@@ -75,7 +75,7 @@ addTalrækkeTilDeltager(1,[1,2,3,4,5],deltagerListe)
 
 
 
-import{Game,findVinder,setWinnerArrayForGame } from "./classes.js/game.js"
+import{Game } from "./classes.js/game.js"
 
 let spil = new Game(55,1,2,Date.now)
 spil.participantList = deltagerListe

@@ -2,6 +2,7 @@ html
     head 
         title lotterier
     body 
+        a(href='/')= '<Tilbage'
         each lotteri in lotterier 
             li 
                 a(href="/lotteri/"+lotteri.docID)= lotteri.date 

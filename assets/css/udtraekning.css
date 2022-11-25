@@ -1,0 +1,45 @@
+
+
+.container {
+    display: grid;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content:space-between;
+    grid-template-columns: [col1] 10% [col2] 60% [col3] 30%;
+    grid-template-rows: [row1start] auto [row1end] auto;
+    grid-template-areas: 
+        ".    main   sidebar "
+        "selectionFooter mainFooter sidebarFooter";
+}
+
+
+
+.textFeild1{
+    grid-area: main;
+    text-align: start;
+    
+}
+.textFeild2{
+    grid-area: main;
+    text-align: center;
+}
+.textFeild3{
+    grid-area: main;
+    text-align: end;
+
+}
+
+
+.item-b {
+    grid-area: sidebar;
+}
+.item-c {
+    grid-area: sidebarFooter;
+}
+.item-d {
+    grid-area: mainFooter;
+    text-align: center;
+}
+.item-e {
+    grid-area: selectionFooter;
+}

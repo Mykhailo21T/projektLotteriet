@@ -1,0 +1,11 @@
+html 
+    head 
+        title deltager
+    body 
+        h1= deltager.game
+        h2= deltager.member
+        li All rows
+            for row in deltager.rows
+                li row
+                    for tal in row 
+                        ul(display="inline")= tal

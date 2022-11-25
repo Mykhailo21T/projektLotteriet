@@ -1,0 +1,11 @@
+html 
+    head 
+        title Deltagere 
+    body 
+            ul 
+                each medlem in medlemmer
+                    li 
+                        a(href='/medlem/' + medlem.docID)= medlem.Fornavn
+                        a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
+          
+                    
