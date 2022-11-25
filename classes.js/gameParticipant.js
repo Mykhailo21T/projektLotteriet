@@ -9,6 +9,7 @@ class GameParticipant {
         this.name = name
         this.id = id
         this.numberArr = numberArr
+        this.arrOfNumberArr = arrOfNumberArr
         this.participantArr = participantArr
         
     }
@@ -55,8 +56,8 @@ class GameParticipant {
         gameParticipant.arrOfNumberArr.push(numberArr)
     }
 
+    
+
 }
 
-
-
-export {GameParticipant, addParticipant, locateParticipant, prepickNumber, createNumberArr, addNumberArrToParticipant}
+export {GameParticipant}

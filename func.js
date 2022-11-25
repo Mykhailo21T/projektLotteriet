@@ -85,6 +85,9 @@ console.log(spil.findVinder);
 
  
 
+import { GameParticipant } from "./classes.js/gameParticipant.js"
+
+
 //test
 
 const _findVinder = (antalVindertal, deltagerListe, vinderTal) => {
