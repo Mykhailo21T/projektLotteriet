@@ -84,7 +84,9 @@ spil.setWinnerArrayForGame = [3,4,5]
 console.log(spil.findVinder);
 
  
-import {GameParticipant, addParticipant, locateParticipant, prepickNumber, createNumberArr, addNumberArrToParticipant} from "./classes.js/gameParticipant.js"
+
+import { GameParticipant } from "./classes.js/gameParticipant.js"
+
 
 //test
 
