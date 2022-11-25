@@ -1,4 +1,5 @@
 import chai from 'chai'
+
 const expect = chai.expect
 const assert = chai.assert
 
@@ -13,11 +14,15 @@ import { findVinder } from '../func.js'
 
 import { findDeltager } from '../func.js'
 
+import {Game} from "../classes.js/game"
+
 
 
 let list = []
 let deltager = new Object;
 let deltager2 = new Object
+let newGame = new Game()
+
 beforeEach(function(){
     deltager.navn = "Knud Knudsen"
     deltager.id = 1

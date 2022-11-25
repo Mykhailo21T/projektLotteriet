@@ -10,6 +10,7 @@ class GameParticipant {
         this.id = id
         this.numberArr = numberArr
         this.participantArr = participantArr
+        
     }
 
     

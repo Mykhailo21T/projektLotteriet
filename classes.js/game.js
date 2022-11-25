@@ -10,6 +10,8 @@ class Game {
         this.date = date
         this.participantList = participantList
         this.findVinder = findVinder()
+
+        return this
     }
 }
 
@@ -66,4 +68,9 @@ function findVinder(){
     
 
     export {Game}
-    
+
+    const _Game = (highestNum, lowestNum, amountOfWinningNums, date) => {
+   
+        Game(highestNum, lowestNum, amountOfWinningNums, date)
+    };
+    export { _Game as Game };
