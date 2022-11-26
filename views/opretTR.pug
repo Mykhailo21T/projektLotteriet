@@ -1,0 +1,15 @@
+html 
+    head 
+        title talrække
+    body 
+        p= data.date 
+        p talraekker 
+            for tal in data.talraekker
+                li række
+                    for i in tal 
+                        li= i
+                
+        p deltagere 
+            for delt in data.deltagere 
+                li= delt.reference
+        

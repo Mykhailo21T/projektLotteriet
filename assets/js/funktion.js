@@ -1,6 +1,3 @@
-import { async } from "@firebase/util"
-import { render } from "pug";
-
 async function tilføjDeltager(id){
     const responce = await fetch ('/tilføjDeltager/'+id,{
         method: "POST",
@@ -13,8 +10,17 @@ async function tilføjDeltager(id){
         window.location.href='/gemeParticipants'
 }
 
-async function tilføjVT(id){
-
+function tilfVT(id){
+   alert(id)
+  /*const respons = await fetch('/deleteVT/' + id, {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  if (respons.status !== 201) // Deleted
+    throw new Error(respons.status);
+    window.location.href='/lotterier'*/
 }
 
 function addDeltager(){

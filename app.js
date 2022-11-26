@@ -120,8 +120,22 @@ async function addDeltager(lID,mID){
   return await getDeltager(docRef.id)
 }
 
+async function addTR(lid, did){
+  let lot = await getLotteri(lID)
+  
+  return lot
+}
 
 ///deltagere slut///////////////////////////////////
+
+//--------------VINDERTAL_START---------------------
+async function addVinderTal(lid,a,b,c){
+  const docRef = doc(db, "Lotterier", `${lid}`)
+  const opdatere = await updateDoc(docRef,{Vindertal:[a,b,c]})
+  console.log("opdateret");
+}
+//--------------VINDERTAL_SLUT----------------------
+
 
 // Express Endpoint
 
@@ -216,9 +230,38 @@ app.get('/:lid/:mid', async (request, response)=>{ //ok
   response.render('deltager', {deltager: deltager})
 })
 
+////talraekke
+app.get('/lotteri/:lotteriId/addTR', async (request, response)=>{ //ok
+  let inputId = request.params.lotteriId
+  const docRef = doc(db, "Lotterier", `${inputId}`);
+  const docSnap = await getDoc(docRef);
+  let data = docSnap.data()
+  console.log(data);
+  response.render('opretTR', {data:data})
+})
+
+app.post('/lotteri/:lotId/:tal1/:tal2/:tal3',async(req,res)=>{
+  let a = req.params.tal1
+  let b = req.params.tal2
+  let c = req.params.tal3
+  let id = req.params.lotId
+  let vt = await addVinderTal(id,a,b,c)
+  res.redirect(`/lotteri/${id}`)
+})
+
 app.get('/',(req,res)=>{
   res.render('start')
 })
+
+app.delete('/deleteVT/:id',async(req,res)=>{//test
+  console.log(11111);
+  const docRef = doc(db,"Lotterier",req.params.id)
+  let go =await deleteDoc(docRef,{
+    Vindertal: []
+  })
+
+})
+
 app.listen(8000, ()=>{
   console.log("lytter på port 8000");
 })

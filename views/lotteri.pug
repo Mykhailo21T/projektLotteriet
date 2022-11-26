@@ -1,15 +1,29 @@
 html 
     head 
         title lotteri
-        //script(src="assets/js/function.js") 
+        script(src="/js/funktion.js") 
     body 
         a(href='/lotterier')= '<Tilbage'
         h1= 'date: '+lotteri.date 
         h1= 'vindertal: '+lotteri.Vindertal || lotteri.vindertal
-            button(type='submit',value='tilfoejVT',onClick='javascript:tilfoejVT('+lotteri.docID+')') TilføjVT
-        h1= 'talrækker: '+lotteri.Talrækker 
-        p= lotteri.deltagere
-            button(type='submit',value='tilfoejTR',onClick='javascript:købTR('+lotteri.docID+')') KøbTR
-        h1= 'deltagere: '+lotteri.Deltagere 
-            a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addD
         
+        textarea(id="1", cols="1", rows="1" value="value") 
+        textarea(id="2", cols="1", rows="1" value="value")
+        textarea(id="3", cols="1", rows="1" value="value")
+        a(href='javascript: tilfVT(\''+ lotteri.docID +'\')') submit
+        h1= 'talrækker: '
+            a(href=`/lotteri/${lotteri.docID}/addTR`) KøbTR
+            for tr in lotteri.talraekker
+                li 
+                    for tal in tr 
+                        a= tal+"     "
+        h1= "deltagere: "
+            for deltager in lotteri.deltagere
+                for d in deltager
+                    ul= d
+        
+        h1= 'deltagere: '+lotteri.deltagere 
+        a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
+        each deltager in lotteri.deltagere
+            li= deltager
+        br
