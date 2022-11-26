@@ -1,5 +1,5 @@
 "use strict"
-import { arrayUnion } from "firebase/firestore"
+import { arrayUnion, limit, limitToLast } from "firebase/firestore"
 import {GameParticipant} from "../classes.js/gameParticipant.js"
 let winnerArray = []
 let participantList = []
@@ -31,6 +31,7 @@ export class Game {
     
         gameParticipant.arrOfNumberArr.push(numberArr)
     }
+    
     createNumberArr(arr) {
         let min = Math.ceil(this.lowestNum)                                                  // i talrækken i forvejen. Hvis talrækken er fuld, oprettes ingen ekstra tal.
         let max = Math.floor(this.highestNum)                                              // (I parametret talrækkke anvendes talrækken valgteTal)
@@ -49,7 +50,7 @@ export class Game {
         return arr
     }
     prepickNumber(number, arr) {
-        if (!arr.includes(number)) {                 // Tilføjer selvvalgt tal mellem 1 og 25 til liste, 
+        if (arr.length<5 && number<=this.highestNum && number>=this.lowestNum && !arr.includes(number)) {                 // Tilføjer selvvalgt tal mellem 1 og 25 til liste, 
             arr.push(number)                                                      // såfremt tallet ikke allerede er på listen, og 
         }  
     }
