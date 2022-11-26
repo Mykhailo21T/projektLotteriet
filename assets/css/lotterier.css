@@ -21,6 +21,7 @@ font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial
 font-size: 300%;
 padding-top: 5%;
 text-align: center;
+padding-bottom: 5%;
 }
 
 #backButton {
@@ -29,7 +30,7 @@ text-align: center;
 }
 
 body {
-    background-color: #f8eecf;
+    background-color:#FDF8E2;
 }
 
 .button{
@@ -78,25 +79,44 @@ body {
 
 
 #previousWinningNumbers {
-    grid-area: c;
-    color :grey ;
-    font-size: 200%;
+   padding-left: 2rem;
+   padding-right: 2rem;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   grid-area: c;
+   color :#ffab91;
+   font-size: 200%;
+
+   border-style: inset;
+   border-width: 0.5rem;
+   border-color: #ffab91;
+   background-color:white;
+   border-radius: 30%;
 }
 
 #futureWinningNumbers {
-    padding: 1em, 1em, 1em, 1em;
-    margin: 1em -2em;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     grid-area: d;
-    color: white;
+    color: rgb(49, 223, 110);
     font-size: 200%;
-    border-width: 3%;
-    border-color: white;
-    background-color: rgb(49, 223, 110);
+
+    border-style: outset;
+    border-width: 0.5rem;
+    border-color: rgb(49, 223, 110);
+    background-color: white;
     border-radius: 30%;
     
 }
 
 a.fwList{
-    color: ;
+    color :rgb(49, 223, 110);
     font-size: 80%;
+}
+
+a.fwList:hover {
+  color: forestgreen;
+  transform: translateY(-2px);
 }
