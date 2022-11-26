@@ -130,7 +130,7 @@ async function addTR(lid, did){
 
 //--------------VINDERTAL_START---------------------
 async function addVinderTal(lid,a,b,c){
-  const docRef = doc(db, "Lotterier", `${lid}`)
+  const docRef = doc(db, "Lotterier", lid)
   const opdatere = await updateDoc(docRef,{Vindertal:[a,b,c]})
   console.log("opdateret");
 }
