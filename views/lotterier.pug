@@ -1,8 +1,14 @@
 html 
     head 
         title lotterier
-    body 
-        a(href='/')= '<Tilbage'
-        each lotteri in lotterier 
-            li 
-                a(href="/lotteri/"+lotteri.docID)= lotteri.date 
+        link(rel="stylesheet" type="text/css" href="/css/lotterier.css")
+    body
+    #container
+            #lotteriOversigt OVERSIGT OVER LOTTERIUDTRÆKNINGER
+            #backButton 
+                a.button(href="/")= 'Forrige side'       
+            #futureWinningNumbers Kommende udtrækninger
+                each lotteri in lotterier 
+                    li 
+                            a.fwList(href="/lotteri/"+lotteri.docID)= lotteri.date 
+            #previousWinningNumbers Tidligere udtrækninger

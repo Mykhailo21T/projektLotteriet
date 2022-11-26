@@ -5,33 +5,21 @@ const assert = chai.assert
 
 
 
-import { addDeltager } from '../func.js'
-import { opretTalrække } from '../func.js'
-import { vælgTalPåForhånd } from '../func.js'
-import { addTalrækkeTilDeltager } from '../func.js'
-import { findVinder } from '../func.js'
+//import{GameParticipant} from "../classes.js/gameParticipant"
 
+//import {Game} from "../classes.js/game.js"
 
-import { findDeltager } from '../func.js'
-
-import {Game} from "../classes.js/game"
-
-
+import {Game} from "../classes.js/game.js" 
 
 let list = []
-let deltager = new Object;
-let deltager2 = new Object
-let newGame = new Game()
 
+let date = new Date(Date.now)
+let newGame = new Game(25,1,3, date,list)
+
+
+newGame.addParticipant
 beforeEach(function(){
-    deltager.navn = "Knud Knudsen"
-    deltager.id = 1
-    deltager.talrække = []
-    
 
-    deltager2.navn = "Per Hansen"
-    deltager2.id = 2
-    deltager2.talrække = []
     list = []
 
 }
@@ -40,38 +28,24 @@ beforeEach(function(){
 
 describe('US1: When adding a Deltager', () =>{
 
-    it('Should add the deltager', () =>{
+    it('Should add and find the deltager', () =>{
 
         //act
-        addDeltager(deltager.navn, deltager.id, list)
-        addDeltager(deltager2.navn, deltager2.id, list)
+        let deltager1 = newGame.addParticipant("Knud Knudsen",1)
+        let deltager2 = newGame.addParticipant("Per hansen",2)
+
 
         //assert
-        const liste = list
-        assert.isNotEmpty(liste, "List is not empty")
+       
+        let findDeltager1 = newGame.locateParticipant(1)
+        let findDeltager2 = newGame.locateParticipant(2)
 
+        assert.equal(findDeltager1, deltager1)
+        assert.equal(findDeltager2, deltager2)
 
-        let found = false
-        for(let i of list){
-            if(i.id == deltager.id && i.navn == deltager.navn){
-                found = true
-                break
-            }
-        }
+        assert.equal(findDeltager1.name, "Knud Knudsen")
+        assert.equal(findDeltager2.name, "Per hansen")
 
-        assert.isTrue(found, "Deltager 1 er fundet")
-
-        found = false
-        for(let i of list){
-            if(i.id == deltager2.id && i.navn == deltager2.navn){
-                found = true
-                break
-            }
-        }
-        
-       assert.isTrue(found, "Deltager 2 fundet")
-       assert.isNotEmpty(list)
-       assert.equal(list.length,2)
 
     })
 
@@ -84,29 +58,7 @@ describe('US1: When adding a Deltager', () =>{
 describe("US2: Should show talrækker connected to a deltager", ()=>{
 
     
-    it('Should find a konkrete deltager by the id', ()=>{
-        //assign 
-
-        addDeltager(deltager.navn, deltager.id, list)
-        addDeltager(deltager2.navn, deltager2.id, list)
-        
-        
-        
-        //act & assert
-       
-        let konkretDeltager1 = findDeltager(1, list);
-        let konkretDeltager2 = findDeltager(2, list)
     
-        
-       
-        assert.equal(konkretDeltager1.id, 1)
-        assert.equal(konkretDeltager1.navn, "Knud Knudsen")
-        assert.equal(konkretDeltager2.id, 2)
-        assert.equal(konkretDeltager2.navn, "Per Hansen")
-     
-
-    
-    })
     it('Should add talrække to konkrete deltager', () =>{
         //assign
         let talrække1 = [1,2,3,4,5]
@@ -114,32 +66,36 @@ describe("US2: Should show talrækker connected to a deltager", ()=>{
         let talrække3HalfEmpty = [23,2,8]
         let talrækkeEmpty = []
 
-        addDeltager(deltager.navn, deltager.id, list)
-        addDeltager(deltager2.navn, deltager2.id, list)
+        newGame.addParticipant("Knud Knudsen",1, list)
+        newGame.addParticipant("Per hansen",2, list)
 
-        let konkretDeltager1 = findDeltager(1, list);
-        let konkretDeltager2 = findDeltager(2, list);
+        
+        let findDeltager1 = newGame.locateParticipant(1)
+        let findDeltager2 = newGame.locateParticipant(2)
         //act
-        addTalrækkeTilDeltager(1, talrække1,list)
-        addTalrækkeTilDeltager(2, talrække1,list)
-        addTalrækkeTilDeltager(2, talrække2,list)
-        addTalrækkeTilDeltager(2, talrække3HalfEmpty,list)
-        addTalrækkeTilDeltager(2, talrækkeEmpty,list)
+        
+        
+        newGame.addNumberArrToParticipant(1,talrække1)
+        newGame.addNumberArrToParticipant(2,talrække1)
+        newGame.addNumberArrToParticipant(2,talrække2)
+        newGame.addNumberArrToParticipant(2,talrække3HalfEmpty)
+        newGame.addNumberArrToParticipant(2,talrækkeEmpty)
+
         //assert
 
 
-        assert.equal(konkretDeltager1.talrækker.length, 1)
-        assert.equal(konkretDeltager2.talrækker.length,4)
+        assert.equal(findDeltager1.arrOfNumberArr.length, 1)
+        assert.equal(findDeltager2.arrOfNumberArr.length,4)
 
         //Tests that the method fills the array with 5 numbers
-        assert.equal(konkretDeltager2.talrækker[2].length, 5)
-        assert.equal(konkretDeltager2.talrækker[3].length, 5)
+        assert.equal(findDeltager2.arrOfNumberArr[2].length, 5)
+        assert.equal(findDeltager2.arrOfNumberArr[3].length, 5)
 
       
         //Checks that the same number doesnt occur in the same talrække
         let checkIfFailed = false
-        for(let i =0; i < konkretDeltager2.talrækker.length; i++){
-            let testArray = konkretDeltager2.talrækker[i]
+        for(let i =0; i < findDeltager2.arrOfNumberArr.length; i++){
+            let testArray = findDeltager2.arrOfNumberArr[i]
             for(let j = 0; j < testArray.length-1; j++){
                 for(let q =j+1; q<testArray.length;q++){
                 if(testArray[j] === testArray[q]){
@@ -168,20 +124,22 @@ describe('US3: Should be able to manually add a winning talrække and find a win
         let talrække2 = [20,22,12,8,6]
         let talrække3 = [6,9,4,3,12]
 
-        addDeltager(deltager.navn, deltager.id, list)
-        addDeltager(deltager2.navn, deltager2.id, list)
-        let vinderen = addDeltager("Hans", 3, list)
+        newGame.addParticipant("Knud Knudsen",1, list)
+        newGame.addParticipant("Per hansen",2, list)
+        let vinderen = newGame.addParticipant("Hans", 3, list)
 
-        addTalrækkeTilDeltager(1,talrække1,list)
-        addTalrækkeTilDeltager(2,talrække2,list)
-        addTalrækkeTilDeltager(3,talrække3,list)
 
-        let antalVindetal = 3
+        newGame.addNumberArrToParticipant(1,talrække1)
+        newGame.addNumberArrToParticipant(2,talrække2)
+        newGame.addNumberArrToParticipant(3,talrække3)
+
+
 
         //act
         
         //adds the winning array to the function to find winners
-          let faktiskeVinder = findVinder(antalVindetal,list,vinderRække)
+            newGame.setWinningArray(vinderRække)
+          let faktiskeVinder = newGame.findWinner()
 
         //assert
         
@@ -193,6 +151,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
 
     it('Should return more vindere', ()=>{
 
+
          //assign
          let vinderRække = [12,3,6]
 
@@ -201,27 +160,30 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          let talrække3 = [6,9,4,3,12] // vinder med 3 rigtige
          let talrække4 = [6,24,12,4,3] //vinder med 3 rigtige
  
-         addDeltager(deltager.navn, deltager.id, list)
-         addDeltager(deltager2.navn, deltager2.id, list)
-         let vinder1 = addDeltager("Hans", 3, list)
-         let vinder2 = addDeltager("Grete", 4, list)
+        
+         newGame.addParticipant("Knud Knudsen",1)
+         newGame.addParticipant("Per hansen",2)
+         let vinder1 = newGame.addParticipant("Hans", 3)
+         let vinder2 = newGame.addParticipant("Grete", 4)
  
-         addTalrækkeTilDeltager(1,talrække1,list)
-         addTalrækkeTilDeltager(2,talrække2,list)
-         addTalrækkeTilDeltager(3,talrække3,list)
-         addTalrækkeTilDeltager(4,talrække4,list)
+         newGame.addNumberArrToParticipant(1,talrække1)
+         newGame.addNumberArrToParticipant(2,talrække2)
+         newGame.addNumberArrToParticipant(3,talrække3)
+         newGame.addNumberArrToParticipant(4,talrække4)
  
-         let antalVindertal = 3
  
          //act
          
-         let faktiskeVindere = findVinder(antalVindertal,list,vinderRække)
- 
+         newGame.setWinningArray(vinderRække)
+         let faktiskeVinder = newGame.findWinner()
          //assert
          
-         assert.equal(faktiskeVindere[0], vinder1)
-         assert.equal(faktiskeVindere[1], vinder2)
-         assert.equal(faktiskeVindere.length, 2)
+
+         assert.equal(faktiskeVinder[0].name, vinder1.name)
+         assert.equal(faktiskeVinder[1].name, vinder2.name)
+         assert.equal(faktiskeVinder.length, 2)
+
+
      
 
     })
@@ -238,9 +200,8 @@ describe('US4: Should return an array with 5 numbers',()=>{
         let testArrayPartialFilled = [4,3,1]
         //act
 
-        opretTalrække(testArray)
-        opretTalrække(testArrayPartialFilled)
-
+        newGame.createNumberArr(testArray)
+        newGame.createNumberArr(testArrayPartialFilled)
         //assert
         assert.equal(testArray.length, 5)
 
@@ -253,8 +214,8 @@ describe('US4: Should return an array with 5 numbers',()=>{
         let failed = false
         for(let i = 0; i<=testArray.length-1;i++){
             if(testArray[i] === testArray[i+1] ||
-                testArray[i] < 1 || testArray[i+1]<1 || testArray[i]>25 || 
-                testArray[i+1] >25){
+                testArray[i] < newGame.lowestNum || testArray[i+1]<newGame.lowestNum  || testArray[i]>newGame.highestNum || 
+                testArray[i+1] >newGame.highestNum){
                 failed = true 
                 break
             }

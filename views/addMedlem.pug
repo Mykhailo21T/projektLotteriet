@@ -2,10 +2,12 @@ html
   head  
     title Add medlem
     style
+    link(rel="stylesheet" type="text/css" href="/css/addMedlem.css")
   body 
-    a(href='/medlemmer')= '<Tilbage'
+    .h1 OPRET MEDLEM
     form(action="/addMedlem", method="post") 
-      input(type="number", name="medlemsID", placeholder="Skriv ID")
-      input(type="text", name="Fornavn", placeholder="Skriv fornavn")
-      input(type="text", name="Efternavn", placeholder="Skriv efternavn")
-      button(type="submit", value="Opret medlem") 🚙 Opret Medlem
+       input(type="number", name="medlemsID", placeholder="Indtast ID")
+       input(type="text", name="Fornavn", placeholder="Indtast fornavn")
+       input(type="text", name="Efternavn", placeholder="Indtast efternavn")
+       button(type="submit", value="Opret medlem") Opret medlem
+    a.button(href='/medlemmer') Tilbage   

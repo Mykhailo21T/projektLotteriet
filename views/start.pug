@@ -2,10 +2,12 @@ html
     head 
         title Startside
         script(scr="js/tom.pug")
+        link(rel="stylesheet" type="text/css" href="/css/start.css")
+
     body 
         
         a(href='/medlemmer') Medlemmer
         br
         a(href='/lotterier') Oversigt over udtrækninger
         br
-        a(href='/addLotteri') Tilføj lotteri
+        a.button(href='/addLotteri') Opret lotteriudtrækning

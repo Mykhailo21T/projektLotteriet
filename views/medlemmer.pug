@@ -1,13 +1,15 @@
 html 
     head 
         title Medlemmer 
+        link(rel="stylesheet" type="text/css" href="/css/medlemmer.css")
     body 
-        a(href='/')= '<Tilbage'
+     .h1 MEDLEMMER
         br
-        a(href='/addMedlem')= 'Opret medlem'
-        ul 
+        a.button(href='/addMedlem') Opret medlem
+        .ul 
             each medlem in medlemmer
                 li
                     a(href='/medlem/' + medlem.docID)= medlem.Fornavn
+        a.button(href='/') Tilbage
                     
                     
