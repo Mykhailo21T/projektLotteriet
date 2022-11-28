@@ -21,6 +21,7 @@ const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase)
 
 import express, { request, response } from 'express'
+import { Game } from "./classes.js/game";
 const app = express()
 app.set('view engine', 'pug')
 app.use(express.json())
@@ -43,6 +44,7 @@ async function getMedlemmer() {
   })
   return medlemmer
 }
+
 
 async function getMedlem(id) {
   const docRef = doc(db, "Medlemmer", id)
@@ -84,8 +86,13 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   return lotteri
 }
 
+import {Game} from './classes.js/game.js'
+
+
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
+  //let game = new Game(25,1,3,)
+
   const docRef = await addDoc(collection(db, "Lotterier"), lotteri)//,
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
@@ -213,6 +220,7 @@ app.get('/lotterier', async (req,res)=>{
   const alleLotterier = await getLotterier();
   let upcoming = []
   let previous = []
+  let todaysLottery = undefined
   let todaysDate = new Date()
   const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth()+1) + "-" +  todaysDate.getUTCDate() 
 
@@ -226,15 +234,13 @@ for(let lottery of alleLotterier){
 
   } else if(comparisonDate < lotteryDate){ //This section is for future lotteries
     upcoming.push(lottery)
+  } else if (comparisonDate == lotteryDate){
+    todaysLottery = lottery
   }
+  
 
 }
-
-
-
-
-
-  res.render('lotterier',{upcoming: upcoming, previous: previous})
+  res.render('lotterier',{upcoming: upcoming, previous: previous, todaysLottery: todaysLottery})
 })
 app.get('/lotteri/:id', async (request, response)=>{
   const lID = request.params.id
