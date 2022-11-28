@@ -2,9 +2,14 @@ html
     head 
         title lotteri
         //script(src="assets/js/function.js") 
-    body 
-        a(href='/lotterier')= '<Tilbage'
-        h1= 'date: '+lotteri.date 
+        link(rel="stylesheet" type="text/css" href="/css/lotteri.css")
+    body
+    #container
+        #lotteriTitel UDTRÆKNING D. 
+            h= ' '+lotteri.date 
+        #backButton 
+            a.button(href="/lotterier")= 'Oversigt'
+        
         h1= 'vindertal: '+lotteri.Vindertal || lotteri.vindertal
             button(type='submit',value='tilfoejVT',onClick='javascript:tilfoejVT('+lotteri.docID+')') TilføjVT
         h1= 'talrækker: '+lotteri.Talrækker 
