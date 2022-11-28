@@ -88,10 +88,11 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
 
 import {Game} from './classes.js/game.js'
 
+let game = undefined;
 
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
-  //let game = new Game(25,1,3,)
+   game = new Game(25,1,3,)
 
   const docRef = await addDoc(collection(db, "Lotterier"), lotteri)//,
   console.log("Document witten with ID: ", docRef.id);
@@ -107,6 +108,8 @@ async function getDeltagere() { // henter lotterier fra db Lotterier i firebase
       data.docID = doc.id
       return data
   })
+
+  
   return deltagere
 }
 
