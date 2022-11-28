@@ -232,6 +232,8 @@ for(let lottery of alleLotterier){
 
 
 
+
+
   res.render('lotterier',{upcoming: upcoming, previous: previous})
 })
 app.get('/lotteri/:id', async (request, response)=>{
