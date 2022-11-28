@@ -21,7 +21,6 @@ const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase)
 
 import express, { request, response } from 'express'
-import { Game } from "../classes.js/game.js";
 const app = express()
 app.set('view engine', 'pug')
 app.use(express.json())
@@ -87,11 +86,10 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
 }
 
 
-let lottery = undefined
+
 
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
-  lottery = new Game(25,1,3,)
 
   const docRef = await addDoc(collection(db, "Lotterier"), lotteri)//,
   console.log("Document witten with ID: ", docRef.id);
@@ -175,21 +173,32 @@ app.get('/addLotteri', (request, response)=>{
   response.render('addLotteri', {})
 })
 
+
+import {Game} from './classes.js/game.js';
+
+let lottery = undefined
+
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
-  const lowestNum = parseInt(request.body.lowestNum)
+
+  let x = request.body.lowestNum
+  const lowestNum = parseInt(x)
   const highestNum = parseInt(request.body.highestNum)
   const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
 
+  console.log("x: " + x);
+  console.log("lowestNum: " + lowestNum);
   if (lowestNum < 1) {
-    alert("du har fucket up i dit laveste tal")
+    window.alert("du har fucket up i dit laveste tal")
+  console.log("KAGE");
   }
   if (!isNaN(highestNum)) {
   
   }
   if (!isNaN(amountOfWinningNums && amountOfWinningNums < 6 && amountOfWinningNums >= 1)) {
-  
   }
+
+  lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
   console.log(date);
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
