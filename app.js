@@ -215,7 +215,28 @@ app.get('/lotterier', async (req,res)=>{
   //TODO getLotterier funktion
   //done_TODO opret lotterier.pug
   const alleLotterier = await getLotterier();
-  res.render('lotterier',{lotterier:alleLotterier})
+  let upcoming = []
+  let previous = []
+  let todaysDate = new Date()
+  const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth()+1) + "-" +  todaysDate.getUTCDate() 
+
+for(let lottery of alleLotterier){
+  const lotteryDate = new Date(lottery.date)
+  const comparisonDate = new Date(concreteDate)
+  
+  //ComparisonDate is today, so if its lower then lotterydate then its the previous lottery dates
+  if(comparisonDate > lotteryDate){
+    previous.push(lottery)
+
+  } else if(comparisonDate < lotteryDate){ //This section is for future lotteries
+    upcoming.push(lottery)
+  }
+
+}
+
+
+
+  res.render('lotterier',{upcoming: upcoming, previous: previous})
 })
 app.get('/lotteri/:id', async (request, response)=>{
   const lID = request.params.id

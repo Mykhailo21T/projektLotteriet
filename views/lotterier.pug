@@ -8,7 +8,10 @@ html
             #backButton 
                 a.button(href="/")= 'Forrige side'       
             #futureWinningNumbers Kommende udtrækninger
-                each lotteri in lotterier 
+                each lotteri in upcoming 
                     li 
                             a.fwList(href="/lotteri/"+lotteri.docID)= lotteri.date 
             #previousWinningNumbers Tidligere udtrækninger
+               each lotteri in previous 
+                    li 
+                            a.fwList(href="/lotteri/"+lotteri.docID)= lotteri.date 
