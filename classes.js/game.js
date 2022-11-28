@@ -90,7 +90,7 @@ export class Game {
 
             this.concreteWinners = vindere
 
-            
+
 
            return vindere
         }

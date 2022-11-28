@@ -16,13 +16,14 @@ let list = []
 let dato = new Date()
 const faktisktDato = dato.getUTCFullYear() + "-" + (dato.getUTCMonth()+1) + "-" +  dato.getUTCDate() 
 
-let newGame = new Game(25,1,3, faktisktDato,list)
+let newGame = new Game(25,1,3, faktisktDato)
 
 
 newGame.addParticipant
 beforeEach(function(){
 
     list = []
+    newGame.participantList = list
 
 }
 )
@@ -153,7 +154,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
         
     })
 
-    it.only('Should return more vindere', ()=>{
+    it('Should return more vindere', ()=>{
 
 
          //assign

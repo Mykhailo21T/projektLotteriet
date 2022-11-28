@@ -108,6 +108,8 @@ async function getDeltagere() { // henter lotterier fra db Lotterier i firebase
       data.docID = doc.id
       return data
   })
+
+  
   return deltagere
 }
 
