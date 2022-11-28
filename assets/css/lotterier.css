@@ -5,15 +5,15 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 5pt;
-    
+
     
     
 
 
     grid-template-areas: 
-    "a . . . . ."
-    "b b b b b b"
-    ". c . . d .";
+    "a . . . . . ."
+    "b b b b b b b"
+    ". c . d . e .";
 }
 
 body {
@@ -36,10 +36,10 @@ text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
     
 }
 
-.button{
+.buttonBack{
   appearance: none;
   background-color: white;
-  border: 2px solid #1A1A1A;
+  border: 2pt solid #1A1A1A;
   border-radius: 15px;
   box-sizing: border-box;
   color: #3B3B3B;
@@ -63,61 +63,145 @@ text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
   will-change: transform;
 }
 
-.button:disabled {
-  pointer-events: none;
-}
-
-.button:hover {
+.buttonBack:hover {
   color: #fff;
   background-color: #1A1A1A;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
 
-.button:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-
-#previousWinningNumbers {
+#previousWinningTicket {
    padding-left: 2rem;
    padding-right: 2rem;
    padding-top: 2rem;
    padding-bottom: 2rem;
+   margin-left: 2rem;
    grid-area: c;
-   color :#ffab91;
+   color :#ee4f46;
    font-size: 200%;
-
-   border-style: dotted;
-   border-width: 0.5rem;
-   border-color: #ffab91;
-   background-color:white;
-   border-radius: 30%;
 }
 
-#futureWinningNumbers {
+#futureWinningTicket {
     padding-left: 2rem;
     padding-right: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    grid-area: d;
-    color: rgb(49, 223, 110);
-    font-size: 200%;
-    border-style: dotted;
-    border-width: 0.5rem;
-    border-color: rgb(49, 223, 110);
-    background-color: white;
-    border-radius: 30%;
-    
+    margin-right: 7.5rem;
+    grid-area: e;
+    color: rgb(47, 100, 165);
+    font-size: 200%;  
 }
 
-a.fwList{
-    color :rgb(49, 223, 110);
-    font-size: 80%;
+#todaysTicket {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  grid-area: d;
+  color: rgb(5, 150, 3);
+  font-size: 200%;  
 }
 
-a.fwList:hover {
-  color: forestgreen;
+.buttonTodaysTicket{
+  appearance: none;
+  background-color: white;
+  border: 4pt solid rgb(5, 150, 3);
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: rgb(5, 150, 3);
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16pt;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.buttonTodaysTicket:hover {
+  color: #fff;
+  background-color: hsl(131, 80%, 45%);
+  box-shadow: rgba(87, 178, 234, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.buttonFutureWinningTicket{
+  appearance: none;
+  background-color: white;
+  border: 4pt solid rgb(47, 100, 165);
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: rgb(47, 100, 165);
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16pt;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.buttonFutureWinningTicket:hover {
+  color: #fff;
+  background-color: #436cf3;
+  box-shadow: rgba(87, 178, 234, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+
+.marginBot {
+  margin-bottom: 2pt;
+}
+.buttonPreviousTickets {
+  appearance: none;
+  background-color: white;
+  border: 4pt solid #ee4f46;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #ee4f46;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16pt;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.buttonPreviousTickets:hover {
+  color: #fff;
+  background-color: #f66d61;
+  box-shadow: rgba(87, 178, 234, 0.25) 1 8px 15px;
   transform: translateY(-2px);
 }
