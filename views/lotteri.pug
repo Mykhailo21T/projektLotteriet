@@ -7,9 +7,9 @@ html
         h1= 'date: '+lotteri.date 
         h1= 'vindertal: '+lotteri.Vindertal || lotteri.vindertal
         
-        textarea(id="1", cols="1", rows="1" value="value") 
-        textarea(id="2", cols="1", rows="1" value="value")
-        textarea(id="3", cols="1", rows="1" value="value")
+        textarea(id="1",cols="1",rows="1",value="value",maxlength="2") 
+        textarea(id="2", cols="1", rows="1", value="value",maxlength="2")
+        textarea(id="3", cols="1", rows="1", value="value",maxlength="2")
         a(href='javascript: tilfVT(\''+ lotteri.docID +'\')') submit
         h1= 'talrækker: '
             a(href=`/lotteri/${lotteri.docID}/addTR`) KøbTR
@@ -18,12 +18,9 @@ html
                     for tal in tr 
                         a= tal+"     "
         h1= "deltagere: "
-            for deltager in lotteri.deltagere
-                for d in deltager
-                    ul= d
-        
-        h1= 'deltagere: '+lotteri.deltagere 
-        a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
-        each deltager in lotteri.deltagere
-            li= deltager
-        br
+            a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
+        for deltager in lotteri.deltagere
+            for d in deltager
+                ul= d
+                
+    
