@@ -151,6 +151,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
 
     it('Should return more vindere', ()=>{
 
+
          //assign
          let vinderRække = [12,3,6]
 
@@ -177,8 +178,9 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          let faktiskeVinder = newGame.findWinner()
          //assert
          
-         assert.equal(faktiskeVinder[0], vinder1)
-         assert.equal(faktiskeVinder[1], vinder2)
+
+         assert.equal(faktiskeVinder[0].name, vinder1.name)
+         assert.equal(faktiskeVinder[1].name, vinder2.name)
          assert.equal(faktiskeVinder.length, 2)
 
 
@@ -198,10 +200,8 @@ describe('US4: Should return an array with 5 numbers',()=>{
         let testArrayPartialFilled = [4,3,1]
         //act
 
-        opretTalrække(testArray)
-        opretTalrække(testArrayPartialFilled)
-   
-        
+        newGame.createNumberArr(testArray)
+        newGame.createNumberArr(testArrayPartialFilled)
         //assert
         assert.equal(testArray.length, 5)
 
@@ -214,8 +214,8 @@ describe('US4: Should return an array with 5 numbers',()=>{
         let failed = false
         for(let i = 0; i<=testArray.length-1;i++){
             if(testArray[i] === testArray[i+1] ||
-                testArray[i] < 1 || testArray[i+1]<1 || testArray[i]>25 || 
-                testArray[i+1] >25){
+                testArray[i] < newGame.lowestNum || testArray[i+1]<newGame.lowestNum  || testArray[i]>newGame.highestNum || 
+                testArray[i+1] >newGame.highestNum){
                 failed = true 
                 break
             }

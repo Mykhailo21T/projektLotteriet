@@ -1,0 +1,23 @@
+html 
+    head 
+        title talrække
+        script(src="/js/funktion.js") 
+    body 
+        p= data.date 
+        p talraekker
+        textarea(id="tr1", cols="1", rows="1", maxlength="2")
+        textarea(id="tr2", cols="1", rows="1", maxlength="2")
+        textarea(id="tr3", cols="1", rows="1", maxlength="2")
+        textarea(id="tr4", cols="1", rows="1", maxlength="2")
+        textarea(id="tr5", cols="1", rows="1", maxlength="2") 
+        a(href='javascript: tilfTR(\''+ docID +'\')') submit
+        for tal in data.talraekker
+            li række
+                for i in tal 
+                    li= i
+                
+        p deltagere 
+            for delt in data.deltagere 
+                li= delt.reference
+                    input(type="radio", name="1")
+        
