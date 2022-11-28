@@ -80,6 +80,7 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   const lotteriQueryDocument = await getDoc(docRef)
   let lotteri = lotteriQueryDocument.data()
   lotteri.docID = lotteriQueryDocument.id
+  console.log(lotteri);
   return lotteri
 }
 
@@ -120,12 +121,6 @@ async function addDeltager(lID,mID){
   return await getDeltager(docRef.id)
 }
 
-async function addTR(lid, did){
-  let lot = await getLotteri(lID)
-  
-  return lot
-}
-
 ///deltagere slut///////////////////////////////////
 
 //--------------VINDERTAL_START---------------------
@@ -133,6 +128,7 @@ async function addVinderTal(lid,a,b,c){
   const docRef = doc(db, "Lotterier", lid)
   const opdatere = await updateDoc(docRef,{Vindertal:[a,b,c]})
   console.log("opdateret");
+
 }
 //--------------VINDERTAL_SLUT----------------------
 
@@ -237,7 +233,7 @@ app.get('/lotteri/:lotteriId/addTR', async (request, response)=>{ //ok
   const docSnap = await getDoc(docRef);
   let data = docSnap.data()
   console.log(data);
-  response.render('opretTR', {data:data})
+  response.render('opretTR', {data:data,docID:inputId})
 })
 
 app.post('/lotteri/:lotId/:tal1/:tal2/:tal3',async(req,res)=>{

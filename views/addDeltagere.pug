@@ -1,18 +1,18 @@
 html 
     head 
-        title Deltagere 
+        title Deltagere
+        script(src="/js/funktion.js")  
     body 
-        form(action=`/`, method="post") 
-            p talrække#1
-            textarea(name="1", cols="1", rows="1") 
-            textarea(name="2", cols="1", rows="1")
-            textarea(name="3", cols="1", rows="1")
-            textarea(name="4", cols="1", rows="1")
-            textarea(name="5", cols="1", rows="1")
-            ul 
-                each medlem in medlemmer
-                    li 
-                        a(href='/medlem/' + medlem.docID)= medlem.Fornavn
-                        a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
-          
-                    
+        p talrække#1
+        textarea(id="1", cols="1", rows="1", value="value") 
+        textarea(id="2", cols="1", rows="1", value="value")
+        textarea(id="3", cols="1", rows="1", value="value")
+        textarea(id="4", cols="1", rows="1", value="value")
+        textarea(id="5", cols="1", rows="1", value="value")
+        ul 
+            each medlem in medlemmer
+                li 
+                    a(href='/medlem/' + medlem.docID)= medlem.Fornavn
+                    a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
+                    button(onclick='javascript: print(\''+ lotteri.docID+','+ medlem.docID +'\')') tryk
+                
