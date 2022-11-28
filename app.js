@@ -21,7 +21,7 @@ const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase)
 
 import express, { request, response } from 'express'
-import { Game } from "./classes.js/game";
+import { Game } from "../classes.js/game.js";
 const app = express()
 app.set('view engine', 'pug')
 app.use(express.json())
@@ -86,17 +86,18 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   return lotteri
 }
 
-import {Game} from './classes.js/game.js'
 
+let lottery = undefined
 
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
-  //let game = new Game(25,1,3,)
+  lottery = new Game(25,1,3,)
 
   const docRef = await addDoc(collection(db, "Lotterier"), lotteri)//,
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
+
 ///lotterier slut///////////////////////////////////
 
 ///deltagere start//////////////////////////////////
@@ -174,11 +175,25 @@ app.get('/addLotteri', (request, response)=>{
 
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
+  const lowestNum = parseInt(request.body.lowestNum)
+  const highestNum = parseInt(request.body.highestNum)
+  const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
+
+  if (lowestNum < 1) {
+    alert("du har fucket up i dit laveste tal")
+  }
+  if (!isNaN(highestNum)) {
+  
+  }
+  if (!isNaN(amountOfWinningNums && amountOfWinningNums < 6 && amountOfWinningNums >= 1)) {
+  
+  }
   console.log(date);
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addLotteri({date:date, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""})
+  let id = await addLotteri({date:date, lowestNum:lowestNum, highestNum:highestNum, amountOfWinningNums:amountOfWinningNums, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""
+})
   response.redirect('/lotterier')
 })
 
