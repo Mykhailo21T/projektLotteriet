@@ -13,8 +13,10 @@ import {Game} from "../classes.js/game.js"
 
 let list = []
 
-let date = new Date(Date.now)
-let newGame = new Game(25,1,3, date,list)
+let dato = new Date()
+const faktisktDato = dato.getUTCFullYear() + "-" + (dato.getUTCMonth()+1) + "-" +  dato.getUTCDate() 
+
+let newGame = new Game(25,1,3, faktisktDato,list)
 
 
 newGame.addParticipant
@@ -45,6 +47,8 @@ describe('US1: When adding a Deltager', () =>{
 
         assert.equal(findDeltager1.name, "Knud Knudsen")
         assert.equal(findDeltager2.name, "Per hansen")
+
+    
 
 
     })
@@ -149,7 +153,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
         
     })
 
-    it('Should return more vindere', ()=>{
+    it.only('Should return more vindere', ()=>{
 
 
          //assign
@@ -183,7 +187,7 @@ describe('US3: Should be able to manually add a winning talrække and find a win
          assert.equal(faktiskeVinder[1].name, vinder2.name)
          assert.equal(faktiskeVinder.length, 2)
 
-
+       
      
 
     })

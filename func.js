@@ -1,3 +1,35 @@
+
+
+
+
+let dato =  new Date()
+
+//dato.setHours(0,0,0,0)
+
+console.log(dato.getDate());
+
+const faktisktDato = dato.getUTCFullYear() + "-" + (dato.getUTCMonth()+1) + "-" +  dato.getUTCDate() 
+
+
+let malte = {navn: "malte", dato: faktisktDato}
+
+console.log(malte);
+
+let x = malte.dato
+let dato2 = new Date(faktisktDato)
+
+console.log(dato2.getDate());
+
+
+
+
+
+
+
+
+
+
+/*
 import { arrayUnion } from "firebase/firestore"
 
 let deltagerListe = []
@@ -141,5 +173,5 @@ const _opretTalrække = (talRække) => {
     opretTalrække(talRække)
 };
 export { _opretTalrække as opretTalrække };
-
+*/
 

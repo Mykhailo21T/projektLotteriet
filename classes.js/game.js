@@ -11,6 +11,7 @@ export class Game {
         this.winnerArray = winnerArray;
         this.date = date
         this.participantList = participantList
+        this.concreteWinners = []
         
         return this
     }
@@ -86,6 +87,11 @@ export class Game {
                     
                 }
             }
+
+            this.concreteWinners = vindere
+
+            
+
            return vindere
         }
 
@@ -95,6 +101,11 @@ export class Game {
 
         changeWinningNumAmount(howManyWinNums){
             this.amountOfWinningNums = howManyWinNums
+        }
+
+
+        addLotteryToPrevious(){
+
         }
 }
 
