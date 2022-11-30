@@ -48,7 +48,7 @@ function addDeltager(){
 }
 
 function addTextArea(){
-  let areas = document.getElementsByTagName('textarea')
+  let areas = document.getElementsByTagName('input')
   let n = areas.length;
 
   let divattr = (n/5)+1;
@@ -61,7 +61,7 @@ function addTextArea(){
 
   document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
   for(let i= n+1; i<=n+5;i++){
-    divv.innerHTML+=(`<textarea id="${i}" cols="1" rows="1" value="value">`)
+    divv.innerHTML+=(`<input id="${i}" type="number" value="value">`)
   }
 }
 
