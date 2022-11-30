@@ -2,27 +2,28 @@
 import { arrayUnion, limit, limitToLast } from "firebase/firestore"
 import {GameParticipant} from "../classes.js/gameParticipant.js"
 let winnerArray = []
-let participantList = []
+
 export class Game {
-     constructor(highestNum, lowestNum, amountOfWinningNums, date, participantList) {
+     constructor(highestNum, lowestNum, amountOfWinningNums, date) {
         this.highestNum = highestNum;
         this.lowestNum = lowestNum;
         this.amountOfWinningNums = amountOfWinningNums;
         this.winnerArray = winnerArray;
         this.date = date
-        this.participantList = participantList
+        this.participantList = []
+        this.concreteWinners = []
         
         return this
     }
 
     addParticipant(name, id){
         const gameParticipant = new GameParticipant(name, id)
-        participantList.push(gameParticipant)
+        this.participantList.push(gameParticipant)
         return gameParticipant
     }
 
      locateParticipant(id) {
-        let gameParticipant = participantList.find(gameParticipant => gameParticipant.id === id)   // Finder og returnerer deltager med ID som parameter.  
+        let gameParticipant = this.participantList.find(gameParticipant => gameParticipant.id === id)   // Finder og returnerer deltager med ID som parameter.  
         return gameParticipant
     }
     addNumberArrToParticipant(id, arrOfNumberArr) {
@@ -62,7 +63,7 @@ export class Game {
         
         
         
-        for (let deltager of participantList) {
+        for (let deltager of this.participantList) {
             for (let talrækkeIndex = 0; talrækkeIndex<deltager.arrOfNumberArr.length; talrækkeIndex++) {      
                 counter = 0
         
@@ -86,6 +87,11 @@ export class Game {
                     
                 }
             }
+
+            this.concreteWinners = vindere
+
+
+
            return vindere
         }
 
@@ -95,6 +101,11 @@ export class Game {
 
         changeWinningNumAmount(howManyWinNums){
             this.amountOfWinningNums = howManyWinNums
+        }
+
+
+        addLotteryToPrevious(){
+
         }
 }
 

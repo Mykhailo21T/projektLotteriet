@@ -44,6 +44,7 @@ async function getMedlemmer() {
   return medlemmer
 }
 
+
 async function getMedlem(id) {
   const docRef = doc(db, "Medlemmer", id)
   const medlemQueryDocument = await getDoc(docRef)
@@ -85,12 +86,17 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   return lotteri
 }
 
+
+
+
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
+
   const docRef = await addDoc(collection(db, "Lotterier"), lotteri)//,
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
+
 ///lotterier slut///////////////////////////////////
 
 ///deltagere start//////////////////////////////////
@@ -101,6 +107,8 @@ async function getDeltagere() { // henter lotterier fra db Lotterier i firebase
       data.docID = doc.id
       return data
   })
+
+  
   return deltagere
 }
 
@@ -202,13 +210,38 @@ app.get('/addLotteri', (request, response)=>{
   response.render('addLotteri', {})
 })
 
+
+import {Game} from './classes.js/game.js';
+
+let lottery = undefined
+
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
+
+  let x = request.body.lowestNum
+  const lowestNum = parseInt(x)
+  const highestNum = parseInt(request.body.highestNum)
+  const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
+
+  console.log("x: " + x);
+  console.log("lowestNum: " + lowestNum);
+  if (lowestNum < 1) {
+    window.alert("du har fucket up i dit laveste tal")
+  console.log("KAGE");
+  }
+  if (!isNaN(highestNum)) {
+    alert("du har fucket up i dit højeste tal")
+  }
+  if (!isNaN(amountOfWinningNums && amountOfWinningNums < 6 && amountOfWinningNums >= 1)) {
+  }
+
+  lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
   console.log(date);
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addLotteri({date:date, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""})
+  let id = await addLotteri({date:date, lowestNum:lowestNum, highestNum:highestNum, amountOfWinningNums:amountOfWinningNums, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""
+})
   response.redirect('/lotterier')
 })
 
@@ -248,7 +281,29 @@ app.get('/lotterier', async (req,res)=>{
   //TODO getLotterier funktion
   //done_TODO opret lotterier.pug
   const alleLotterier = await getLotterier();
-  res.render('lotterier',{lotterier:alleLotterier})
+  let upcoming = []
+  let previous = []
+  let todaysLottery = undefined
+  let todaysDate = new Date()
+  const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth()+1) + "-" +  todaysDate.getUTCDate() 
+
+for(let lottery of alleLotterier){
+  const lotteryDate = new Date(lottery.date)
+  const comparisonDate = new Date(concreteDate)
+  
+  //ComparisonDate is today, so if its lower then lotterydate then its the previous lottery dates
+  if(comparisonDate > lotteryDate){
+    previous.push(lottery)
+
+  } else if(comparisonDate < lotteryDate){ //This section is for future lotteries
+    upcoming.push(lottery)
+  } else if (comparisonDate == lotteryDate){
+    todaysLottery = lottery
+  }
+  
+
+}
+  res.render('lotterier',{upcoming: upcoming, previous: previous, todaysLottery: todaysLottery})
 })
 app.get('/lotteri/:id', async (request, response)=>{
   const lID = request.params.id

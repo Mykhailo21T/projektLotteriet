@@ -6,9 +6,14 @@ html
     #container
             #lotteriOversigt OVERSIGT OVER LOTTERIUDTRÆKNINGER
             #backButton 
-                a.button(href="/")= 'Forrige side'       
-            #futureWinningNumbers Kommende udtrækninger
-                each lotteri in lotterier 
-                    li 
-                            a.fwList(href="/lotteri/"+lotteri.docID)= lotteri.date 
-            #previousWinningNumbers Tidligere udtrækninger
+                a.buttonBack(href="/")= 'Forside'       
+            #futureWinningTicket Kommende udtrækninger
+                each lotteri in upcoming 
+                            a.buttonFutureWinningTicket(href="/lotteri/"+lotteri.docID)= lotteri.date 
+                            .marginBot
+            #todaysTicket   Dagens udtrækninger
+                a.buttonTodaysTicket(href="/lotteri/")= 'Dato skal indsættes'
+            #previousWinningTicket Tidligere udtrækninger
+                each lotteri in previous  
+                            a.buttonPreviousTickets(href="/lotteri/"+lotteri.docID)= lotteri.date
+                            .marginBot

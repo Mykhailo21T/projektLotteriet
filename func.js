@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+/*
 import { arrayUnion } from "firebase/firestore"
 
 let deltagerListe = []
@@ -141,5 +152,5 @@ const _opretTalrække = (talRække) => {
     opretTalrække(talRække)
 };
 export { _opretTalrække as opretTalrække };
-
+*/
 

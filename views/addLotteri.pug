@@ -4,5 +4,13 @@ html
     style
   body 
     form(action="/addLotteri", method="post") 
-      input(type="date", name="date")
+      p= "Vælg dato for lotteri"
+      input(type="date", name="date", placeholder= "Indtast Dato")
+      br
+      input(type="text", name="lowestNum", placeholder= "indtast laveste tal")
+      br
+      input(type="text", name="highestNum", placeholder= "indtast højeste tal")
+      br
+      input(type="text", name="amountOfWinningNum", placeholder= "Indtast antal windertal")
+      br
       button(type="submit", value="Opret lotteri") 🚙 Opret lotteri

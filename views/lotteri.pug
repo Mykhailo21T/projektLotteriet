@@ -1,10 +1,15 @@
 html 
     head 
         title lotteri
-        script(src="/js/funktion.js") 
+        //script(src="assets/js/function.js") 
+        link(rel="stylesheet" type="text/css" href="/css/lotteri.css")
     body 
-        a(href='/lotterier')= '<Tilbage'
-        h1= 'date: '+lotteri.date 
+    #container
+        #lotteriTitel UDTRÆKNING D. 
+            h= ' '+lotteri.date
+        #backButton 
+            a.buttonBack(href="/lotterier")= 'Oversigt'
+        
         h1= 'vindertal: '+lotteri.Vindertal || lotteri.vindertal
         
         textarea(id="1",cols="1",rows="1",value="value",maxlength="2") 
