@@ -46,3 +46,31 @@ function addDeltager(){
   console.log(123);
 
 }
+
+function addTextArea(){
+  let areas = document.getElementsByTagName('input')
+  let n = areas.length;
+
+  let divattr = (n/5)+1;
+  let divv = document.createElement('div')
+  divv.setAttribute('id',`d${divattr}`)
+
+  let pp = document.createElement('p')
+  pp.textContent = `talrække#${divattr}`
+  divv.appendChild(pp)
+
+  document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
+  for(let i= n+1; i<=n+5;i++){
+    divv.innerHTML+=(`<input id="${i}" type="number" value="value">`)
+  }
+}
+
+function addGPwithRows(){
+  let textAreas = document.getElementsByTagName('textarea')
+  let arr = ''
+  for(let i = 0; i<textAreas.length;i++){
+    arr+=(textAreas[i].value.trim())+','
+  }
+  
+}
+
