@@ -3,7 +3,7 @@
     width: 90%;
     margin: 30px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: auto;
     gap: 5px;
     
     
@@ -13,26 +13,32 @@
     grid-template-areas: 
     "a . . . . . ."
     "b b b b b b b"
-    ". . c d e f ."
-    ". . g g . . .";
+    "c d e f g . ."
+    ". h h i i . ."
+    "j j j k k k k"
+    "l l l m m m m";
 }
 
 body {
     background-color:#FDF8E2;
 }
 
+h2 {
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
 #backButton {
     grid-area: a;
-    
 }
 
 #lotteryTitle {
     grid-area: b;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 300%;
+    font-size: 350%;
     padding-top: 5%;
-    text-align: center;
     padding-bottom: 5%;
+    padding-left: 6%;
+    text-align: center;
     color: white;
     text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
 }
@@ -72,8 +78,8 @@ body {
   }
 
   #winningRow {
-    padding-top: 30pt;
-    padding-right: 30pt;
+    padding-top: 25pt;
+    padding-right: 100pt;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     grid-area: c;  
     font-size: 20pt;
@@ -81,24 +87,20 @@ body {
     text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
   }
 
-  #textArea1{
+  #intInput1{
     grid-area: d;
     margin-right: 30pt;
   }
 
 
-  #textArea2{
+  #intInput2{
     grid-area: e;
     margin-right: 30pt;
   }
 
 
-  #textArea3{
+  #intInput3{
     grid-area: f;
-  }
-
-  #definiteWinningRow {
-        grid-area: g;
   }
 
   .inputField {
@@ -107,6 +109,88 @@ body {
     font-size: 50pt;
     text-align: center;
   }
+
+  #submitButton {
+    grid-area: g;
+    padding-top: 30pt;
+  }
+
+  .buttonSubmit{
+    appearance: none;
+    background-color: white;
+    border: 2pt solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16pt;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    touch-action: manipulation;
+    width: 100pt;
+    will-change: transform;
+  }
+
+  .buttonSubmit:hover {
+    color: white;
+    background-color: black;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+
+  #definiteWinningNumbersText {
+    grid-area: h;
+    font-size: 150%;
+  }
+
+  #definiteWinningNumbers {
+    grid-area: i;
+    font-size: 150%;
+    text-decoration: underline;
+    color: rgb(6, 172, 25);
+  }
+
+  #winningRows {
+    grid-area: j;
+    font-size: 150%;
+    text-decoration: underline;
+    padding-left: 150pt;
+  }
+
+  #winningNames {
+    grid-area: k;
+    font-size: 150%;
+    text-decoration: underline;
+    padding-right: 30pt;
+    padding-left: 60pt;
+  }
+
+  #winningRowsUL {
+    grid-area: l;
+    list-style-type:none;
+    font-size: 150%;
+    text-decoration: underline;
+    padding-left: 150pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    color: rgb(6, 172, 25);
+  }
+
+  #winningNameUL {
+    
+  }
+
+
   
   /*  
     - Tekstbokse skal være deaktiverede, når vindertal er valgt
