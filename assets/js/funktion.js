@@ -26,9 +26,9 @@ async function print(id){
 }
 
 async function tilfVT(id){
-  let a = document.getElementById("1").value
-  let b = document.getElementById("2").value
-  let c = document.getElementById("3").value
+  let a = document.getElementById("1").value.trim
+  let b = document.getElementById("2").value.trim
+  let c = document.getElementById("3").value.trim
 
   const responce = await fetch (`/lotteri/${id}/${a}/${b}/${c}`,{
     method: "POST",
@@ -47,8 +47,8 @@ function addDeltager(){
 
 }
 
-function addTextArea(){
-  let areas = document.getElementsByTagName('input')
+function addRows(){
+  /*let areas = document.getElementsByTagName('input')
   let n = areas.length;
 
   let divattr = (n/5)+1;
@@ -62,7 +62,20 @@ function addTextArea(){
   document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
   for(let i= n+1; i<=n+5;i++){
     divv.innerHTML+=(`<input id="${i}" type="number" value="value">`)
+  }*/
+  let main = document.getElementById('main')
+  let mainChilds= main.children
+  for(let child in mainChilds){
+
   }
+
+}
+
+import {Game} from "../../classes.js/game.js"
+
+function getArray(div){
+
+  return
 }
 
 function addGPwithRows(){
