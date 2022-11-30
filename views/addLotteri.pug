@@ -2,15 +2,16 @@ html
   head  
     title Add lotteri
     style
+    script(src="js/event.js" defer) 
   body 
     form(action="/addLotteri", method="post") 
       p= "Vælg dato for lotteri"
       input(type="date", name="date", placeholder= "Indtast Dato")
       br
-      input(type="text", name="lowestNum", placeholder= "indtast laveste tal")
+      input(type="number", name="lowestNum", placeholder= "indtast laveste tal", min= "1")
       br
-      input(type="text", name="highestNum", placeholder= "indtast højeste tal")
+      input(type="number", name="highestNum", placeholder= "indtast højeste tal", min= "1")
       br
-      input(type="text", name="amountOfWinningNum", placeholder= "Indtast antal windertal")
+      input(type="number", name="amountOfWinningNum", placeholder= "Indtast antal windertal", min= "1", max= "5")
       br
       button(type="submit", value="Opret lotteri") 🚙 Opret lotteri

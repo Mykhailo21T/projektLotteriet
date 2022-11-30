@@ -186,17 +186,13 @@ app.post('/addLotteri', async (request, response)=>{
   const highestNum = parseInt(request.body.highestNum)
   const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
 
+
+ 
+
   console.log("x: " + x);
   console.log("lowestNum: " + lowestNum);
-  if (lowestNum < 1) {
-    window.alert("du har fucket up i dit laveste tal")
-  console.log("KAGE");
-  }
-  if (!isNaN(highestNum)) {
-    alert("du har fucket up i dit højeste tal")
-  }
-  if (!isNaN(amountOfWinningNums && amountOfWinningNums < 6 && amountOfWinningNums >= 1)) {
-  }
+  
+ 
 
   lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
   console.log(date);
