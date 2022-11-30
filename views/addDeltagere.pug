@@ -3,16 +3,19 @@ html
         title Deltagere
         script(src="/js/funktion.js")  
     body 
-        p talrække#1
-        textarea(id="1", cols="1", rows="1", value="value") 
-        textarea(id="2", cols="1", rows="1", value="value")
-        textarea(id="3", cols="1", rows="1", value="value")
-        textarea(id="4", cols="1", rows="1", value="value")
-        textarea(id="5", cols="1", rows="1", value="value")
+        div(id="main")
+            div(id="d1")
+                p talrække#1
+                input(id="1", type="number", value="value") 
+                input(id="2", type="number", value="value")
+                input(id="3", type="number", value="value")
+                input(id="4", type="number", value="value")
+                input(id="5", type="number", value="value")
+        button(onclick="javascript: addRows()") Tilføj flere 
         ul 
             each medlem in medlemmer
                 li 
                     a(href='/medlem/' + medlem.docID)= medlem.Fornavn
                     a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
-                    button(onclick='javascript: print(\''+ lotteri.docID+','+ medlem.docID +'\')') tryk
-                
+                    button(onclick="javascript: addGPwithRows()") tryk
+        

@@ -5,16 +5,29 @@ html
         link(rel="stylesheet" type="text/css" href="/css/lotteri.css")
     body 
     #container
-        #lotteriTitel UDTRÆKNING D. 
+        #lotteryTitle UDTRÆKNING D. 
             h= ' '+lotteri.date
         #backButton 
             a.buttonBack(href="/lotterier")= 'Oversigt'
+<<<<<<< HEAD
         
         h1= 'vindertal: '+lotteri.Vindertal || lotteri.vindertal
         
-        textarea(id="1",cols="1",rows="1",value="value",maxlength="2") 
-        textarea(id="2", cols="1", rows="1", value="value",maxlength="2")
-        textarea(id="3", cols="1", rows="1", value="value",maxlength="2")
+        input(id="1", type="number", value="value") 
+        input(id="2", type="number", value="value")
+        input(id="3", type="number", value="value")
+=======
+        #winningRow
+            h2='VÆLG VINDERTAL:'
+        #textArea1
+            input.inputfield(type="number", min = 1, max = 25)
+        #textArea2
+            input.inputfield(type="number", min = 1, max = 25)
+        #textArea3    
+            input.inputfield(type="number", min = 1, max = 25)
+        #definiteWinningRow 
+              h2='ENDELIGE VINDERTAL '+lotteri.Vindertal || lotteri.vindertal
+>>>>>>> 43b173e7109ab981032012b736fdb2ac5a7160b4
         a(href='javascript: tilfVT(\''+ lotteri.docID +'\')') submit
         h1= 'talrækker: '
             a(href=`/lotteri/${lotteri.docID}/addTR`) KøbTR
@@ -25,7 +38,6 @@ html
         h1= "deltagere: "
             a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
         for deltager in lotteri.deltagere
-            for d in deltager
-                ul= d
+            ul= deltager
                 
     

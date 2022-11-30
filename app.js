@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
+import {Game} from './classes.js/game.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -81,7 +82,8 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   const lotteriQueryDocument = await getDoc(docRef)
   let lotteri = lotteriQueryDocument.data()
   lotteri.docID = lotteriQueryDocument.id
-  console.log(lotteri);
+  console.log("Deltagere >>>>>>>>>>>>>>>>");
+  console.log(lotteri.deltagere);
   return lotteri
 }
 
@@ -119,17 +121,52 @@ async function getDeltager(id) { //henter deltager med bestemt id
   return deltager
 }
 
-async function addDeltager(lID,mID){
-  let lot = await getLotteri(lID)
-  let delt = await getMedlem(mID)
-  const docRef = await addDoc(collection(db,"GameParticipants"),delt) // man skal ikke glemme "collection"!
-  const docRefNy = doc(db, "GameParticipants", docRef.id)
-  const updt = await updateDoc(docRefNy,{game:`/Lotterier/${lot.docID}`,member:`/Medlemmer/${delt.docID}`,rows:[{1:"",2:"",3:"",4:"",5:""}]})
-  console.log(125);
-  return await getDeltager(docRef.id)
+async function addDeltager(lID,mID){ 
+  const gpInfo = { // en gameParticipant objekt
+    game: lID,
+    member: mID
+  }
+  
+  const docRef = await addDoc(collection(db,"GameParticipants"),gpInfo) // man skal ikke glemme "collection"!
+  
+  let gp = await getGameParticipants(lID) // array
+  
+  
+  const thisLotteri = doc(db, "Lotterier", lID)
+  
+  let temp = await updateDoc(thisLotteri,{ // opdaterer lotteri med ny deltager
+    deltagere: gp
+  })
+  console.log('+ deltager');
+  return gpInfo
 }
 
 ///deltagere slut///////////////////////////////////
+async function getGameParticipants(lID){
+  // TODO deltagere af en lotteri skal opdateres fra gameparticipants med samme lotteri link
+  console.log(11);
+  const docRef = collection(db, "GameParticipants")
+  console.log(12);
+  console.log(lID);
+  const GameParticipantsQueryDocument = await getDocs(docRef)//data() virker ikke
+  console.log(13);
+  
+  let lotterietsGP = []
+  console.log('gp før map');
+  
+  GameParticipantsQueryDocument.forEach((gameParticipant)=>{ // samle reference fra gp i array
+    let data = gameParticipant.data()
+    console.log(data);
+    if(data.game == lID)
+      lotterietsGP.push(data.member)
+  })
+  
+  console.log('gp efter map');
+  return lotterietsGP
+}
+/// gameParticipants start///////////////////////////////////
+
+/// gameParticipants slut////////////////////////////////////
 
 //--------------VINDERTAL_START---------------------
 async function addVinderTal(lid,a,b,c){
@@ -173,40 +210,31 @@ app.get('/addLotteri', (request, response)=>{
   response.render('addLotteri', {})
 })
 
-
-import {Game} from './classes.js/game.js';
-
-let lottery = undefined
-
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
-
   let x = request.body.lowestNum
   const lowestNum = parseInt(x)
   const highestNum = parseInt(request.body.highestNum)
   const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
 
-
- 
-
-  console.log("x: " + x);
-  console.log("lowestNum: " + lowestNum);
-  
- 
-
-  lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
-  console.log(date);
+  //let lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addLotteri({date:date, lowestNum:lowestNum, highestNum:highestNum, amountOfWinningNums:amountOfWinningNums, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""
+  let dates = await getDocs(db,'Lotterier')
+  let datoer = dates.docs.map(doc => {
+    let data = doc.data()
+    return data.date
+})
+  console.log(datoer);
+  let id = await addLotteri({date:date, lowestNum:lowestNum, highestNum:highestNum, amountOfWinningNums:amountOfWinningNums, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], Vindertal: ""
 })
   response.redirect('/lotterier')
 })
 
 app.get('/lotteri/:id/addDeltagere', async (request, response)=>{ //ok
-  const medlemmer = await getMedlemmer()
-  const lotteri = await getLotteri(request.params.id)
+  const medlemmer = await getMedlemmer() // giver alle medlemmer af denne lotteri
+  const lotteri = await getLotteri(request.params.id) // giver lotteri fra db med id fra input
   response.render('addDeltagere', {medlemmer: medlemmer,lotteri:lotteri})
 })
 
@@ -231,7 +259,7 @@ app.get('/deltagere', async (req,res)=>{
 
 app.get('/deltager/:id', async (request, response)=>{
   const mID = request.params.id
-  const deltager = await addDeltager(mID)
+  const deltager = await getDeltager(mID)
   response.render('deltager', {deltager: deltager})
 })
 
@@ -276,6 +304,7 @@ app.get('/:lid/:mid', async (request, response)=>{ //ok
   const deltager = await addDeltager(lID,mID)
   response.render('deltager', {deltager: deltager})
 })
+
 
 ////talraekke
 app.get('/lotteri/:lotteriId/addTR', async (request, response)=>{ //ok
