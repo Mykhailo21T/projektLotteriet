@@ -74,8 +74,11 @@ function addRows(){
 import {Game} from "../../classes.js/game.js"
 
 function getArray(div){
-
-  return
+  let array = []
+  for(input in div){
+    array.push(input.value)
+  }
+  return array
 }
 
 function addGPwithRows(){
