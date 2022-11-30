@@ -3,14 +3,15 @@ html
         title Deltagere
         script(src="/js/funktion.js")  
     body 
-        div(id="d1")
-            p talrække#1
-            input(id="1", type="number", value="value") 
-            input(id="2", type="number", value="value")
-            input(id="3", type="number", value="value")
-            input(id="4", type="number", value="value")
-            input(id="5", type="number", value="value")
-        button(onclick="javascript: addTextArea()") Tilføj flere 
+        div(id="main")
+            div(id="d1")
+                p talrække#1
+                input(id="1", type="number", value="value") 
+                input(id="2", type="number", value="value")
+                input(id="3", type="number", value="value")
+                input(id="4", type="number", value="value")
+                input(id="5", type="number", value="value")
+        button(onclick="javascript: addRows()") Tilføj flere 
         ul 
             each medlem in medlemmer
                 li 

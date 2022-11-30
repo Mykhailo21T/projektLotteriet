@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
+import {Game} from './classes.js/game.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -123,17 +124,16 @@ async function getDeltager(id) { //henter deltager med bestemt id
 async function addDeltager(lID,mID){ 
   const gpInfo = { // en gameParticipant objekt
     game: lID,
-    member: mID,
-    rows: []
+    member: mID
   }
-  console.log(1);
+  
   const docRef = await addDoc(collection(db,"GameParticipants"),gpInfo) // man skal ikke glemme "collection"!
-  console.log(2);
+  
   let gp = await getGameParticipants(lID) // array
-  console.log(gp);
-  console.log(3);
+  
+  
   const thisLotteri = doc(db, "Lotterier", lID)
-  console.log(4);
+  
   let temp = await updateDoc(thisLotteri,{ // opdaterer lotteri med ny deltager
     deltagere: gp
   })
@@ -210,37 +210,24 @@ app.get('/addLotteri', (request, response)=>{
   response.render('addLotteri', {})
 })
 
-
-import {Game} from './classes.js/game.js';
-
-let lottery = undefined
-
 app.post('/addLotteri', async (request, response)=>{
   const date = request.body.date
-
   let x = request.body.lowestNum
   const lowestNum = parseInt(x)
   const highestNum = parseInt(request.body.highestNum)
   const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
 
-  console.log("x: " + x);
-  console.log("lowestNum: " + lowestNum);
-  if (lowestNum < 1) {
-    window.alert("du har fucket up i dit laveste tal")
-  console.log("KAGE");
-  }
-  if (!isNaN(highestNum)) {
-    alert("du har fucket up i dit højeste tal")
-  }
-  if (!isNaN(amountOfWinningNums && amountOfWinningNums < 6 && amountOfWinningNums >= 1)) {
-  }
-
-  lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
-  console.log(date);
+  //let lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addLotteri({date:date, lowestNum:lowestNum, highestNum:highestNum, amountOfWinningNums:amountOfWinningNums, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], talraekker:[{1: 1,2:13,3:12,4:19,5:24}], Vindertal: ""
+  let dates = await getDocs(db,'Lotterier')
+  let datoer = dates.docs.map(doc => {
+    let data = doc.data()
+    return data.date
+})
+  console.log(datoer);
+  let id = await addLotteri({date:date, lowestNum:lowestNum, highestNum:highestNum, amountOfWinningNums:amountOfWinningNums, deltagere:[{reference: "Medlemmer/8dzauo83ZTy5QwsT75CY"}], Vindertal: ""
 })
   response.redirect('/lotterier')
 })
