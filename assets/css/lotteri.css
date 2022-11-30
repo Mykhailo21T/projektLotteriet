@@ -11,9 +11,10 @@
 
 
     grid-template-areas: 
-    "a . . . . ."
-    "b b b b b b"
-    ". c . . d .";
+    "a . . . . . ."
+    "b b b b b b b"
+    ". . c d e f ."
+    ". . g g . . .";
 }
 
 body {
@@ -25,7 +26,7 @@ body {
     
 }
 
-#lotteriTitel {
+#lotteryTitle {
     grid-area: b;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     font-size: 300%;
@@ -39,7 +40,7 @@ body {
 .buttonBack{
     appearance: none;
     background-color: white;
-    border: 2px solid #1A1A1A;
+    border: 2pt solid #1A1A1A;
     border-radius: 15px;
     box-sizing: border-box;
     color: #3B3B3B;
@@ -59,7 +60,7 @@ body {
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
     user-select: none;
     touch-action: manipulation;
-    width: 100%;
+    width: 100pt;
     will-change: transform;
   }
 
@@ -69,4 +70,47 @@ body {
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
   }
+
+  #winningRow {
+    padding-top: 30pt;
+    padding-right: 30pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    grid-area: c;  
+    font-size: 20pt;
+    color: white;
+    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+  }
+
+  #textArea1{
+    grid-area: d;
+    margin-right: 30pt;
+  }
+
+
+  #textArea2{
+    grid-area: e;
+    margin-right: 30pt;
+  }
+
+
+  #textArea3{
+    grid-area: f;
+  }
+
+  #definiteWinningRow {
+        grid-area: g;
+  }
+
+  .inputField {
+    height: 120pt;
+    width: 120pt ;
+    font-size: 50pt;
+    text-align: center;
+  }
   
+  /*  
+    - Tekstbokse skal være deaktiverede, når vindertal er valgt
+    - Vindertal skal ikke kunne vælges før udtrækningstidspunktet
+        (hvis der trykkes "submit" inden, skal der kastes exceptioN/erro
+    - Når der er trykket submit, findes vinderen
+  */
