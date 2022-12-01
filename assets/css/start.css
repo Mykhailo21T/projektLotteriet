@@ -1,28 +1,80 @@
-.h1 {
-  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
+#container {
+    
+  width: 90%;
+  margin: 30px;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 5px;
+  
+  
+  
+
+
+  grid-template-areas: 
+  "a a a a"
+  "b b b b"
+  "c c d d"
+  "e e e e"
+  "f f g g"
+  "h h h h"
+  "i i j j";
+  
 }
 
-.button {
+body {
+  background-color:#FDF8E2;
+}
+  
+  #systemName {
+    grid-area: a;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 800%;
+    font-style: italic;
+    text-align: center;
+    color: white;
+    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+  }
+
+  
+/* Oversigt over ting man kan oprette/tilføje */ 
+  #add {
+    grid-area: b;
+    background-color:rgb(154, 245, 42);
+    color: white;
+    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    margin-left: 50pt;
+    margin-top: 50pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 300%;
+    text-align: center;
+
+   }
+
+  #addMember {
+    grid-area: c;
+    }
+
+
+  #addLottery{
+    grid-area: d;
+  }
+
+  .addButton {
     appearance: none;
-    background-color: transparent;
-    border: 2px solid #1A1A1A;
-    border-radius: 15px;
+    background-color:white;
+    border: 2px solid rgb(73, 126, 7);
+    border-radius: 15pt;
     box-sizing: border-box;
-    color: #3B3B3B;
+    color: rgb(73, 126, 7);
     cursor: pointer;
     display: inline-block;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 16px;
+    font-size: 40pt;
     font-weight: 600;
     line-height: normal;
     margin: 0;
-    min-height: 60px;
-    min-width: 0;
+    height: 120pt;
     outline: none;
-    padding: 16px 24px;
     text-align: center;
     text-decoration: none;
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
@@ -31,20 +83,136 @@
     touch-action: manipulation;
     width: 100%;
     will-change: transform;
+
+    margin-left: 27pt;
+    margin-top: 30pt;
+    padding-top: 35pt
+
   }
-  
-  .button:disabled {
-    pointer-events: none;
-  }
-  
-  .button:hover {
-    color: #fff;
-    background-color: #1A1A1A;
+
+  .addButton:hover {
+    color: rgb(240, 249, 231);
+    background-color: rgb(73, 126, 7);
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
   }
-  
-  .button:active {
-    box-shadow: none;
-    transform: translateY(0);
+
+/* Oversigt over denne rundes lotteri */ 
+  #thisLottery {
+    grid-area: e;
+    background-color:rgb(245, 78, 52);
+    color: white;
+    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    margin-left: 50pt;
+    margin-top: 50pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 300%;
+    text-align: center;
+  }
+
+  #purchaseRow {
+    grid-area: f;
+  }
+
+  #drawWinningNumbers {
+    grid-area: g;
+  }
+
+
+  .thisRoundButton {
+    appearance: none;
+    background-color:white;
+    border: 2px solid rgb(230, 19, 19);
+    border-radius: 15pt;
+    box-sizing: border-box;
+    color: rgb(230, 19, 19);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 40pt;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    height: 120pt;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+
+    margin-left: 27pt;
+    margin-top: 30pt;
+    padding-top: 35pt
+
+  }
+
+  .thisRoundButton:hover {
+    color: rgb(240, 249, 231);
+    background-color: rgb(230, 19, 19);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+
+  /* Oversigt */
+
+  #overview {
+    grid-area: h;
+    background-color:rgb(28, 170, 240);
+    color: white;
+    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    margin-left: 50pt;
+    margin-top: 50pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 300%;
+    text-align: center;
+  }
+
+  #lotteryOverview {
+    grid-area: i;
+  }
+
+  #memberOverview {
+    grid-area: j;
+  }
+
+  .overviewButton {
+    appearance: none;
+    background-color:white;
+    border: 2px solid rgb(39, 65, 236);
+    border-radius: 15pt;
+    box-sizing: border-box;
+    color: rgb(39, 65, 236);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 40pt;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    height: 120pt;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+
+    margin-left: 27pt;
+    margin-top: 30pt;
+    padding-top: 35pt
+
+  }
+
+  .overviewButton:hover {
+    color: rgb(240, 249, 231);
+    background-color: rgb(39, 65, 236);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
   }
