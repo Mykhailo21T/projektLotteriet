@@ -3,7 +3,7 @@ html
         title lotteri
         script(src="/js/funktion.js") 
         script(src="/js/smallJsFuncs.js") 
-        link(rel="stylesheet" type="text/css" href="/css/lotteri.css")
+        link(rel="stylesheet" type="text/css" href="/css/winningRow.css")
     body 
     #container
         #lotteryTitle UDTRÆKNING D. 
@@ -32,11 +32,5 @@ html
             h2= 'VINDER(E)'
         #winningRowsUL 
         #winningNameUL
-
-        h1= "deltagere: "
-            a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
-        for deltager in lotteri.deltagere
-            ul= deltager
-                
     
 
