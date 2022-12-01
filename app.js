@@ -93,7 +93,7 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
 
-  const docRef = await setDoc(doc(db, "Lotterier",`${lotteri.date}`), lotteri)//,
+  const docRef = await setDoc(doc(db, "Lotterier",`${lotteri.date}`), JSON.parse(JSON.stringify(lotteri)))//,
   console.log("Document witten with ID: ", lotteri.date);
   return lotteri.date
 }
