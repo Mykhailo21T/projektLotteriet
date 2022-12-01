@@ -94,5 +94,6 @@ function addGPwithRows() {
     toDimArr.push(tempArr)
   }
   console.log(toDimArr);
+  
 }
 
