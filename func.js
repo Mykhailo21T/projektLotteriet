@@ -44,7 +44,7 @@ async function addDeltager(gID, mID, name) {
     for(let lot of lotDocArray){
      if(lot.date == gID){
        x = lot
-       
+        
      }
     }
     console.log("Game second it: " + x.date)
