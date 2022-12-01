@@ -55,9 +55,9 @@ function addRows() {
   divv.setAttribute('id', `d${tempNr}`)
   main.appendChild(divv)
 
-  let pp = document.createElement('p')
-  pp.textContent = `talrække#${tempNr}`
-  divv.appendChild(pp)
+  //let pp = document.createElement('p')
+  //pp.textContent = `talrække#${tempNr}`
+  //divv.appendChild(pp)
 
   //document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
   for (let i = 1; i <= 5; i++) {
@@ -81,15 +81,19 @@ function getArray(div) {
 
 function addGPwithRows() {
   let main = document.getElementById('main')
+  let mChi = main.children
   let toDimArr = []
 
-  for (divs in main.children) {
+  for (let i = 0;i<mChi.length;i++) {
     let tempArr = []
-    for (element in divs.children) {
-      tempArr.push(element.value)
+    let divChi = mChi[i].children
+    for (let j = 1;j<divChi.length;j++) {
+      
+      tempArr.push(divChi[j].value)
     }
     toDimArr.push(tempArr)
   }
   console.log(toDimArr);
+  
 }
 

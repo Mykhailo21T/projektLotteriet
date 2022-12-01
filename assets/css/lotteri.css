@@ -79,7 +79,7 @@ h2 {
 
   #winningRow {
     padding-top: 25pt;
-    padding-right: 100pt;
+    padding-right: 20pt;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     grid-area: c;  
     font-size: 20pt;
@@ -90,6 +90,7 @@ h2 {
   #intInput1{
     grid-area: d;
     margin-right: 30pt;
+    
   }
 
 
@@ -152,6 +153,7 @@ h2 {
   #definiteWinningNumbersText {
     grid-area: h;
     font-size: 150%;
+    padding-top: 70pt;
   }
 
   #definiteWinningNumbers {
@@ -165,7 +167,7 @@ h2 {
     grid-area: j;
     font-size: 150%;
     text-decoration: underline;
-    padding-left: 150pt;
+    padding-left: 100pt;
   }
 
   #winningNames {
