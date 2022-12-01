@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
-import { Game } from "./classes.js/game.js";
+//import { Game } from "./classes.js/game.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -93,9 +93,9 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
 
-  const docRef = await setDoc(collection(db, "Lotterier", `${lotteri.date}`), lotteri)//,
-  console.log("Document witten with ID: ", docRef.id);
-  return docRef.id
+  const docRef = await setDoc(doc(db, "Lotterier",`${lotteri.date}`), lotteri)//,
+  console.log("Document witten with ID: ", lotteri.date);
+  return lotteri.date
 }
 
 ///lotterier slut///////////////////////////////////
@@ -212,6 +212,7 @@ app.get('/addLotteri', (request, response) => {
 
 app.post('/addLotteri', async (request, response) => {
   const date = request.body.date
+  console.log(date);
   let x = request.body.lowestNum
   const lowestNum = parseInt(x)
   const highestNum = parseInt(request.body.highestNum)
@@ -267,15 +268,18 @@ app.get('/deltager/:id', async (request, response) => {
 
 
 app.get('/lotterier', async (req, res) => {
-  //TODO getLotterier funktion
-  //done_TODO opret lotterier.pug
+ 
   const alleLotterier = await getLotterier();
   let upcoming = []
   let previous = []
   let todaysLottery = undefined
   let todaysDate = new Date()
   const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth() + 1) + "-" + todaysDate.getUTCDate()
-
+  let lot = { 
+      upcoming: upcoming, 
+      previous: previous, 
+      todaysLottery: todaysLottery 
+    }
   for (let lottery of alleLotterier) {
     const lotteryDate = new Date(lottery.date)
     const comparisonDate = new Date(concreteDate)
@@ -290,9 +294,9 @@ app.get('/lotterier', async (req, res) => {
       todaysLottery = lottery
     }
 
-
   }
-  res.render('lotterier', { upcoming: upcoming, previous: previous, todaysLottery: todaysLottery })
+  
+  res.render('lotterier', lot)
 })
 app.get('/lotteri/:id', async (request, response) => {
   const lID = request.params.id

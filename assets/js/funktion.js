@@ -1,4 +1,4 @@
-async function print(id){
+async function print(id) {
   //id lotteri.docID
   let toId = id.split(',')
   let lid = toId[0]
@@ -6,31 +6,31 @@ async function print(id){
   let mid = toId[1]
   let tr = []
   //vi skal finde talrækker ud af textareaID
-  
-  for(i = 1; i<=5;i++){ //laver array af tal fra ta html
+
+  for (i = 1; i <= 5; i++) { //laver array af tal fra ta html
     tr.push(document.getElementById(i).value)
   }
   alert(JSON.stringify(tr))
 
   //tilføje medlem til spil og talrække til deltager og lotteri til deltager
-    /*const responce = await fetch ('/tilføjDeltager/'+id,{
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      if (respons.status !== 201) // Posted
-        throw new Error(respons.status);
-        window.location.href='/gemeParticipants'
-        */
+  /*const responce = await fetch ('/tilføjDeltager/'+id,{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (respons.status !== 201) // Posted
+      throw new Error(respons.status);
+      window.location.href='/gemeParticipants'
+      */
 }
 
-async function tilfVT(id){
+async function tilfVT(id) {
   let a = document.getElementById("1").value.trim
   let b = document.getElementById("2").value.trim
   let c = document.getElementById("3").value.trim
 
-  const responce = await fetch (`/lotteri/${id}/${a}/${b}/${c}`,{
+  const responce = await fetch(`/lotteri/${id}/${a}/${b}/${c}`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -39,54 +39,57 @@ async function tilfVT(id){
   location.reload()
   if (respons.status !== 201) // Posted
     throw new Error(respons.status);
-    window.location.href='/gemeParticipants'
+  window.location.href = '/gemeParticipants'
 }
 
-function addDeltager(){
+function addDeltager() {
   console.log(123);
 
 }
 
-function addRows(){
-  /*let areas = document.getElementsByTagName('input')
-  let n = areas.length;
-
-  let divattr = (n/5)+1;
+function addRows() {
+  console.log(111);
+  let main = document.getElementById('main')
+  let tempNr = main.children.length + 1;
   let divv = document.createElement('div')
-  divv.setAttribute('id',`d${divattr}`)
+  divv.setAttribute('id', `d${tempNr}`)
+  main.appendChild(divv)
 
   let pp = document.createElement('p')
-  pp.textContent = `talrække#${divattr}`
+  pp.textContent = `talrække#${tempNr}`
   divv.appendChild(pp)
 
-  document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
-  for(let i= n+1; i<=n+5;i++){
-    divv.innerHTML+=(`<input id="${i}" type="number" value="value">`)
-  }*/
-  let main = document.getElementById('main')
-  let mainChilds= main.children
-  for(let child in mainChilds){
-
+  //document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
+  for (let i = 1; i <= 5; i++) {
+    let inp = document.createElement('input')
+    inp.setAttribute('id', `${i}`)
+    inp.setAttribute('type', 'number')
+    inp.setAttribute('value', 'value')
+    divv.appendChild(inp)
   }
-
+  console.log(123);
 }
 
-import {Game} from "../../classes.js/game.js"
 
-function getArray(div){
+function getArray(div) {
   let array = []
-  for(input in div){
+  for (input in div) {
     array.push(input.value)
   }
   return array
 }
 
-function addGPwithRows(){
-  let textAreas = document.getElementsByTagName('textarea')
-  let arr = ''
-  for(let i = 0; i<textAreas.length;i++){
-    arr+=(textAreas[i].value.trim())+','
+function addGPwithRows() {
+  let main = document.getElementById('main')
+  let toDimArr = []
+
+  for (n in main.children) {
+    let tempArr = []
+    for (element in n.children) {
+      tempArr.push(element.value)
+    }
+    toDimArr.push(tempArr)
   }
-  
+  console.log(toDimArr);
 }
 
