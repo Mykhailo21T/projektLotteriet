@@ -1,3 +1,4 @@
+
 async function print(id) {
   //id lotteri.docID
   let toId = id.split(',')
@@ -55,9 +56,9 @@ function addRows() {
   divv.setAttribute('id', `d${tempNr}`)
   main.appendChild(divv)
 
-  //let pp = document.createElement('p')
-  //pp.textContent = `talrække#${tempNr}`
-  //divv.appendChild(pp)
+  let pp = document.createElement('p')
+  pp.textContent = `talrække#${tempNr}`
+  divv.appendChild(pp)
 
   //document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
   for (let i = 1; i <= 5; i++) {
@@ -79,10 +80,16 @@ function getArray(div) {
   return array
 }
 
-function addGPwithRows() {
+async function addGPwithRows(lidmid) {
+  //TODO 
+  console.log(lidmid);
+  let split = lidmid.split(',')
+  let lid = split[0]
+  let mid = split[1]
+  
   let main = document.getElementById('main')
   let mChi = main.children
-  let toDimArr = []
+  let toDimArr = {}
 
   for (let i = 0;i<mChi.length;i++) {
     let tempArr = []
@@ -91,9 +98,24 @@ function addGPwithRows() {
       
       tempArr.push(divChi[j].value)
     }
-    toDimArr.push(tempArr)
+    toDimArr[i]=(tempArr)
   }
-  console.log(toDimArr);
+  let obj = {
+    game: lid,
+    member: mid,
+    rows: toDimArr
+  }
+  console.log("before postf");
+  await postF ("/sendRows",obj)
   
+  console.log("after postf");
+}
+
+async function postF(url,obj){
+  const result = await fetch(url,{
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(obj)
+  });
 }
 

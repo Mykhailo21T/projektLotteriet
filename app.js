@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
 import { Game } from "./classes.js/game.js";
+import fetch from 'node-fetch'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -83,7 +84,7 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
   let lotteri = lotteriQueryDocument.data()
   lotteri.docID = lotteriQueryDocument.id
   console.log("Deltagere >>>>>>>>>>>>>>>>");
-  console.log(lotteri.deltagere);
+  console.log("participantList: "+lotteri.participantList);
   return lotteri
 }
 
@@ -93,7 +94,7 @@ async function getLotteri(id) { // henter lotteri med bestemt id fra db Lotterie
 async function addLotteri(lotteri) {
   // lotteri = {date: dato}
 
-  const docRef = await setDoc(doc(db, "Lotterier",`${lotteri.date}`), lotteri)//,
+  const docRef = await setDoc(doc(db, "Lotterier",`${lotteri.date}`), JSON.parse(JSON.stringify(lotteri)))//,
   console.log("Document witten with ID: ", lotteri.date);
   return lotteri.date
 }
@@ -321,6 +322,23 @@ app.get('/lotteri/:lotteriId/addTR', async (request, response) => { //ok
   let data = docSnap.data()
   console.log(data);
   response.render('opretTR', { data: data, docID: inputId })
+})
+
+app.post('/sendRows',async(req,res)=>{
+  // TODO to  
+  let dataQ = req.body
+  console.log(dataQ);
+  let gp = await addDoc(deltagereCollection,dataQ)
+  const docRef = doc(db, "Lotterier", dataQ.game)
+  let docGet = await getDoc(docRef)
+  let docData = docGet.data()
+  let pl = docData.participantList
+  pl.push(gp.id)
+  console.log(pl);
+  let lotteri = await updateDoc(docRef,{participantList: pl})
+  console.log(222);
+  res.status(200)
+  res.end()
 })
 
 app.post('/lotteri/:lotId/:tal1/:tal2/:tal3', async (req, res) => {

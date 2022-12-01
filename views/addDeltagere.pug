@@ -6,16 +6,16 @@ html
         div(id="main")
             div(id="d1")
                 p talrække#1
-                input(id="1", type="number", value="value") 
-                input(id="2", type="number", value="value")
-                input(id="3", type="number", value="value")
-                input(id="4", type="number", value="value")
-                input(id="5", type="number", value="value")
+                input(id="1", type="number") 
+                input(id="2", type="number")
+                input(id="3", type="number")
+                input(id="4", type="number")
+                input(id="5", type="number")
         button(onclick="javascript: addRows()") Tilføj rows 
         ul 
             each medlem in medlemmer
                 li 
                     a(href='/medlem/' + medlem.docID)= medlem.Fornavn
                     a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
-                    button(onclick="javascript: addGPwithRows()") tryk
+                    button(onclick='javascript: addGPwithRows(\''+lotteri.docID+','+medlem.docID+'\')') tryk
         

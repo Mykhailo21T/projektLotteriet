@@ -55,7 +55,7 @@ html
 
         h1= "deltagere: "
             a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
-        for deltager in lotteri.deltagere
+        for deltager in lotteri.participantList
             ul= deltager
                 
     
