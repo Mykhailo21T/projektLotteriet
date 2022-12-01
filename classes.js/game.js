@@ -12,15 +12,18 @@ export class Game {
         this.date = date
         this.participantList = []
         this.concreteWinners = []
-        
+
         return this
     }
 
-    addParticipant(name, id){
-        const gameParticipant = new GameParticipant(name, id)
+   
+    addParticipant(name, id, gameID){
+        const gameParticipant = new GameParticipant(name, id, gameID)
         this.participantList.push(gameParticipant)
         return gameParticipant
     }
+    
+
 
      locateParticipant(id) {
         let gameParticipant = this.participantList.find(gameParticipant => gameParticipant.id === id)   // Finder og returnerer deltager med ID som parameter.  
@@ -106,6 +109,10 @@ export class Game {
 
         addLotteryToPrevious(){
 
+        }
+
+        toString1(){
+            return this.date + " | " + this.participantList + " | " + this.highestNum + " | " + this.lowestNum
         }
 }
 

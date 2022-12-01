@@ -31,7 +31,7 @@ beforeEach(function(){
 
 describe('US1: When adding a Deltager', () =>{
 
-    it('Should add and find the deltager', () =>{
+    it.only('Should add and find the deltager', () =>{
 
         //act
         let deltager1 = newGame.addParticipant("Knud Knudsen",1)
@@ -49,7 +49,7 @@ describe('US1: When adding a Deltager', () =>{
         assert.equal(findDeltager1.name, "Knud Knudsen")
         assert.equal(findDeltager2.name, "Per hansen")
 
-    
+   
 
 
     })

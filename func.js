@@ -1,7 +1,91 @@
+'use strict'
+import { initializeApp } from "firebase/app";
+
+import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
+import { Game } from "./classes.js/game.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBmlyw9TMKl-ign_hYLhAsaPmdsXlzPs4w",
+    authDomain: "projektlotteriet.firebaseapp.com",
+    projectId: "projektlotteriet",
+    storageBucket: "projektlotteriet.appspot.com",
+    messagingSenderId: "556554582591",
+    appId: "1:556554582591:web:80c6dd7ee6e2b80bf4d68a",
+    measurementId: "G-J8D1FB7W3N"
+  };
+  
+  // Initialize Firebase
+  const appFirebase = initializeApp(firebaseConfig);
+  const db = getFirestore(appFirebase)
+
+  let lotterierCollection = collection(db, 'Lotterier')
 
 
+async function getLotterier() { // henter lotterier fra db Lotterier i firebase
+    let lotterierQueryDocs = await getDocs(lotterierCollection)
+    let lotterier = lotterierQueryDocs.docs.map(doc => {
+      let data = doc.data()
+      data.docID = doc.id
+      return data
+    })
+    return lotterier
+}
+
+let x = new Game()
+let x1 = []
+async function addDeltager(gID, mID, name) {
 
 
+    let lotDocArray = await getLotterier()
+   
+    
+    console.log("Game first it: " + x);
+   
+    for(let lot of lotDocArray){
+     if(lot.date == gID){
+       x = lot
+       
+     }
+    }
+    console.log("Game second it: " + x.date)
+   
+    console.log(lotDocArray.includes(x))
+    
+    console.log("Game second it: " + JSON.stringify(x))
+
+    if(lotDocArray.includes(x)){
+        console.log(typeof(x));
+        
+        
+            x.createNumberArr(x1)
+            console.log('fghjj');
+       
+
+        
+        
+   
+   
+   
+     //const docRef = await addDoc(collection(db, "GameParticipants"), gpInfo) // man skal ikke glemme "collection"!
+   
+     //let gp = await getGameParticipants(gID) // array
+   
+     /*
+     const thisLotteri = doc(db, "Lotterier", gID)
+   
+     let temp = await updateDoc(thisLotteri, { // opdaterer lotteri med ny deltager
+       deltagere: gp
+     })*/
+    
+
+     
+     return -1
+   } 
+}
+
+addDeltager("2022-12-11", 1, "Knud")
+
+console.log(x.participantList);
 
 
 
