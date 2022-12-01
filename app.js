@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
-//import { Game } from "./classes.js/game.js";
+import { Game } from "./classes.js/game.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -218,11 +218,12 @@ app.post('/addLotteri', async (request, response) => {
   const highestNum = parseInt(request.body.highestNum)
   const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
 
-  //let lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
+  let lottery = new Game(highestNum,lowestNum,amountOfWinningNums,date)
 
-  let id = await addLotteri({
+  let id = await addLotteri(lottery)
+    /*{
     date: date, lowestNum: lowestNum, highestNum: highestNum, amountOfWinningNums: amountOfWinningNums, deltagere: [{ reference: "Medlemmer/8dzauo83ZTy5QwsT75CY" }], Vindertal: ""
-  })
+  })*/
   response.redirect('/lotterier')
 })
 

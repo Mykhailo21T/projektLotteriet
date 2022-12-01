@@ -83,9 +83,9 @@ function addGPwithRows() {
   let main = document.getElementById('main')
   let toDimArr = []
 
-  for (n in main.children) {
+  for (divs in main.children) {
     let tempArr = []
-    for (element in n.children) {
+    for (element in divs.children) {
       tempArr.push(element.value)
     }
     toDimArr.push(tempArr)
