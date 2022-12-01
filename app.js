@@ -122,24 +122,37 @@ async function getDeltager(id) { //henter deltager med bestemt id
   return deltager
 }
 
-async function addDeltager(lID, mID) {
-  const gpInfo = { // en gameParticipant objekt
-    game: lID,
-    member: mID
+async function addDeltager(gID, mID, name) {
+
+
+ let lotDocArray = await getLotterier()
+
+ let x = new Game()
+
+ for(let lot of lotDocArray){
+  if(lot.date == gID){
+    x = lot
   }
+ }
+
+ if(lotDocArray.includes(x)){
+ const gpInfo =x.addParticipant(name,mID,gID)
+
+
 
   const docRef = await addDoc(collection(db, "GameParticipants"), gpInfo) // man skal ikke glemme "collection"!
 
-  let gp = await getGameParticipants(lID) // array
+  let gp = await getGameParticipants(gID) // array
 
 
-  const thisLotteri = doc(db, "Lotterier", lID)
+  const thisLotteri = doc(db, "Lotterier", gID)
 
   let temp = await updateDoc(thisLotteri, { // opdaterer lotteri med ny deltager
     deltagere: gp
   })
   console.log('+ deltager');
   return gpInfo
+} else alert("Lotteriet findes ikke");
 }
 
 ///deltagere slut///////////////////////////////////

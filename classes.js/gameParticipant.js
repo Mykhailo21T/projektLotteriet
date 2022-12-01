@@ -7,9 +7,10 @@ let numberArr = []
 //let id = -1
 
 export class GameParticipant {
-    constructor(name, id) {
+    constructor(name, id, gameID) {
         this.name = name
         this.id = id
+        this.gameID = gameID
         this.arrOfNumberArr = []
     
 
