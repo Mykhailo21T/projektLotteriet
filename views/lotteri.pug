@@ -11,13 +11,6 @@ html
         #backButton 
             a.buttonBack(href="/lotterier")= 'Oversigt'
 
-        
-        h1= 'vindertal: '+lotteri.Vindertal || lotteri.vindertal
-        
-        input(id="1", type="number", value="value") 
-        input(id="2", type="number", value="value")
-        input(id="3", type="number", value="value")
-
         #winningRow
             h2='VÆLG VINDERTAL:'
         #intInput1
@@ -38,25 +31,4 @@ html
         #winningNames 
             h2= 'VINDER(E)'
         #winningRowsUL 
-
-        #definiteWinningRow 
-              h2='ENDELIGE VINDERTAL '+lotteri.Vindertal || lotteri.vindertal
-
-        a(href='javascript: tilfVT(\''+ lotteri.docID +'\')') submit
-        h1= 'talrækker: '
-            a(href=`/lotteri/${lotteri.docID}/addTR`) KøbTR
-        //
-            for tr in lotteri.talraekker
-                li 
-                    for tal in tr 
-                        a= tal+"     "
-        //
         #winningNameUL
-
-        h1= "deltagere: "
-            a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
-        for deltager in lotteri.deltagere
-            ul= deltager
-                
-    
-
