@@ -5,9 +5,9 @@ html
     link(rel="stylesheet" type="text/css" href="/css/addMedlem.css")
   body 
     .h1 OPRET MEDLEM
-    form(action="/addMedlem", method="post") 
-       input(type="number", name="medlemsID", placeholder="Indtast ID")
+    form(action="/addMember", method="post") 
+       input(type="number", name="membersID", placeholder="Indtast ID")
        input(type="text", name="Fornavn", placeholder="Indtast fornavn")
        input(type="text", name="Efternavn", placeholder="Indtast efternavn")
-       button(type="submit", value="Opret medlem") Opret medlem
-    a.button(href='/medlemmer') Tilbage   
+       button(type="submit", value="Opret member") Opret medlem
+    a.button(href='/Members') Tilbage   
