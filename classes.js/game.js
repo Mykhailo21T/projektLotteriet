@@ -1,26 +1,30 @@
-"use strict"
+
 import { arrayUnion, limit, limitToLast } from "firebase/firestore"
 import {GameParticipant} from "../classes.js/gameParticipant.js"
-let winnerArray = []
+
 
 export class Game {
-     constructor(highestNum, lowestNum, amountOfWinningNums, date) {
+     constructor(highestNum, lowestNum, amountOfWinningNums, winnerArray=[], date,participantList=[],concreteWinners=[]) {
         this.highestNum = highestNum;
         this.lowestNum = lowestNum;
         this.amountOfWinningNums = amountOfWinningNums;
         this.winnerArray = winnerArray;
         this.date = date
-        this.participantList = []
-        this.concreteWinners = []
+        this.participantList = participantList
+        this.concreteWinners =concreteWinners
 
         return this
     }
 
+    showParticipant() {
+        return this.participantList
+    }
+
    
     addParticipant(name, id, gameID){
-        const gameParticipant = new GameParticipant(name, id, gameID)
-        this.participantList.push(gameParticipant)
-        return gameParticipant
+        let newGameparticipant = new GameParticipant(name,id,gameID);
+        this.participantList.push(newGameparticipant)
+        return newGameparticipant
     }
     
 

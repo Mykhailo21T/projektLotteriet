@@ -31,7 +31,7 @@ beforeEach(function(){
 
 describe('US1: When adding a Deltager', () =>{
 
-    it.only('Should add and find the deltager', () =>{
+    it('Should add and find the deltager', () =>{
 
         //act
         let deltager1 = newGame.addParticipant("Knud Knudsen",1)
@@ -228,6 +228,7 @@ describe('US4: Should return an array with 5 numbers',()=>{
         }
       assert.isFalse(failed)
 
-        
+      newGame  
+
     })
 })
