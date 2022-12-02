@@ -9,16 +9,16 @@ html
         #lotteryTitle UDTRÆKNING D. 
             h= ' '+game.date
         #backButton 
-            a.buttonBack(href="/Games")= 'Oversigt'
+            a.buttonBack(href="/")= 'Startside'
 
         #winningRow
             h2='VÆLG VINDERTAL:'
         #intInput1
-            input.inputfield(type="number", min = 1, max = 25)
+            input.inputField(type="number", min = 1, max = 25)
         #intInput2
-            input.inputfield(type="number", min = 1, max = 25)
+            input.inputField(type="number", min = 1, max = 25)
         #intInput3    
-            input.inputfield(type="number", min = 1, max = 25)
+            input.inputField(type="number", min = 1, max = 25)
 
         #submitButton
             button.buttonSubmit(href='javascript: tilfVT(\''+ game.docID +'\')', onclick="javascript: disableInputField") TILFØJ

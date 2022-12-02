@@ -4,9 +4,9 @@ html
         link(rel="stylesheet" type="text/css" href="/css/lotterier.css")
     body
     #container
-            #lotteriOversigt OVERSIGT OVER LOTTERIUDTRÆKNINGER
+            #lotteriOverview OVERSIGT OVER LOTTERIUDTRÆKNINGER
             #backButton 
-                a.buttonBack(href="/")= 'Forside'       
+                a.buttonBack(href="/")= 'Startside'       
             #futureWinningTicket Kommende udtrækninger
                 each game in upcoming 
                             a.buttonFutureWinningTicket(href="/game/"+game.docID)= game.date 

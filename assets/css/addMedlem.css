@@ -1,9 +1,27 @@
-.h1 {
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      font-size: 32px;
-      font-weight: 600;
-      text-align: center;
-  }
+#container {
+    
+  width: 90%;
+  margin: 30pt;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5pt;
+
+  
+  
+
+
+  grid-template-areas: 
+  "a . . . . . ."
+  "b b b b b b b"
+  "c c c c c c c"
+  ". . d d d . .";
+
+}
+
+body {
+  background-color:#FDF8E2;
+}
+
 
   input{
     width: 100%;
@@ -15,17 +33,21 @@
     box-sizing: border-box;
   }
   
-  button {
+  #backButton {
+    grid-area: a;
+  }
+
+  .buttonBack{
     appearance: none;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    background-color: white;
+    border: 2pt solid rgb(73, 126, 7);
+    border-radius: 15px;
     box-sizing: border-box;
-    color: #3B3B3B;
+    color: rgb(73, 126, 7);
     cursor: pointer;
     display: inline-block;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 12px;
+    font-size: 16pt;
     font-weight: 600;
     line-height: normal;
     margin: 0;
@@ -37,45 +59,67 @@
     text-decoration: none;
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
     user-select: none;
-    -webkit-user-select: none;
     touch-action: manipulation;
-    width: 10%;
+    width: 100pt;
     will-change: transform;
-  }
-  
-  button:disabled {
-    pointer-events: none;
-  }
-  
-  button:hover {
+    }
+    
+    .buttonBack:hover {
     color: #fff;
-    background-color: #1A1A1A;
+    background-color: rgb(73, 126, 7);
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
-  }
-  
-  button:active {
-    box-shadow: none;
-    transform: translateY(0);
-  }
-  
-  div {
-    border-radius: 5px;
-    background-color: #e5e1e1e8;
-    padding: 20px;
-  }
-  
-  .button {
+    }
+
+    #addMemberTitle {
+      grid-area: b;
+      font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      font-size: 350%;
+      padding-top: 5%;
+      text-align: center;
+      padding-bottom: 5%;
+      color: white;
+      text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+      background-color: rgb(73, 126, 7);
+      height: 40pt;
+      margin-bottom: 50pt;
+      margin-top: 10pt;
+      border-radius: 25pt;
+      margin-right: -47pt;
+      padding-right: 20pt;
+      }
+
+      #createMemberArea {
+        grid-area: c;
+      }
+
+    .inputField {
+      border-radius: 20pt;
+      border-color: rgb(73, 126, 7);
+      border-width: 2pt;
+      width: 80%;
+      height: 50pt;
+      margin-left: 122pt;
+      font-size: 30pt;
+      color: rgb(58, 103, 3);
+      text-align: center;
+    }
+
+    #opretMemberArea {
+      grid-area: d;
+    }
+
+    .opretMemberButton {
       appearance: none;
-      background-color: transparent;
-      border: 2px solid #1A1A1A;
+      background-color: white;
+      border: 2pt solid rgb(73, 126, 7);
       border-radius: 15px;
       box-sizing: border-box;
-      color: #3B3B3B;
+      color: rgb(73, 126, 7);
       cursor: pointer;
       display: inline-block;
       font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      font-size: 16px;
+      font-size: 16pt;
       font-weight: 600;
       line-height: normal;
       margin: 0;
@@ -87,24 +131,14 @@
       text-decoration: none;
       transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
       user-select: none;
-      -webkit-user-select: none;
       touch-action: manipulation;
-      width: 15%;
+      width: 100pt;
       will-change: transform;
-    }
-    
-    .button:disabled {
-      pointer-events: none;
-    }
-    
-    .button:hover {
+
+    } 
+    .buttonBack:hover {
       color: #fff;
-      background-color: #1A1A1A;
+      background-color: rgb(73, 126, 7);
       box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
       transform: translateY(-2px);
-    }
-    
-    .button:active {
-      box-shadow: none;
-      transform: translateY(0);
-    }
+      }

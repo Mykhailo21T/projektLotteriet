@@ -88,6 +88,31 @@ async function getgame(id) { // henter game med bestemt id fra db Games i fireba
   return game
 }
 
+async function firebaseGameConverter(gID) {
+// Firestore data converter
+const gameConverter = {
+    toFirestore: (game) => {
+        return game 
+    },
+    fromFirestore: (snapshot) => {
+        const data = snapshot.data();
+        return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums,data.winnerArray,data.date,data.participantList,data.concreteWinners);
+    }
+};
+const ref = doc(db, "Games", gID ).withConverter(gameConverter);
+const docSnap = await getDoc(ref);
+if (docSnap.exists()) {
+  // Convert to City object
+  const game = docSnap.data();
+  // Use a City instance method
+  console.log("G: "+game.toString());
+} else {
+  console.log("No such document!");
+}
+
+    return docSnap
+}
+
 
 
 
@@ -124,35 +149,16 @@ async function getDeltager(id) { //henter deltager med bestemt id
 
 async function addDeltager(gID, mID, name) {
 
+let retrivedGameData = await firebaseGameConverter(gID)
 
-  let lotDocArray = await getGames()
+let data = retrivedGameData.data()
 
-  let x = new Game()
+data.addParticipant(name, mID, gID)
 
-  for (let lot of lotDocArray) {
-    if (lot.date == gID) {
-      x = lot
-    }
-  }
+const docRef = doc(db, "Games", gID)
 
-  if (lotDocArray.includes(x)) {
-    const gpInfo = x.addParticipant(name, mID, gID)
+const update = await updateDoc(docRef, data)
 
-
-
-    const docRef = await addDoc(collection(db, "GameParticipants"), gpInfo) // man skal ikke glemme "collection"!
-
-    let gp = await getGameParticipants(gID) // array
-
-
-    const thisgame = doc(db, "Games", gID)
-
-    let temp = await updateDoc(thisgame, { // opdaterer game med ny deltager
-      deltagere: gp
-    })
-    console.log('+ deltager');
-    return gpInfo
-  } else alert("gameet findes ikke");
 }
 
 ///deltagere slut///////////////////////////////////
@@ -323,7 +329,8 @@ app.get('/game/:id', async (request, response) => {
 app.get('/:lid/:mid', async (request, response) => { //ok
   const lID = request.params.lid
   const mID = request.params.mid
-  const deltager = await addDeltager(lID, mID)
+  const name = request.params.Fornavn
+  const deltager = await addDeltager(name,lID, mID)
   response.render('deltager', { deltager: deltager })
 })
 
