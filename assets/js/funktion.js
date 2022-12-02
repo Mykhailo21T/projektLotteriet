@@ -57,7 +57,7 @@ function addRows() {
   main.appendChild(divv)
 
   let pp = document.createElement('p')
-  pp.textContent = `talrække#${tempNr}`
+  pp.textContent = `Talrække ${tempNr}`
   divv.appendChild(pp)
 
   //document.body.insertBefore(divv, document.body.firstChild) //instead of appendChild(divv)
