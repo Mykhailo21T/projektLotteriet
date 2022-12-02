@@ -40,16 +40,22 @@ h2 {
     padding-left: 6%;
     text-align: center;
     color: white;
-    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    background-color: rgb(230, 19, 19);
+    height: 40pt;
+    margin-bottom: 50pt;
+    margin-top: 10pt;
+    border-radius: 25pt;
+
 }
 
 .buttonBack{
     appearance: none;
     background-color: white;
-    border: 2pt solid #1A1A1A;
+    border: 2pt solid rgb(230, 19, 19);
     border-radius: 15px;
     box-sizing: border-box;
-    color: #3B3B3B;
+    color: rgb(230, 19, 19);
     cursor: pointer;
     display: inline-block;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -72,7 +78,7 @@ h2 {
 
   .buttonBack:hover {
     color: white;
-    background-color: black;
+    background-color: rgb(230, 19, 19);
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
   }
@@ -84,7 +90,7 @@ h2 {
     grid-area: c;  
     font-size: 20pt;
     color: white;
-    text-shadow: 1pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    text-shadow: 2pt 0 0 rgb(230, 19, 19), 0 -1px 0 rgb(230, 19, 19), 0 1pt 0 rgb(230, 19, 19), -1px 0 0 rgb(230, 19, 19);
   }
 
   #intInput1{
@@ -109,6 +115,8 @@ h2 {
     width: 120pt ;
     font-size: 50pt;
     text-align: center;
+    color: rgb(230, 19, 19);
+    border-color: rgb(230, 19, 19);
   }
 
   #submitButton {
@@ -119,10 +127,10 @@ h2 {
   .buttonSubmit{
     appearance: none;
     background-color: white;
-    border: 2pt solid #1A1A1A;
+    border: 2pt solid rgb(230, 19, 19);
     border-radius: 15px;
     box-sizing: border-box;
-    color: #3B3B3B;
+    color: rgb(230, 19, 19);
     cursor: pointer;
     display: inline-block;
     font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -145,7 +153,7 @@ h2 {
 
   .buttonSubmit:hover {
     color: white;
-    background-color: black;
+    background-color: rgb(230, 19, 19);
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
   }
