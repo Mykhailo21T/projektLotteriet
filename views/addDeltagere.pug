@@ -2,7 +2,31 @@ html
     head 
         title Deltagere
         script(src="/js/funktion.js")  
+        link(rel="stylesheet" type="text/css" href="/css/koebTalraekker.css")
+
     body 
+<<<<<<< HEAD
+        #container
+            #backButton
+                a.buttonBack(href="/")= 'Startside'
+            #buyRowTitle Tilføj talrække(r)
+            #inputfield
+                div(id="main")
+                    div(id="d1")
+                        p Talrække 1
+                        input(id="1", type="number") 
+                        input(id="2", type="number")
+                        input(id="3", type="number")
+                        input(id="4", type="number")
+                        input(id="5", type="number")
+            #extraRowButton
+                button.buttonExtraRow(onclick="javascript: addRows()") Tilføj end en række 
+            #choseMember Vælg medlem
+            #memberArea
+                each medlem in medlemmer
+                    button.memberButton(onclick='javascript: addGPwithRows(\''+lotteri.docID+','+medlem.docID+'\')')=medlem.Fornavn
+            
+=======
         div(id="main")
             div(id="d1")
                 p talrække#1
@@ -13,9 +37,10 @@ html
                 input(id="5", type="number")
         button(onclick="javascript: addRows()") Tilføj rows 
         ul 
-            each member in members
+            each medlem in medlemmer
                 li 
-                    a(href='/member/' + member.docID)= member.Fornavn
-                    a(href=`/${game.docID}/${member.docID}`) Tilføj
-                    button(onclick='javascript: addGPwithRows(\''+game.docID+','+member.docID+'\')') tryk
+                    a(href='/medlem/' + medlem.docID)= medlem.Fornavn
+                    a(href=`/${game.docID}/${medlem.docID}`) Tilføj
+                    button(onclick='javascript: addGPwithRows(\''+game.docID+','+medlem.docID+'\')') tryk
         
+>>>>>>> parent of 003851e (Merge branch 'newBranch' of https://github.com/Mykhailo21T/projektLotteriet into newBranch)

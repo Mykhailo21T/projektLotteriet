@@ -20,7 +20,7 @@ body {
   background-color:#FDF8E2;
 }
 
-#lotteriOversigt {
+#lotteriOverview {
 grid-area: b;
 font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 font-size: 350%;
@@ -34,6 +34,8 @@ height: 40pt;
 margin-bottom: 50pt;
 margin-top: 10pt;
 border-radius: 25pt;
+margin-right: -60pt;
+padding-right: 60pt;
 }
 
 #backButton {
@@ -64,7 +66,7 @@ border-radius: 25pt;
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   user-select: none;
   touch-action: manipulation;
-  width: 100%;
+  width: 100pt;
   will-change: transform;
 }
 
