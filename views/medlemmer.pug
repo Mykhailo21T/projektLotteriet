@@ -3,13 +3,13 @@ html
         title Medlemmer 
         link(rel="stylesheet" type="text/css" href="/css/medlemmer.css")
     body 
-     .h1 MEDLEMMER
-        br
-        a.button(href='/addMedlem') Opret medlem
-        .ul 
-            each medlem in medlemmer
-                li
-                    a(href='/medlem/' + medlem.docID)= medlem.Fornavn
-        a.button(href='/') Tilbage
-                    
-                    
+        #container 
+            #backButton
+                a.buttonBack(href="/")= 'Startside'
+            #memberTitle Medlems-oversigt
+            #memberArea
+                each medlem in medlemmer
+                    a.memberButton(href='/medlem/' + medlem.docID)= medlem.Fornavn
+            
+                        
+                        
