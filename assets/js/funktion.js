@@ -109,6 +109,7 @@ async function addGPwithRows(lidmid) {
   await postF ("/sendRows",obj)
   
   console.log("after postf");
+  location.replace("/game/"+lid) 
 }
 
 async function postF(url,obj){
