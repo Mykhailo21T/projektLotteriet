@@ -11,15 +11,15 @@ html
             #addMember
                 a.addButton(href="/addMedlem")= 'Opret medlem'
             #addLottery
-                a.addButton(href="/addLotteri")= 'Opret lotteri'
+                a.addButton(href="/addgame")= 'Opret game'
 
             #thisLottery Handlinger til denne runde  
             #purchaseRow
-                a.thisRoundButton(href="/lotteri/2022-12-11/addDeltagere")= 'Køb række(r)'
+                a.thisRoundButton(href="/game/2022-12-11/addDeltagere")= 'Køb række(r)'
             #drawWinningNumbers
-                a.thisRoundButton(href="/lotteri/2022-12-11")= 'Udtræk vindertal'
+                a.thisRoundButton(href="/game/2022-12-11")= 'Udtræk vindertal'
             #overview Overblik over lotterier
             #lotteryOverview
-                a.overViewButton(href="/lotterier")= 'Lotteri-oversigt'
+                a.overViewButton(href="/Games")= 'Lotteri-oversigt'
             #memberOverview
                 a.overViewButton(href="/medlemmer")= 'Medlems-oversigt'

@@ -1,6 +1,6 @@
 html 
     head 
-        title lotterier
+        title Games
         link(rel="stylesheet" type="text/css" href="/css/lotterier.css")
     body
     #container
@@ -8,12 +8,12 @@ html
             #backButton 
                 a.buttonBack(href="/")= 'Forside'       
             #futureWinningTicket Kommende udtrækninger
-                each lotteri in upcoming 
-                            a.buttonFutureWinningTicket(href="/lotteri/"+lotteri.docID)= lotteri.date 
+                each game in upcoming 
+                            a.buttonFutureWinningTicket(href="/game/"+game.docID)= game.date 
                             .marginBot
             #todaysTicket   Dagens udtrækninger
-                a.buttonTodaysTicket(href="/lotteri/")= 'Dato skal indsættes'
+                a.buttonTodaysTicket(href="/game/")= 'Dato skal indsættes'
             #previousWinningTicket Tidligere udtrækninger
-                each lotteri in previous  
-                            a.buttonPreviousTickets(href="/lotteri/"+lotteri.docID)= lotteri.date
+                each game in previous  
+                            a.buttonPreviousTickets(href="/game/"+game.docID)= game.date
                             .marginBot

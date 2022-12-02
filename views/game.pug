@@ -1,15 +1,15 @@
 html 
     head 
-        title lotteri
+        title game
         script(src="/js/funktion.js") 
         script(src="/js/smallJsFuncs.js") 
         link(rel="stylesheet" type="text/css" href="/css/winningRow.css")
     body 
     #container
         #lotteryTitle UDTRÆKNING D. 
-            h= ' '+lotteri.date
+            h= ' '+game.date
         #backButton 
-            a.buttonBack(href="/lotterier")= 'Oversigt'
+            a.buttonBack(href="/Games")= 'Oversigt'
 
         #winningRow
             h2='VÆLG VINDERTAL:'
@@ -21,11 +21,11 @@ html
             input.inputfield(type="number", min = 1, max = 25)
 
         #submitButton
-            button.buttonSubmit(href='javascript: tilfVT(\''+ lotteri.docID +'\')', onclick="javascript: disableInputField") TILFØJ
+            button.buttonSubmit(href='javascript: tilfVT(\''+ game.docID +'\')', onclick="javascript: disableInputField") TILFØJ
         #definiteWinningNumbersText 
             h2='ENDELIGE VINDERTAL: '
         #definiteWinningNumbers
-            h2=lotteri.Vindertal
+            h2=game.Vindertal
         #winningRows 
             h2= 'VINDERRÆKKE(R)'
         #winningNames 
@@ -34,8 +34,8 @@ html
         #winningNameUL
 
         h1= "deltagere: "
-            a(href=`/lotteri/${lotteri.docID}/addDeltagere`) addDeltager
-        for deltager in lotteri.participantList
+            a(href=`/game/${game.docID}/addDeltagere`) addDeltager
+        for deltager in game.participantList
             ul= deltager
                 
     
