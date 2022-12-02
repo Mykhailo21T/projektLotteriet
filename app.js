@@ -196,7 +196,7 @@ async function addVinderTal(lid, a, b, c) {
 // Express Endpoint
 
 app.get('/Members', async (request, response) => {
-  const Members = await getMembers()
+  const members = await getMembers()
   response.render('members', { members: members })
 })
 
