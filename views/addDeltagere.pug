@@ -13,9 +13,9 @@ html
                 input(id="5", type="number")
         button(onclick="javascript: addRows()") Tilføj rows 
         ul 
-            each medlem in medlemmer
+            each member in members
                 li 
-                    a(href='/medlem/' + medlem.docID)= medlem.Fornavn
-                    a(href=`/${game.docID}/${medlem.docID}`) Tilføj
-                    button(onclick='javascript: addGPwithRows(\''+game.docID+','+medlem.docID+'\')') tryk
+                    a(href='/member/' + member.docID)= member.Fornavn
+                    a(href=`/${game.docID}/${member.docID}`) Tilføj
+                    button(onclick='javascript: addGPwithRows(\''+game.docID+','+member.docID+'\')') tryk
         
