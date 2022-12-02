@@ -16,6 +16,6 @@ html
             each medlem in medlemmer
                 li 
                     a(href='/medlem/' + medlem.docID)= medlem.Fornavn
-                    a(href=`/${lotteri.docID}/${medlem.docID}`) Tilføj
-                    button(onclick='javascript: addGPwithRows(\''+lotteri.docID+','+medlem.docID+'\')') tryk
+                    a(href=`/${game.docID}/${medlem.docID}`) Tilføj
+                    button(onclick='javascript: addGPwithRows(\''+game.docID+','+medlem.docID+'\')') tryk
         
