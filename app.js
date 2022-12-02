@@ -32,36 +32,36 @@ app.use(express.static('assets'))
 
 // Firebase funktioner
 
-let medlemmerCollection = collection(db, 'Medlemmer')
+let membersCollection = collection(db, 'Members')
 let GamesCollection = collection(db, 'Games')
 let deltagereCollection = collection(db, 'GameParticipants')
-///medlemmer start///////////////////////////////////
-async function getMedlemmer() {
-  let medlemmerQueryDocs = await getDocs(medlemmerCollection)
-  let medlemmer = medlemmerQueryDocs.docs.map(doc => {
+///Members start///////////////////////////////////
+async function getMembers() {
+  let membersQueryDocs = await getDocs(membersCollection)
+  let members = membersQueryDocs.docs.map(doc => {
     let data = doc.data()
     data.docID = doc.id
     return data
   })
-  return medlemmer
+  return members
 }
 
 
-async function getMedlem(id) {
-  const docRef = doc(db, "Medlemmer", id)
-  const medlemQueryDocument = await getDoc(docRef)
-  let medlem = medlemQueryDocument.data()
-  medlem.docID = medlemQueryDocument.id
-  return medlem
+async function getMember(id) {
+  const docRef = doc(db, "Members", id)
+  const memberQueryDocument = await getDoc(docRef)
+  let member = memberQueryDocument.data()
+  member.docID = memberQueryDocument.id
+  return member
 }
 
-async function addMedlem(medlem) {
-  // Medlem = {medlemsID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
-  const docRef = await addDoc(collection(db, "Medlemmer"), medlem)//, medlem.medlemsID
+async function addMember(member) {
+  // member = {membersID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
+  const docRef = await addDoc(collection(db, "Members"), member)//, member.membersID
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
-///medlemmer slut////////////////////////////////////
+///Members slut////////////////////////////////////
 
 ///Games start///////////////////////////////////
 async function getGames() { // henter Games fra db Games i firebase
@@ -201,30 +201,30 @@ async function addVinderTal(lid, a, b, c) {
 
 // Express Endpoint
 
-app.get('/medlemmer', async (request, response) => {
-  const medlemmer = await getMedlemmer()
-  response.render('medlemmer', { medlemmer: medlemmer })
+app.get('/members', async (request, response) => {
+  const members = await getMembers()
+  response.render('members', { members: members })
 })
 
-app.get('/medlem/:id', async (request, response) => {
+app.get('/member/:id', async (request, response) => {
   const mID = request.params.id
-  const medlem = await getMedlem(mID)
-  response.render('medlem', { medlem: medlem })
+  const member = await getMember(mID)
+  response.render('member', { member: member })
 })
 
-app.get('/addMedlem', (request, response) => {
-  response.render('addMedlem', {})
+app.get('/addMember', (request, response) => {
+  response.render('addMember', {})
 })
 
-app.post('/addMedlem', async (request, response) => {
-  const medlemsID = request.body.medlemsID
+app.post('/addMember', async (request, response) => {
+  const membersID = request.body.membersID
   const Fornavn = request.body.Fornavn
   const Efternavn = request.body.Efternavn
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addMedlem({ medlemsID: medlemsID, Fornavn: Fornavn, Efternavn: Efternavn })
-  response.redirect('/medlemmer')
+  let id = await addMember({ membersID: membersID, Fornavn: Fornavn, Efternavn: Efternavn })
+  response.redirect('/members')
 })
 
 app.get('/addgame', (request, response) => {
@@ -243,14 +243,14 @@ app.post('/addgame', async (request, response) => {
 
   let id = await addgame(lottery)
   /*{
-  date: date, lowestNum: lowestNum, highestNum: highestNum, amountOfWinningNums: amountOfWinningNums, deltagere: [{ reference: "Medlemmer/8dzauo83ZTy5QwsT75CY" }], Vindertal: ""
+  date: date, lowestNum: lowestNum, highestNum: highestNum, amountOfWinningNums: amountOfWinningNums, deltagere: [{ reference: "members/8dzauo83ZTy5QwsT75CY" }], Vindertal: ""
 })*/
   response.redirect('/Games')
 })
 
 app.get('/demoliste', async (req, res) => {
   let Games = await getDocs(db, 'Games')
-  let medlemmer = Games.docs.map(doc => {
+  let members = Games.docs.map(doc => {
     return doc.data().id
   })
   console.log(med);
@@ -258,9 +258,9 @@ app.get('/demoliste', async (req, res) => {
 })
 
 app.get('/game/:id/addDeltagere', async (request, response) => { //ok
-  const medlemmer = await getMedlemmer() // giver alle medlemmer af denne game
+  const members = await getMembers() // giver alle Members af denne game
   const game = await getgame(request.params.id) // giver game fra db med id fra input
-  response.render('addDeltagere', { medlemmer: medlemmer, game: game })
+  response.render('addDeltagere', { members: members, game: game })
 })
 
 app.post('/addDeltagere', async (request, response) => {
