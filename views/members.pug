@@ -1,0 +1,16 @@
+html 
+    head 
+        title Members 
+        link(rel="stylesheet" type="text/css" href="/css/medlemmer.css")
+    body 
+        #container 
+            #backButton
+                a.buttonBack(href="/")= 'Startside'
+            #memberTitle Medlems-oversigt
+            #memberArea
+                each member in members
+                    a.memberButton(href='/member/' + member.docID)= member.Fornavn
+                     
+            
+                        
+                        

@@ -23,6 +23,7 @@ html
                 button.buttonExtraRow(onclick="javascript: addRows()") Tilføj end en række 
             #choseMember Vælg medlem
             #memberArea
+<<<<<<< HEAD
                 each medlem in medlemmer
                     button.memberButton(onclick='javascript: addGPwithRows(\''+lotteri.docID+','+medlem.docID+'\')')=medlem.Fornavn
             
@@ -44,3 +45,8 @@ html
                     button(onclick='javascript: addGPwithRows(\''+game.docID+','+medlem.docID+'\')') tryk
         
 >>>>>>> parent of 003851e (Merge branch 'newBranch' of https://github.com/Mykhailo21T/projektLotteriet into newBranch)
+=======
+                each medlem in members
+                    button.memberButton(onclick='javascript: addGPwithRows(\''+game.docID+','+medlem.docID+'\')')=member.Fornavn
+            
+>>>>>>> 581c1e3f707425d26cbc242d223a33c96f7a03c7
