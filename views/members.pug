@@ -8,8 +8,8 @@ html
                 a.buttonBack(href="/")= 'Startside'
             #memberTitle Medlems-oversigt
             #memberArea
-                each medlem in medlemmer
-                    a.memberButton(href='/medlem/' + medlem.docID)= medlem.Fornavn
+                each member in members
+                    a.memberButton(href='/member/' + member.docID)= member.Fornavn
                      
             
                         

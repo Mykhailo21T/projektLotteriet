@@ -22,6 +22,6 @@ html
                 button.buttonExtraRow(onclick="javascript: addRows()") Tilføj end en række 
             #choseMember Vælg medlem
             #memberArea
-                each medlem in medlemmer
-                    button.memberButton(onclick='javascript: addGPwithRows(\''+lotteri.docID+','+medlem.docID+'\')')=medlem.Fornavn
+                each medlem in members
+                    button.memberButton(onclick='javascript: addGPwithRows(\''+game.docID+','+medlem.docID+'\')')=member.Fornavn
             
