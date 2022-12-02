@@ -1,4 +1,4 @@
-"use strict"
+
 
 import { arrayUnion } from "firebase/firestore"
 let participantArr = []
@@ -8,12 +8,12 @@ let numberArr = []
 
 export class GameParticipant {
     constructor(name, id, gameID) {
-        this.name = name
-        this.id = id
-        this.gameID = gameID
-        this.arrOfNumberArr = []
+        this.name = name;
+        this.id = id;
+        this.gameID = gameID;
+        this.arrOfNumberArr = [];
     
-
+       
         return this
         
     }

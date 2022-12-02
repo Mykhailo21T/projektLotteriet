@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
 import { Game } from "./classes.js/game.js";
+import {GameParticipant} from "./classes.js/gameParticipant.js"
 
 const firebaseConfig = {
     apiKey: "AIzaSyBmlyw9TMKl-ign_hYLhAsaPmdsXlzPs4w",
@@ -67,16 +68,28 @@ async function addDeltager(gID, mID, name) {
     let fuckpis = []
     let lotDocArray = await getLotterier("2022-12-11")
     let data = lotDocArray.data()
-
  
 
-data.addParticipant(name,mID.gID)
+let xxx=data.addParticipant(name,mID,gID)
+
+console.log("HERE: " + JSON.stringify(xxx));
        
     data.winnerArray = data.createNumberArr(fuckpis)
    
      console.log("||||||||||||||||||||||||||||||||||");
-   console.log(data.showParticipant());
    
+     console.log(JSON.stringify(data));
+
+     data.addNumberArrToParticipant(1,[])
+     data.addNumberArrToParticipant(1,[])
+     data.addNumberArrToParticipant(1,[])
+     data.addNumberArrToParticipant(1,[])
+     data.addNumberArrToParticipant(1,[])
+     
+   
+     console.log("||||||||||||||||||||||||||||||||||");
+   
+     console.log(JSON.stringify(data));
    
      //const docRef = await addDoc(collection(db, "GameParticipants"), gpInfo) // man skal ikke glemme "collection"!
    
@@ -93,8 +106,12 @@ data.addParticipant(name,mID.gID)
    
    } 
 
+let dfgdfg ="2022-12-11"
 
-addDeltager("2022-12-11", 1, "Knud")
+
+
+
+addDeltager(dfgdfg, 1, "Knud")
 
 
 
