@@ -1,0 +1,219 @@
+#container {
+    
+    width: 90%;
+    margin: 30pt;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5pt;
+  
+    
+    
+  
+  
+    grid-template-areas: 
+    "a . . . . . ."
+    "b b b b b b b"
+    "c . d . e . f"
+    "g . h . i . j"
+    ". . k k k . .";
+  
+  }
+  
+  body {
+    background-color:#FDF8E2;
+  }
+
+  #backButton {
+    grid-area: a;
+  }
+
+  .buttonBack{
+    appearance: none;
+    background-color: white;
+    border: 2pt solid rgb(73, 126, 7);
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: rgb(73, 126, 7);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16pt;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    touch-action: manipulation;
+    width: 100pt;
+    will-change: transform;
+    }
+    
+    .buttonBack:hover {
+    color: #fff;
+    background-color: rgb(73, 126, 7);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+    }
+
+    #createGameTitle {
+        grid-area: b;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 350%;
+        padding-top: 5%;
+        text-align: center;
+        padding-bottom: 5%;
+        color: white;
+        text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+        background-color: rgb(73, 126, 7);
+        height: 40pt;
+        margin-bottom: 50pt;
+        margin-top: 10pt;
+        border-radius: 25pt;
+        margin-right: -47pt;
+        padding-right: 20pt;
+        }
+
+    #dateTitle {
+        grid-area: c;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 20pt;
+        padding-top: 5%;
+        text-align: center;
+        padding-bottom: 5%;
+        color: white;
+        text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+        background-color: rgb(73, 126, 7);
+        height: 30pt;
+        width: 200pt;
+        border-radius: 25pt;
+    }
+
+    #lowestNumberTitle {
+        grid-area: d;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 20pt;
+        padding-top: 5%;
+        text-align: center;
+        padding-bottom: 5%;
+        color: white;
+        text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+        background-color: rgb(73, 126, 7);
+        height: 30pt;
+        width: 200pt;
+        border-radius: 25pt;
+    }
+
+    #highestNumberTitle {
+        grid-area: e;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 20pt;
+        padding-top: 5%;
+        text-align: center;
+        padding-bottom: 5%;
+        color: white;
+        text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+        background-color: rgb(73, 126, 7);
+        height: 30pt;
+        width: 200pt;
+        border-radius: 25pt;
+    }
+
+    #amountOfWinningNumbersTitle {
+        grid-area: f;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 20pt;
+        padding-top: 5%;
+        text-align: center;
+        padding-bottom: 5%;
+        color: white;
+        text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+        background-color: rgb(73, 126, 7);
+        height: 30pt;
+        width: 200pt;
+        border-radius: 25pt;
+    }
+
+
+    #dateInput {
+        grid-area: g;
+        padding-top: 20pt;
+    }
+
+    #lowestNumberInput {
+        grid-area: h;
+        padding-top: 20pt;
+    }
+
+    #highestNumberInput {
+        grid-area: i;
+        padding-top: 20pt;
+    }
+
+    #amountOfWinningNumbersInput {
+        grid-area: j;
+        padding-top: 20pt;
+    }
+
+    .inputField{
+        font-size: 20pt;
+        padding-top: 5%;
+        text-align: center;
+        padding-bottom: 5%;
+        color: rgb(73, 126, 7);
+        background-color: white;
+        height: 30pt;
+        width: 200pt;
+        border-radius: 25pt;
+        height: 50pt;
+        font-size: 25   pt;
+    }
+
+    #submitButton {
+        grid-area: k;
+      }
+    
+      .buttonSubmit{
+        appearance: none;
+        background-color: white;
+        border: 6pt solid rgb(73, 126, 7);
+        border-radius: 50pt;
+        box-sizing: border-box;
+        color: rgb(73, 126, 7);
+        cursor: pointer;
+        display: inline-block;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 40pt;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        min-height: 60px;
+        min-width: 0;
+        outline: none;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        user-select: none;
+        touch-action: manipulation;
+        width: 300pt;
+        height: 100pt;
+        will-change: transform;
+        margin-top: 50pt;
+        margin-left: 100pt;
+        }
+        
+        .buttonSubmit:hover {
+        color: #fff;
+        background-color: rgb(73, 126, 7);
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+        }
+
+
+
+

@@ -25,6 +25,18 @@ body {
 
 h2 {
   font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  text-align: center;
+  color: white;
+  text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+  background-color: rgb(230, 19, 19);
+  border-radius: 25pt;
+}
+
+h3 {
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  text-align: center;
+  color: rgb(35, 230, 13);
+  text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
 }
 
 #backButton {
@@ -176,14 +188,12 @@ h2 {
   #winningRows {
     grid-area: j;
     font-size: 150%;
-    text-decoration: underline;
     padding-left: 100pt;
   }
 
   #winningNames {
     grid-area: k;
     font-size: 150%;
-    text-decoration: underline;
     padding-right: 30pt;
     padding-left: 60pt;
   }

@@ -12,7 +12,7 @@ html
             a.buttonBack(href="/")= 'Startside'
 
         #winningRow
-            h2='VÆLG VINDERTAL:'
+            h2='VÆLG VINDERTAL'
         #intInput1
             input.inputField(type="number", min = 1, max = 25)
         #intInput2
@@ -23,9 +23,9 @@ html
         #submitButton
             button.buttonSubmit(href='javascript: tilfVT(\''+ game.docID +'\')', onclick="javascript: disableInputField") TILFØJ
         #definiteWinningNumbersText 
-            h2='ENDELIGE VINDERTAL: '
+            h2='ENDELIGE VINDERTAL'
         #definiteWinningNumbers
-            h2=game.Vindertal
+            h3=game.Vindertal
         #winningRows 
             h2= 'VINDERRÆKKE(R)'
         #winningNames 
