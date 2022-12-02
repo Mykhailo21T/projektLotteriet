@@ -21,49 +21,61 @@ const firebaseConfig = {
   let lotterierCollection = collection(db, 'Lotterier')
 
 
-async function getLotterier() { // henter lotterier fra db Lotterier i firebase
+async function getLotterier(gID) { // henter lotterier fra db Lotterier i firebase
     let lotterierQueryDocs = await getDocs(lotterierCollection)
+   
     let lotterier = lotterierQueryDocs.docs.map(doc => {
       let data = doc.data()
       data.docID = doc.id
       return data
     })
-    return lotterier
+
+
+// Firestore data converter
+const gameConverter = {
+    toFirestore: (game) => {
+        return game 
+    },
+    fromFirestore: (snapshot) => {
+        const data = snapshot.data();
+        return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums,data.winnerArray,data.date,data.participantList,data.concreteWinners);
+    }
+};
+const ref = doc(db, "Lotterier", gID ).withConverter(gameConverter);
+const docSnap = await getDoc(ref);
+if (docSnap.exists()) {
+  // Convert to City object
+  const game = docSnap.data();
+  // Use a City instance method
+  console.log("G: "+game.toString());
+} else {
+  console.log("No such document!");
 }
 
-let x = new Game()
+    return docSnap
+}
+
+
+
+
+let x = undefined
+
 let x1 = []
 async function addDeltager(gID, mID, name) {
 
-
-    let lotDocArray = await getLotterier()
-   
     
-    console.log("Game first it: " + x);
-   
-    for(let lot of lotDocArray){
-     if(lot.date == gID){
-       x = lot
-        
-     }
-    }
-    console.log("Game second it: " + x.date)
-   
-    console.log(lotDocArray.includes(x))
-    
-    console.log("Game second it: " + JSON.stringify(x))
+    let fuckpis = []
+    let lotDocArray = await getLotterier("2022-12-11")
+    let data = lotDocArray.data()
 
-    if(lotDocArray.includes(x)){
-        console.log(typeof(x));
-        
-        
-            x.createNumberArr(x1)
-            console.log('fghjj');
+ 
+
+data.addParticipant(name,mID.gID)
        
-
-        
-        
+    data.winnerArray = data.createNumberArr(fuckpis)
    
+     console.log("||||||||||||||||||||||||||||||||||");
+   console.log(data.showParticipant());
    
    
      //const docRef = await addDoc(collection(db, "GameParticipants"), gpInfo) // man skal ikke glemme "collection"!
@@ -78,14 +90,13 @@ async function addDeltager(gID, mID, name) {
      })*/
     
 
-     
-     return -1
+   
    } 
-}
+
 
 addDeltager("2022-12-11", 1, "Knud")
 
-console.log(x.participantList);
+
 
 
 
