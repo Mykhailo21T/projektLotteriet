@@ -3,7 +3,7 @@ html
     title Add game
     style
     script(src="js/event.js" defer) 
-    //link(rel="stylesheet" type="text/css" href="/css/addGame.css")
+    link(rel="stylesheet" type="text/css" href="/css/addGame.css")
   body
       #container
           #backButton 
@@ -12,15 +12,16 @@ html
           #dateTitle Vælg dato
           #lowestNumberTitle Vælg laveste nummer
           #highestNumberTitle Vælg højeste nummer 
+          form(action="/addgame", method="post") 
           #amountOfWinningNumbersTitle Vælg antal vindertal
           form(action="/addgame", method="post") 
-            #dateInput    
-                input.inputField(type="date", name="date")
-            #lowestNumberInput        
-                input.inputField(type="number", name="lowestNum", min= "1")
-            #highestNumberInput        
-                input.inputField(type="number", name="highestNum", min= "1")
-            #amountOfWinningNumbersInput        
-                input.inputField(type="number", name="amountOfWinningNum", min= "1", max= "5")
-            #submitButton
-                button.buttonSubmit(type="submit", value="Opret lotteri") Opret lotteri
+          #dateInput    
+            input.inputField(type="date", name="date")
+          #lowestNumberInput        
+            input.inputField(type="number", name="lowestNum", min= "1")
+          #highestNumberInput        
+            input.inputField(type="number", name="highestNum", min= "1")
+          #amountOfWinningNumbersInput        
+            input.inputField(type="number", name="amountOfWinningNum", min= "1", max= "5")
+          #submitButton
+            button.buttonSubmit(type="submit", value="Opret lotteri") Opret lotteri

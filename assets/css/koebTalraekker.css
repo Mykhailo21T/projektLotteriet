@@ -13,9 +13,10 @@
     grid-template-areas: 
     "a . . . . ."
     "b b b b b b"
-    "c c c c . d"
     "e e e e e e"
-    "f f f f f f";
+    "f f f f f f"
+    "g g g g g g"
+    "c c c c . d";
 }
 
 body {
@@ -165,6 +166,40 @@ h2 {
     padding-right: 60pt;
   }
 
+    #choseMember {
+    grid-area: e;
+    background-color:rgb(230, 19, 19);
+    color: white;
+    text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    margin-left: 50pt;
+    margin-top: 50pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 300%;
+    text-align: center;
+    border-radius: 25pt;
+    margin-right: -60pt;
+    margin-left: -2pt;
+    margin-top: 100pt;
+    padding-right: 60pt;
+  }
+
+  #pickRows {
+    grid-area: g;
+    background-color:rgb(230, 19, 19);
+    color: white;
+    text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    margin-left: 50pt;
+    margin-top: 50pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 300%;
+    text-align: center;
+    border-radius: 25pt;
+    margin-right: -60pt;
+    margin-left: -2pt;
+    margin-top: 60pt;
+    padding-right: 60pt;
+  }
+
   #memberArea {
     grid-area: f;
   }
@@ -203,4 +238,6 @@ h2 {
     box-shadow: rgba(87, 178, 234, 0.25) 1 8px 15px;
     transform: translateY(-2px);
   }
+
+
   
