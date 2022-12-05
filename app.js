@@ -57,9 +57,13 @@ async function getMember(id) {
 
 async function addMember(member) {
   // member = {membersID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
-  const docRef = await addDoc(membersCollection, member)//, member.membersID
-  console.log("Document witten with ID: ", docRef.id);
-  return docRef.id
+  const tempDocRef = await getDocs(membersCollection)
+  let index = tempDocRef.size
+  console.log(index);
+  member.membersID = index+1
+  const docRef = await setDoc(doc(db,"Members",`${index+1}_${member.fornavn}`), member)//, member.membersID
+  console.log("Document witten with ID: ", `${index+1}_${member.fornavn}`);
+  return `${index+1}_${member.fornavn}`//docRef.id
 }
 ///Members slut////////////////////////////////////
 
@@ -355,12 +359,12 @@ app.post('/sendRows', async (req, res) => {
   // TODO to  
   let dataQ = req.body
   console.log(dataQ);
-  let gp = await addDoc(deltagereCollection, dataQ)
+  let gp = await setDoc(doc(db,"GameParticipants",`${dataQ.game}_${dataQ.member}`), dataQ)
   const docRef = doc(db, "Games", dataQ.game)
   let docGet = await getDoc(docRef)
   let docData = docGet.data()
   let pl = docData.participantList
-  pl.push(gp.id)
+  pl.push(`${dataQ.game}_${dataQ.member}`)
   console.log(pl);
   let game = await updateDoc(docRef, { participantList: pl })
   console.log(222);
