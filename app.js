@@ -57,7 +57,7 @@ async function getMember(id) {
 
 async function addMember(member) {
   // member = {membersID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
-  const docRef = await addDoc(collection(db, "Members"), member)//, member.membersID
+  const docRef = await addDoc(membersCollection, member)//, member.membersID
   console.log("Document witten with ID: ", docRef.id);
   return docRef.id
 }
@@ -218,12 +218,17 @@ app.get('/addMember', (request, response) => {
 
 app.post('/addMember', async (request, response) => {
   const membersID = request.body.membersID
-  const Fornavn = request.body.Fornavn
-  const Efternavn = request.body.Efternavn
+  const efternavn = request.body.efternavn
+  const fornavn = request.body.fornavn
   // ALT hvad der kommer fra brugeren er en string
   // I skal lave en fandens masse check
   // STOL ALDRIG PÅ BRUGERDATA
-  let id = await addMember({ membersID: membersID, Fornavn: Fornavn, Efternavn: Efternavn })
+  let tempMember = {
+    membersID: membersID,
+    efternavn: efternavn,
+    fornavn: fornavn
+  }
+  let id = await addMember(tempMember)
   response.redirect('/members')
 })
 
