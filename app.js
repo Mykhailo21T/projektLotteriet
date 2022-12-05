@@ -358,19 +358,48 @@ app.get('/game/:gameId/addTR', async (request, response) => { //ok
 app.post('/sendRows', async (req, res) => {
   // TODO to  
   let dataQ = req.body
-  console.log(dataQ);
-  let gp = await setDoc(doc(db,"GameParticipants",`${dataQ.game}_${dataQ.member}`), dataQ)
-  const docRef = doc(db, "Games", dataQ.game)
+  //console.log("log dagaQ: "+JSON.stringify(dataQ));
+  let gp = await setDoc(doc(db,"GameParticipants",`${dataQ.game}:${dataQ.member}`), dataQ)//member tilføjes til game på bestemte dato som opretter dokument med 2 id'er ind i GameParticipants
+  //start tilføje gameParticipant til game
+  let docRef = doc(db, "Games", dataQ.game)
   let docGet = await getDoc(docRef)
   let docData = docGet.data()
   let pl = docData.participantList
-  pl.push(`${dataQ.game}_${dataQ.member}`)
-  console.log(pl);
+  pl.push(`${dataQ.game}:${dataQ.member}`)
+  //console.log("log pl: "+pl);
   let game = await updateDoc(docRef, { participantList: pl })
+  //slut tilføje gameParticipant til game
+  
+  //start tilføj rows til member
+  let docMember = doc(db,'Members',dataQ.member)
+  let docGetMember = await getDoc(docMember)
+  let dGMData = docGetMember.data()
+  let dGMDRows = dGMData.rows
+  //console.log("dataQ rows: "+JSON.stringify(dataQ.rows));
+  let newRows = checkDoRows(dGMDRows,dataQ.rows)
+  await updateDoc(docMember,{rows:newRows})
+  //slut tilføj rows til member
   console.log(222);
   res.status(200)
   res.end()
 })
+
+function checkDoRows(inRows,checkArray){ // inrows array fra member, 
+  for(let row in inRows){
+    for(let arr in checkArray){
+      if(JSON.stringify(inRows[row]) == JSON.stringify(checkArray[arr])){
+        console.log("bingo "+inRows[row]+" "+checkArray[arr]);
+        delete checkArray[arr]//fjerne talrække hvis den eksistere i member
+      }
+    }
+  }
+  if(Object.keys(checkArray).length>0){
+    for(let arr in checkArray){
+      inRows[Object.keys(inRows).length]=checkArray[arr]
+    }
+  }
+  return inRows
+}
 
 app.post('/game/:lotId/:tal1/:tal2/:tal3', async (req, res) => {
   let a = req.params.tal1
