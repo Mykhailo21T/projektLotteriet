@@ -117,8 +117,7 @@ if (docSnap.exists()) {
 
 
 async function addgame(game) {
-  // game = {date: dato}
-
+  console.log(game);
   const docRef = await setDoc(doc(db, "Games", `${game.date}`), JSON.parse(JSON.stringify(game)))//,
   console.log("Document witten with ID: ", game.date);
   return game.date
@@ -233,10 +232,12 @@ app.post('/addMember', async (request, response) => {
 })
 
 app.get('/addgame', (request, response) => {
+  console.log("addgame get");
   response.render('addgame', {})
 })
 
 app.post('/addgame', async (request, response) => {
+  console.log("post start");
   const date = request.body.date
   console.log(date);
   let x = request.body.lowestNum
