@@ -261,10 +261,12 @@ app.post('/addgame', async (request, response) => {
   const date = request.body.date
   console.log(date);
   let x = request.body.lowestNum
+  console.log("add game 1");
   const lowestNum = parseInt(x)
+  console.log("add game 2");
   const highestNum = parseInt(request.body.highestNum)
   const amountOfWinningNums = parseInt(request.body.amountOfWinningNums)
-
+  console.log("add game 4");
   let lottery = new Game(highestNum, lowestNum, amountOfWinningNums, date)
 
   let id = await addgame(lottery)
@@ -286,6 +288,22 @@ app.get('/demoliste', async (req, res) => {
 app.get('/game/:id/addDeltagere', async (request, response) => { //ok
   const members = await getMembers() // giver alle Members af denne game
   const game = await getgame(request.params.id) // giver game fra db med id fra input
+  const allGames = await getDocs(GamesCollection)
+  const arrayGames = allGames.docs.map(game =>game.data())
+  let nextDate = null;
+  let todaysDate = new Date()
+  const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth() + 1) + "-" + todaysDate.getUTCDate()
+  for(let g of arrayGames){
+    console.log("g dato "+g.date);
+    let lotteryDate = new Date(g.date)
+    let comparisonDate = new Date(concreteDate)
+    if(comparisonDate<=lotteryDate){
+      nextDate = g.date
+      break
+    }
+  }
+  console.log(nextDate);
+  game.nextDate = nextDate;
   response.render('addDeltagere', { members: members, game: game })
 })
 
@@ -426,8 +444,23 @@ app.post('/game/:lotId/:tal1/:tal2/:tal3', async (req, res) => {
   res.redirect(`/game/${id}`)
 })
 
-app.get('/', (req, res) => {
-  res.render('start')
+app.get('/', async(req, res) => {
+  const allGames = await getDocs(GamesCollection)
+  const arrayGames = allGames.docs.map(game =>game.data())
+  let nextDate = null;
+  let todaysDate = new Date()
+  const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth() + 1) + "-" + todaysDate.getUTCDate()
+  for(let g of arrayGames){
+    console.log("g dato "+g.date);
+    let lotteryDate = new Date(g.date)
+    let comparisonDate = new Date(concreteDate)
+    if(comparisonDate<=lotteryDate){
+      nextDate = g.date
+      break
+    }
+  }
+  console.log(nextDate);
+  res.render('start',{nextDate:nextDate})
 })
 
 app.delete('/deleteVT/:id', async (req, res) => {//test
