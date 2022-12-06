@@ -17,7 +17,8 @@
     "e e e e e e"
     "f f f f f f"
     "g g g g g g"
-    "c c c c . d";
+    "c c c c . d"
+    "j j j j j j";
 }
 
 body {
@@ -266,6 +267,48 @@ h2 {
     border-color:rgb(230, 19, 19);
     width: 400pt;
   }
+
+  #buttonSubmit {
+    grid-area: j;
+  }
+
+  .submitButton {
+    appearance: none;
+    background-color: white;
+    border: 10pt solid rgb(230, 19, 19);
+    border-radius: 15pt;
+    box-sizing: border-box;
+    color: rgb(230, 19, 19);
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16pt;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 70pt;
+    margin-left: 265pt;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    touch-action: manipulation;
+    width: 50%;
+    will-change: transform;
+    height: 100pt;  
+    align-items: center;
+  }
+
+  .submitButton:hover {
+    color: white;
+    background-color: rgb(230, 19, 19);
+    box-shadow: rgba(87, 178, 234, 0.25) 1 8px 15px;
+    transform: translateY(-2px);
+  }
+
+
+
+
 
 
   
