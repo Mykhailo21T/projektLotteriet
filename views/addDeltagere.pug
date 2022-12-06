@@ -10,6 +10,11 @@ html
             #backButton
                 a.buttonBack(href="/")= 'Startside'
             #buyRowTitle Tilføj talrække(r)
+            #choseMember Vælg medlem
+            #memberArea
+                each member in members
+                    button.memberButton(onclick='javascript: addGPwithRows(\''+game.docID+','+member.docID+'\')')=member.fornavn
+            #pickRows Vælg række(r)              
             #inputfield
                 div(id="main")
                     div(id="d1")
@@ -21,9 +26,5 @@ html
                         input(id="5", type="number")
             #extraRowButton
                 button.buttonExtraRow(onclick="javascript: addRows()") Tilføj end en række 
-            #choseMember Vælg medlem
-            #memberArea
-                each member in members
-                    button.memberButton(onclick='javascript: addGPwithRows(\''+game.docID+','+member.docID+'\')')=member.fornavn
-                    
+
 
