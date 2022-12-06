@@ -15,9 +15,9 @@ html
 
             #thisLottery Handlinger til denne runde  
             #purchaseRow
-                a.thisRoundButton(href="/game/2022-12-02/addDeltagere")= 'Tilføj række(r)'
+                a.thisRoundButton(href=`/game/${nextDate}/addDeltagere`)= 'Tilføj række(r)'
             #drawWinningNumbers
-                a.thisRoundButton(href="/game/2022-12-02")= 'Udtræk vindertal'
+                a.thisRoundButton(href=`/game/2022-12-02`)= 'Udtræk vindertal'
             #overview Oversigt
             #lotteryOverview
                 a.overViewButton(href="/Games")= 'Lotteri-oversigt'
