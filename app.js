@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
 import { Game } from "./classes.js/game.js";
 import alert from 'alert'
+import {searchMemberByName} from "./assets/js/smallJsFuncs.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -287,6 +288,13 @@ app.get('/demoliste', async (req, res) => {
 
 app.get('/game/:id/addDeltagere', async (request, response) => { //ok
   const members = await getMembers() // giver alle Members af denne game
+
+  let userInput = request.query.searchBar;
+  console.log(userInput);
+  let foundMembers = searchMemberByName(userInput, members)
+
+
+
   const game = await getgame(request.params.id) // giver game fra db med id fra input
   const allGames = await getDocs(GamesCollection)
   const arrayGames = allGames.docs.map(game =>game.data())
@@ -304,7 +312,7 @@ app.get('/game/:id/addDeltagere', async (request, response) => { //ok
   }
   console.log(nextDate);
   game.nextDate = nextDate;
-  response.render('addDeltagere', { members: members, game: game })
+  response.render('addDeltagere', { members: foundMembers, game: game })
 })
 
 app.post('/addDeltagere', async (request, response) => {
