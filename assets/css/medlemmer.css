@@ -13,6 +13,7 @@
   grid-template-areas: 
   "a . . . . . ."
   "b b b b b b b"
+  "h . i i i i i"
   "c c c c c c c";
 
 }
@@ -124,3 +125,47 @@ transform: translateY(-2px);
       font-weight: 600;
       text-align: center;
 }
+
+
+#searchForMembers {
+  grid-area: h;
+  background-color:rgb(39, 65, 236);
+  color: white;
+  text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+  margin-left: 50pt;
+  margin-top: 50pt;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 20pt;
+  text-align: center;
+  border-radius: 25pt;
+  margin-right: -60pt;
+  margin-left: -2pt;
+  margin-top: 60pt;
+  padding-right: 60pt;
+  height: 25pt;
+  width: 380pt;
+  margin-bottom: 80pt;
+}
+
+#searchField {
+  grid-area: i;
+  margin-top: 45pt;
+  margin-left: 70pt;
+}
+
+.txtSearch {
+  font-size: 20pt;
+  padding-top: 5%;
+  text-align: center;
+  padding-bottom: 5%;
+  color: rgb(39, 65, 236);
+  background-color: white;
+  height: 30pt;
+  width: 200pt;
+  border-radius: 25pt;
+  height: 50pt;
+  font-size: 25pt;
+  border-color:rgb(39, 65, 236);
+  width: 400pt;
+}
+

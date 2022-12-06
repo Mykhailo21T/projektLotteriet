@@ -7,6 +7,9 @@ html
             #backButton
                 a.buttonBack(href="/")= 'Startside'
             #memberTitle Medlems-oversigt
+            #searchForMembers Søg efter medlem 
+            #searchField
+                input.txtSearch(type="text", name="searchBar", class="search", placeholder= "Indtast navn")
             #memberArea
                 each member in members
                     a.memberButton(href='/member/' + member.docID)= member.fornavn
