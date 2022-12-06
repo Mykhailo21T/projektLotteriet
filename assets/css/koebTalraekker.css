@@ -13,6 +13,7 @@
     grid-template-areas: 
     "a . . . . ."
     "b b b b b b"
+    "h . i i i i"
     "e e e e e e"
     "f f f f f f"
     "g g g g g g"
@@ -166,22 +167,6 @@ h2 {
     padding-right: 60pt;
   }
 
-    #choseMember {
-    grid-area: e;
-    background-color:rgb(230, 19, 19);
-    color: white;
-    text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
-    margin-left: 50pt;
-    margin-top: 50pt;
-    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-size: 300%;
-    text-align: center;
-    border-radius: 25pt;
-    margin-right: -60pt;
-    margin-left: -2pt;
-    margin-top: 100pt;
-    padding-right: 60pt;
-  }
 
   #pickRows {
     grid-area: g;
@@ -198,6 +183,26 @@ h2 {
     margin-left: -2pt;
     margin-top: 60pt;
     padding-right: 60pt;
+  }
+
+  #searchForMembers {
+    grid-area: h;
+    background-color:rgb(230, 19, 19);
+    color: white;
+    text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
+    margin-left: 50pt;
+    margin-top: 50pt;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 20pt;
+    text-align: center;
+    border-radius: 25pt;
+    margin-right: -60pt;
+    margin-left: -2pt;
+    margin-top: 60pt;
+    padding-right: 60pt;
+    height: 25pt;
+    width: 380pt;
+    
   }
 
   #memberArea {
@@ -220,6 +225,7 @@ h2 {
     line-height: normal;
     margin-top: 20pt;
     margin-left: 122pt;
+    margin-right: 168pt;
     outline: none;
     text-align: center;
     text-decoration: none;
@@ -237,6 +243,28 @@ h2 {
     background-color: rgb(230, 19, 19);
     box-shadow: rgba(87, 178, 234, 0.25) 1 8px 15px;
     transform: translateY(-2px);
+  }
+
+  #searchField {
+    grid-area: i;
+    margin-top: 45pt;
+    margin-left: 70pt;
+  }
+
+  .txtSearch {
+    font-size: 20pt;
+    padding-top: 5%;
+    text-align: center;
+    padding-bottom: 5%;
+    color: rgb(230, 19, 19);
+    background-color: white;
+    height: 30pt;
+    width: 200pt;
+    border-radius: 25pt;
+    height: 50pt;
+    font-size: 25pt;
+    border-color:rgb(230, 19, 19);
+    width: 400pt;
   }
 
 

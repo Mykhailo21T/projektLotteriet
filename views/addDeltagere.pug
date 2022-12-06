@@ -10,6 +10,9 @@ html
             #backButton
                 a.buttonBack(href="/")= 'Startside'
             #buyRowTitle Tilføj talrække(r)
+            #searchForMembers Søg efter medlem
+            #searchField
+                input.txtSearch(type="text", name="searchBar", class="search", placeholder= "Indtast navn")
             #choseMember Vælg medlem
             #memberArea
                 each member in members
