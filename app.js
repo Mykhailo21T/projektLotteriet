@@ -60,9 +60,8 @@ async function addMember(member) {
   const tempDocRef = await getDocs(membersCollection)
   let index = tempDocRef.size
   console.log(index);
-  member.membersID = index+1
-  const docRef = await setDoc(doc(db,"Members",`${index+1}_${member.fornavn}`), member)//, member.membersID
-  console.log("Document witten with ID: ", `${index+1}_${member.fornavn}`);
+  const docRef = await setDoc(doc(db,"Members",`${member.membersID}_${member.fornavn}`), member)//, member.membersID
+  console.log("Document witten with ID: ", `${member.membersID}_${member.fornavn}`);
   return `${index+1}_${member.fornavn}`//docRef.id
 }
 ///Members slut////////////////////////////////////
