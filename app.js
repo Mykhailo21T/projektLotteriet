@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
 import { Game } from "./classes.js/game.js";
-import fetch from 'node-fetch'
+import alert from 'alert'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -58,11 +58,28 @@ async function getMember(id) {
 async function addMember(member) {
   // member = {membersID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
   const tempDocRef = await getDocs(membersCollection)
-  let index = tempDocRef.size
-  console.log(index);
-  const docRef = await setDoc(doc(db,"Members",`${member.membersID}_${member.fornavn}`), member)//, member.membersID
-  console.log("Document witten with ID: ", `${member.membersID}_${member.fornavn}`);
-  return `${index+1}_${member.fornavn}`//docRef.id
+  let tempArray = tempDocRef.docs.map(member=>member.data())
+
+  if(userUnik(tempArray,member)){ 
+    let index = tempDocRef.size
+    console.log(index);
+    const docRef = await setDoc(doc(db,"Members",`${member.membersID}_${member.fornavn}`), member)//, member.membersID
+    console.log("Document witten with ID: ", `${member.membersID}_${member.fornavn}`);
+    return `${index+1}_${member.fornavn}`//docRef.id
+  } else{
+    alert("Bruger med denne id eksistere i forvejen")
+    return null
+  }
+}
+function userUnik(array,user){
+  for(let member of array){
+    console.log("member: "+member.membersID+", user: "+user.membersID);
+    if( member.membersID == user.membersID ){
+        console.log("id bruges ellerede");
+        return false;
+      }
+  }
+  return true;
 }
 ///Members slut////////////////////////////////////
 
