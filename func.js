@@ -1,121 +1,20 @@
-'use strict'
-import { initializeApp } from "firebase/app";
+// Define an array of objects
+const list = [  {name: 'John', age: 32},  {name: 'Jane', age: 28},  {name: 'Juna', age: 25},  {name: 'Jona', age: 22},];
 
-import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
-import { Game } from "./classes.js/game.js";
-import {GameParticipant} from "./classes.js/gameParticipant.js"
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBmlyw9TMKl-ign_hYLhAsaPmdsXlzPs4w",
-    authDomain: "projektlotteriet.firebaseapp.com",
-    projectId: "projektlotteriet",
-    storageBucket: "projektlotteriet.appspot.com",
-    messagingSenderId: "556554582591",
-    appId: "1:556554582591:web:80c6dd7ee6e2b80bf4d68a",
-    measurementId: "G-J8D1FB7W3N"
-  };
+// Define a function that takes user input as an argument
+function searchObjects(name) {
+    // Convert the user input to lowercase
+    //name = name.toLowerCase();
   
-  // Initialize Firebase
-  const appFirebase = initializeApp(firebaseConfig);
-  const db = getFirestore(appFirebase)
+    // Use the filter() method to search for objects that contain the name property
+    // and that have a value that starts with the user input
+    const results = list.filter(obj => obj.name.toLowerCase().startsWith(name));
+  
+    // Return the array of matching objects
+    return results;
+  }
 
-  let lotterierCollection = collection(db, 'Lotterier')
-
-
-async function getLotterier(gID) { // henter lotterier fra db Lotterier i firebase
-    let lotterierQueryDocs = await getDocs(lotterierCollection)
-   
-    let lotterier = lotterierQueryDocs.docs.map(doc => {
-      let data = doc.data()
-      data.docID = doc.id
-      return data
-    })
-
-
-// Firestore data converter
-const gameConverter = {
-    toFirestore: (game) => {
-        return game 
-    },
-    fromFirestore: (snapshot) => {
-        const data = snapshot.data();
-        return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums,data.winnerArray,data.date,data.participantList,data.concreteWinners);
-    }
-};
-const ref = doc(db, "Lotterier", gID ).withConverter(gameConverter);
-const docSnap = await getDoc(ref);
-if (docSnap.exists()) {
-  // Convert to City object
-  const game = docSnap.data();
-  // Use a City instance method
-  console.log("G: "+game.toString());
-} else {
-  console.log("No such document!");
-}
-
-    return docSnap
-}
-
-
-
-
-let x = undefined
-
-let x1 = []
-async function addDeltager(gID, mID, name) {
-
-    
-    let fuckpis = []
-    let lotDocArray = await getLotterier("2022-12-11")
-    let data = lotDocArray.data()
- 
-
-let xxx=data.addParticipant(name,mID,gID)
-
-console.log("HERE: " + JSON.stringify(xxx));
-       
-    data.winnerArray = data.createNumberArr(fuckpis)
-   
-     console.log("||||||||||||||||||||||||||||||||||");
-   
-     console.log(JSON.stringify(data));
-
-     data.addNumberArrToParticipant(1,[])
-     data.addNumberArrToParticipant(1,[])
-     data.addNumberArrToParticipant(1,[])
-     data.addNumberArrToParticipant(1,[])
-     data.addNumberArrToParticipant(1,[])
-     
-   
-     console.log("||||||||||||||||||||||||||||||||||");
-   
-     console.log(JSON.stringify(data));
-   
-     //const docRef = await addDoc(collection(db, "GameParticipants"), gpInfo) // man skal ikke glemme "collection"!
-   
-     //let gp = await getGameParticipants(gID) // array
-   
-     /*
-     const thisLotteri = doc(db, "Lotterier", gID)
-   
-     let temp = await updateDoc(thisLotteri, { // opdaterer lotteri med ny deltager
-       deltagere: gp
-     })*/
-    
-
-   
-   } 
-
-let dfgdfg ="2022-12-11"
-
-
-
-
-addDeltager(dfgdfg, 1, "Knud")
-
-
-
-
+console.log(searchObjects("J"));
 
 
 
