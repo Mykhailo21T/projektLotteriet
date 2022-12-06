@@ -13,14 +13,10 @@ html
           #lowestNumberTitle Vælg laveste nummer
           #highestNumberTitle Vælg højeste nummer 
           #amountOfWinningNumbersTitle Vælg antal vindertal
-          form(action="/addgame", method="post") 
-            #dateInput    
-                input.inputField(type="date", name="date")
-            #lowestNumberInput        
-                input.inputField(type="number", name="lowestNum", min= "1")
-            #highestNumberInput        
-                input.inputField(type="number", name="highestNum", min= "1")
-            #amountOfWinningNumbersInput        
-                input.inputField(type="number", name="amountOfWinningNum", min= "1", max= "5")
-            #submitButton
+          #inputFieldLine  
+            form(action="/addgame", method="post")   
+                input.inputField1(type="date", name="date")        
+                input.inputField2(type="number", name="lowestNum", min= "1")   
+                input.inputField3(type="number", name="highestNum", min= "1")       
+                input.inputField4(type="number", name="amountOfWinningNum", min= "1", max= "5")
                 button.buttonSubmit(type="submit", value="Opret lotteri") Opret lotteri
