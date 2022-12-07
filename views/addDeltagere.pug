@@ -17,6 +17,10 @@ html
             #memberArea
                 each member in members
                     button.memberButton(onclick='javascript: addGPwithRows(\''+game.docID+','+member.docID+'\')')=member.fornavn
+                    details 
+                        summary bare text 
+                        each row in member.rows 
+                            p= row
             #pickRows Vælg række(r)              
             #inputfield
                 div(id="main")

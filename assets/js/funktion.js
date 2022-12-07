@@ -27,11 +27,12 @@ async function print(id) {
 }
 
 async function tilfVT(id) {
-  let a = document.getElementById("1").value.trim
-  let b = document.getElementById("2").value.trim
-  let c = document.getElementById("3").value.trim
+  console.log("tilfVT(id) start");
+  let a = document.getElementById("winner1").value
+  let b = document.getElementById("winner2").value
+  let c = document.getElementById("winner3").value
 
-  const responce = await fetch(`/lotteri/${id}/${a}/${b}/${c}`, {
+  const responce = await fetch(`/game/${id}/${a}/${b}/${c}`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -121,9 +122,7 @@ async function postF(url,obj){
 }
 
 function findMember(){
-  console.log(123);
   let input = document.getElementById('sercher').value
-  console.log(input);
   let buttons = document.querySelectorAll('.memberButton')
   buttons.forEach(button=>{
     if(!button.textContent.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())){
