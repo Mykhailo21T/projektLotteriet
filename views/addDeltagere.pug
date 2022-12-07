@@ -16,11 +16,7 @@ html
             #choseMember Vælg medlem
             #memberArea
                 each member in members
-                    button.memberButton(onclick='javascript: addGPwithRows(\''+game.docID+','+member.docID+'\')')=member.fornavn
-                    details 
-                        summary bare text 
-                        each row in member.rows 
-                            p= row
+                    button.memberButton(id=`${member.fornavn}`,onclick='javascript: visMemberRows('+JSON.stringify(member)+')')=member.fornavn
             #pickRows Vælg række(r)              
             #inputfield
                 div(id="main")
@@ -34,5 +30,5 @@ html
             #extraRowButton
                 button.buttonExtraRow(onclick="javascript: addRows()") Tilføj end en række 
             #buttonSubmit
-                button.submitButton() Færdig
+                button.submitButton(onclick="javascript: addGPwithRows("+JSON.stringify(game)+")") Færdig
 

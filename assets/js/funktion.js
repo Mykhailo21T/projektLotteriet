@@ -81,13 +81,15 @@ function getArray(div) {
   return array
 }
 
-async function addGPwithRows(lidmid) {
+async function addGPwithRows(game) {
   //TODO 
-  console.log(lidmid);
-  let split = lidmid.split(',')
-  let lid = split[0]
-  let mid = split[1]
+  let lid = game.docID
+  let mid = document.getElementById('hiddenmember').value
+  //
+  //let rb = document.querySelectorAll('gruppeNavn')
+  //let selected = rb.find(button => button.selected).value
   
+  //
   let main = document.getElementById('main')
   let mChi = main.children
   let toDimArr = {}
@@ -101,6 +103,10 @@ async function addGPwithRows(lidmid) {
     }
     toDimArr[i]=(tempArr)
   }
+  let checkboxes =  document.querySelectorAll('input[type=checkbox]:checked')
+  checkboxes.forEach((box) => {
+    return toDimArr[Object.keys(toDimArr).length]=(box.value.split(','))
+  })
   let obj = {
     game: lid,
     member: mid,
@@ -110,7 +116,35 @@ async function addGPwithRows(lidmid) {
   await postF ("/sendRows",obj)
   
   console.log("after postf");
-  location.replace("/game/"+lid) 
+  //location.replace("/game/"+lid) 
+  alert("talrækker er blevet sendt"+game.date)
+  location.reload()
+}
+
+function visMemberRows(member){
+  document.querySelectorAll('.memberdiv').forEach(el =>el.remove())
+  let div = document.createElement('div')
+  div.setAttribute('class','memberdiv')
+  let inp = document.createElement('input')
+  inp.setAttribute('type','radio')
+  inp.setAttribute('selected','true')
+  inp.setAttribute('style','display:none')
+  inp.setAttribute('value',`${member.docID}`)
+  inp.setAttribute('id','hiddenmember')
+  div.appendChild(inp)
+  for(let row in member.rows){
+    let lbl = document.createElement('label')
+    lbl.innerHTML=`${member.rows[row]}`
+    let checkbox = document.createElement('input')
+    lbl.appendChild(checkbox)
+    checkbox.setAttribute('type','checkbox')
+    checkbox.setAttribute('value',`${member.rows[row]}`)
+    
+    div.appendChild(lbl)
+  }
+  let button = document.getElementById(member.fornavn)
+  button.parentNode.insertBefore(div,button.nextSibling)
+  console.log("rows showed and member "+member.fornavn+" selected");
 }
 
 async function postF(url,obj){
@@ -122,13 +156,16 @@ async function postF(url,obj){
 }
 
 function findMember(){
+  document.querySelectorAll('.memberdiv').forEach(element => element.remove())
   let input = document.getElementById('sercher').value
   let buttons = document.querySelectorAll('.memberButton')
   buttons.forEach(button=>{
     if(!button.textContent.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())){
       button.setAttribute('style','display:none')
+      document.getElementById(button.textContent).setAttribute('style','display:none')
     }else{
       button.setAttribute('style','display:block')
+      document.getElementById(button.textContent).setAttribute('style','display:block')
     }
   })
 }
