@@ -2,10 +2,20 @@ html
     head 
         title medlem
         link(rel="stylesheet" type="text/css" href="/css/medlem.css")
-    body 
-        .h1 MEDLEMS-INFO
-        p= 'Fornavn: ' + member.fornavn 
-        p= 'Efternavn: ' +member.efternavn
-        p= 'Medlems-ID: ' +member.membersID
-
-        a.button(href='/members') Tilbage
+    body
+        #container
+            #backButton
+                a.buttonBack(href="/")= 'Startside' 
+            #memberTitle Medlems-info
+            #firstNameTitle
+                p= 'Fornavn: '
+            #firstName
+                p= member.fornavn
+            #lastNameTitle 
+                p= 'Efternavn: '
+            #lastName
+                p= member.efternavn
+            #memberIDTitle
+                p= 'Medlems-ID: '
+            #memberID
+                p= member.membersID
