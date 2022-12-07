@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { setDoc, getFirestore, collection, getDocs, doc, deleteDoc, addDoc, getDoc, query, where, updateDoc } from "firebase/firestore";
 import { Game } from "./classes.js/game.js";
 import alert from 'alert'
+import {searchMemberByName, firebaseGameConverter, addVinderTal} from "./assets/js/smallJsFuncs.js"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -108,30 +109,7 @@ async function getgame(id) { // henter game med bestemt id fra db Games i fireba
   return game
 }
 
-async function firebaseGameConverter(gID) {
-// Firestore data converter
-const gameConverter = {
-    toFirestore: (game) => {
-        return game 
-    },
-    fromFirestore: (snapshot) => {
-        const data = snapshot.data();
-        return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums,data.winnerArray,data.date,data.participantList,data.concreteWinners);
-    }
-};
-const ref = doc(db, "Games", gID ).withConverter(gameConverter);
-const docSnap = await getDoc(ref);
-if (docSnap.exists()) {
-  // Convert to City object
-  const game = docSnap.data();
-  // Use a City instance method
-  console.log("G: "+game.toString());
-} else {
-  console.log("No such document!");
-}
 
-    return docSnap
-}
 
 
 
@@ -208,13 +186,7 @@ async function getGameParticipants(lID) {
 /// gameParticipants slut////////////////////////////////////
 
 //--------------VINDERTAL_START---------------------
-async function addVinderTal(lid, a, b, c) {
-  console.log("vindertal tilføjes start");
-  const docRef = doc(db, "Games", lid)
-  const opdatere = await updateDoc(docRef, { winnerArray: [a, b, c] })
-  console.log("vindertal tilføjes slut");
 
-}
 //--------------VINDERTAL_SLUT----------------------
 
 
@@ -287,6 +259,13 @@ app.get('/demoliste', async (req, res) => {
 
 app.get('/game/:id/addDeltagere', async (request, response) => { //ok
   const members = await getMembers() // giver alle Members af denne game
+
+  let userInput = request.query.searchBar;
+  console.log(userInput);
+  let foundMembers = searchMemberByName(userInput, members)
+
+
+
   const game = await getgame(request.params.id) // giver game fra db med id fra input
   const allGames = await getDocs(GamesCollection)
   const arrayGames = allGames.docs.map(game =>game.data())
@@ -304,7 +283,7 @@ app.get('/game/:id/addDeltagere', async (request, response) => { //ok
   }
   console.log(nextDate);
   game.nextDate = nextDate;
-  response.render('addDeltagere', { members: members, game: game })
+  response.render('addDeltagere', { members: foundMembers, game: game })
 })
 
 app.post('/addDeltagere', async (request, response) => {
