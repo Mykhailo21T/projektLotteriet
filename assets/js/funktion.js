@@ -120,3 +120,16 @@ async function postF(url,obj){
   });
 }
 
+function findMember(){
+  console.log(123);
+  let input = document.getElementById('sercher').value
+  console.log(input);
+  let buttons = document.querySelectorAll('.memberButton')
+  buttons.forEach(button=>{
+    if(!button.textContent.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())){
+      button.setAttribute('style','display:none')
+    }else{
+      button.setAttribute('style','display:block')
+    }
+  })
+}

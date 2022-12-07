@@ -12,7 +12,7 @@ html
             #buyRowTitle Tilføj talrække(r)
             #searchForMembers Søg efter medlem
             #searchField
-                input.txtSearch(type="text", name="searchBar", class="search", placeholder= "Indtast navn")
+                input.txtSearch(id="sercher",type="text", name="searchBar", class="search", placeholder= "Indtast navn", onkeyup="findMember();")
             #choseMember Vælg medlem
             #memberArea
                 each member in members
