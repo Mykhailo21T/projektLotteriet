@@ -2,7 +2,7 @@ html
     head 
         title game
         script(src="/js/funktion.js") 
-        script(src="/js/smallJsFuncs.js") 
+        script(src="/js/smallJsFuncs.js" defer) 
         link(rel="stylesheet" type="text/css" href="/css/winningRow.css")
     body 
     #container
@@ -21,7 +21,7 @@ html
             input.inputField(type="number", id= winner3, min = 1, max = 25)
 
         #submitButton
-            button.buttonSubmit(href='javascript: tilfVT(\''+ game.docID +'\')', id= but1, onclick="javascript: disableInputField") TILFØJ
+            button.buttonSubmit(name= "but", href='javascript: tilfVT(\''+ game.docID +'\')', onclick="javascript: disableInputField") TILFØJ
         #definiteWinningNumbersText 
             h2='ENDELIGE VINDERTAL'
         #definiteWinningNumbers

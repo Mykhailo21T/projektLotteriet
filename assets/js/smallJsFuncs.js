@@ -55,14 +55,43 @@ export function searchMemberByName(name="", list) {
       const game = await firebaseGameConverter(gID)
       let gameX = game.data()
       gameX.winnerArray = [a,b,c]
-      console.log("vindertal tilføjes start");
+      console.log("vindertal tilføjes start" + gameX.winnerArray);
       const docRef = doc(db, "Games", gID)
       const opdatere = await updateDoc(docRef, gameX)
       console.log("vindertal tilføjes slut");
     
     }
 
-    let button = document.getElementById("but1")
-  button.addEventListener("click", (event)=> {
-    const infoNode = document.
+
+    let buttonSubmit = document.querySelector('buttonSubmit')
+
+    
+
+    
+    buttonSubmit.addEventListener('onclick', (event)=> {
+      console.log("dead?")
+      let num1 = document.getElementById('winner1')
+      let num2 = document.getElementById('winner2')
+      let num3 = document.getElementById('winner3')
+      console.log('før vindertal tilføjes');
+      addVinderTal(game.docID ,num1,num2,num3)
+      console.log('efter vindertal tilføjes');
+    })
+
+  
+
+
+
+
+
+    /*
+    document.querySelector('#submitButton').addEventListener("click", (event)=> {
+    let num1 = document.getElementById('winner1')
+    let num2 = document.getElementById('winner2')
+    let num3 = document.getElementById('winner3')
+    console.log('før vindertal tilføjes');
+    addVinderTal(game.docID ,num1,num2,num3)
+    console.log('efter vindertal tilføjes');
   })
+
+  */
