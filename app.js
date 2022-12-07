@@ -59,26 +59,26 @@ async function getMember(id) {
 async function addMember(member) {
   // member = {membersID: 1, Fornavn: 'Hans', Efternavn: 'Hansen'}
   const tempDocRef = await getDocs(membersCollection)
-  let tempArray = tempDocRef.docs.map(member=>member.data())
+  let tempArray = tempDocRef.docs.map(member => member.data())
 
-  if(userUnik(tempArray,member)){ 
+  if (userUnik(tempArray, member)) {
     let index = tempDocRef.size
     console.log(index);
-    const docRef = await setDoc(doc(db,"Members",`${member.membersID}_${member.fornavn}`), member)//, member.membersID
+    const docRef = await setDoc(doc(db, "Members", `${member.membersID}_${member.fornavn}`), member)//, member.membersID
     console.log("Document witten with ID: ", `${member.membersID}_${member.fornavn}`);
-    return `${index+1}_${member.fornavn}`//docRef.id
-  } else{
+    return `${index + 1}_${member.fornavn}`//docRef.id
+  } else {
     alert("Bruger med denne id eksistere i forvejen")
     return null
   }
 }
-function userUnik(array,user){
-  for(let member of array){
-    console.log("member: "+member.membersID+", user: "+user.membersID);
-    if( member.membersID == user.membersID ){
-        console.log("id bruges ellerede");
-        return false;
-      }
+function userUnik(array, user) {
+  for (let member of array) {
+    console.log("member: " + member.membersID + ", user: " + user.membersID);
+    if (member.membersID == user.membersID) {
+      console.log("id bruges ellerede");
+      return false;
+    }
   }
   return true;
 }
@@ -113,27 +113,27 @@ async function getgame(id) { // henter game med bestemt id fra db Games i fireba
 async function firebaseGameConverter(gID) {
   // Firestore data converter
   const gameConverter = {
-      toFirestore: (game) => {
-          return game 
-      },
-      fromFirestore: (snapshot) => {
-          const data = snapshot.data();
-          return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums,data.winnerArray,data.date,data.participantList,data.concreteWinners);
-      }
+    toFirestore: (game) => {
+      return game
+    },
+    fromFirestore: (snapshot) => {
+      const data = snapshot.data();
+      return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums, data.winnerArray, data.date, data.participantList, data.concreteWinners);
+    }
   };
-  const ref = doc(db, "Games", gID ).withConverter(gameConverter);
+  const ref = doc(db, "Games", gID).withConverter(gameConverter);
   const docSnap = await getDoc(ref);
   if (docSnap.exists()) {
     // Convert to City object
     const game = docSnap.data();
     // Use a City instance method
-    console.log("G: "+game.toString());
+    console.log("G: " + game.toString());
   } else {
     console.log("No such document!");
   }
-  
-      return docSnap
-  }
+
+  return docSnap
+}
 
 //firebase converter //////////////////////////////////
 
@@ -170,15 +170,15 @@ async function getDeltager(id) { //henter deltager med bestemt id
 
 async function addDeltager(gID, mID, name) {
 
-let retrivedGameData = await firebaseGameConverter(gID)
+  let retrivedGameData = await firebaseGameConverter(gID)
 
-let data = retrivedGameData.data()
+  let data = retrivedGameData.data()
 
-data.addParticipant(name, mID, gID)
+  data.addParticipant(name, mID, gID)
 
-const docRef = doc(db, "Games", gID)
+  const docRef = doc(db, "Games", gID)
 
-const update = await updateDoc(docRef, data)
+  const update = await updateDoc(docRef, data)
 
 }
 
@@ -210,10 +210,47 @@ async function getGameParticipants(lID) {
 /// gameParticipants slut////////////////////////////////////
 
 //--------------VINDERTAL_START---------------------
-async function addVinderTal(id,a,b,c){
-  let docRef = doc(db,"Games",`${id}`)
-  await updateDoc(docRef,{winnerArray:[a,b,c]})
+async function addVinderTal(id, a, b, c) {
+  console.log("map part start");
+  let participants = (await getDocs(deltagereCollection)).docs.map(doc => {
+    let data = doc.data()
+    data.docID = doc.id
+    return data
+  }).filter(pt => pt.docID.includes(id))
+  console.log("map part slut");
+  console.log(participants);
+  let winners = []
+  let winnerRows = {}
+  console.log("winners check start");
+  participants.forEach((participant) => {
+    for (const row in participant.rows) {
+      console.log("row "+participant.rows[row]);
+      let n = 0;
+      for(let number of participant.rows[row]) {
+        console.log(a+" number "+number);
+        if (number == a || number == b || number == c)
+          n++;
+      }
+      console.log("n "+n);
+      if (n == 3) {
+        console.log("row "+participant.rows[row]);
+        winners.push(participant.member)
+        winnerRows[Object.keys(winnerRows).length]=(participant.rows[row])
+        console.log("winners "+winners+" rows "+winnerRows);
+      }
+    }
+  })
+  console.log("winners check slut");
+  let docRef = doc(db, "Games", `${id}`)
+  if (winners.length > 0) {
+    await updateDoc(docRef, { winnerArray: [a, b, c], winners: winners, winnerRows: winnerRows })
+  } else {
+    await updateDoc(docRef, { winnerArray: [a, b, c] })
+  }
+  let refGame = await getDoc(docRef)
+  let retGame = refGame.data()
   console.log("vindertal opdateret");
+  return retGame
 }
 
 //--------------VINDERTAL_SLUT----------------------
@@ -293,15 +330,15 @@ app.get('/game/:id/addDeltagere', async (request, response) => { //ok
 
   const game = await getgame(request.params.id) // giver game fra db med id fra input
   const allGames = await getDocs(GamesCollection)
-  const arrayGames = allGames.docs.map(game =>game.data())
+  const arrayGames = allGames.docs.map(game => game.data())
   let nextDate = null;
   let todaysDate = new Date()
   const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth() + 1) + "-" + todaysDate.getUTCDate()
-  for(let g of arrayGames){
-    console.log("g dato "+g.date);
+  for (let g of arrayGames) {
+    console.log("g dato " + g.date);
     let lotteryDate = new Date(g.date)
     let comparisonDate = new Date(concreteDate)
-    if(comparisonDate<=lotteryDate){
+    if (comparisonDate <= lotteryDate) {
       nextDate = g.date
       break
     }
@@ -378,7 +415,7 @@ app.get('/:lid/:mid', async (request, response) => { //ok
   const lID = request.params.lid
   const mID = request.params.mid
   const name = request.params.Fornavn
-  const deltager = await addDeltager(name,lID, mID)
+  const deltager = await addDeltager(name, lID, mID)
   response.render('deltager', { deltager: deltager })
 })
 
@@ -397,7 +434,7 @@ app.post('/sendRows', async (req, res) => {
   // TODO to  
   let dataQ = req.body
   //console.log("log dagaQ: "+JSON.stringify(dataQ));
-  let gp = await setDoc(doc(db,"GameParticipants",`${dataQ.game}:${dataQ.member}`), dataQ)//member tilføjes til game på bestemte dato som opretter dokument med 2 id'er ind i GameParticipants
+  let gp = await setDoc(doc(db, "GameParticipants", `${dataQ.game}:${dataQ.member}`), dataQ)//member tilføjes til game på bestemte dato som opretter dokument med 2 id'er ind i GameParticipants
   //start tilføje gameParticipant til game
   let docRef = doc(db, "Games", dataQ.game)
   let docGet = await getDoc(docRef)
@@ -407,33 +444,33 @@ app.post('/sendRows', async (req, res) => {
   //console.log("log pl: "+pl);
   let game = await updateDoc(docRef, { participantList: pl })
   //slut tilføje gameParticipant til game
-  
+
   //start tilføj rows til member
-  let docMember = doc(db,'Members',dataQ.member)
+  let docMember = doc(db, 'Members', dataQ.member)
   let docGetMember = await getDoc(docMember)
   let dGMData = docGetMember.data()
   let dGMDRows = dGMData.rows
   //console.log("dataQ rows: "+JSON.stringify(dataQ.rows));
-  let newRows = checkDoRows(dGMDRows,dataQ.rows)
-  await updateDoc(docMember,{rows:newRows})
+  let newRows = checkDoRows(dGMDRows, dataQ.rows)
+  await updateDoc(docMember, { rows: newRows })
   //slut tilføj rows til member
   console.log(222);
   res.status(200)
   res.end()
 })
 
-function checkDoRows(inRows,checkArray){ // inrows array fra member, 
-  for(let row in inRows){
-    for(let arr in checkArray){
-      if(JSON.stringify(inRows[row]) == JSON.stringify(checkArray[arr])){
-        console.log("bingo "+inRows[row]+" "+checkArray[arr]);
+function checkDoRows(inRows, checkArray) { // inrows array fra member, 
+  for (let row in inRows) {
+    for (let arr in checkArray) {
+      if (JSON.stringify(inRows[row]) == JSON.stringify(checkArray[arr])) {
+        console.log("bingo " + inRows[row] + " " + checkArray[arr]);
         delete checkArray[arr]//fjerne talrække hvis den eksistere i member
       }
     }
   }
-  if(Object.keys(checkArray).length>0){
-    for(let arr in checkArray){
-      inRows[Object.keys(inRows).length]=checkArray[arr]
+  if (Object.keys(checkArray).length > 0) {
+    for (let arr in checkArray) {
+      inRows[Object.keys(inRows).length] = checkArray[arr]
     }
   }
   return inRows
@@ -446,27 +483,29 @@ app.post('/game/:lotId/:tal1/:tal2/:tal3', async (req, res) => {
   let c = req.params.tal3
   let id = req.params.lotId
   let vt = await addVinderTal(id, a, b, c)
-  res.redirect(`/game/${id}`)
   console.log("add vt slut");
+  res.render(`game`, { game: vt })
+  res.status(200)
+  res.end()
 })
 
-app.get('/', async(req, res) => {
+app.get('/', async (req, res) => {
   const allGames = await getDocs(GamesCollection)
-  const arrayGames = allGames.docs.map(game =>game.data())
+  const arrayGames = allGames.docs.map(game => game.data())
   let nextDate = null;
   let todaysDate = new Date()
   const concreteDate = todaysDate.getUTCFullYear() + "-" + (todaysDate.getUTCMonth() + 1) + "-" + todaysDate.getUTCDate()
-  for(let g of arrayGames){
-    console.log("g dato "+g.date);
+  for (let g of arrayGames) {
+    console.log("g dato " + g.date);
     let lotteryDate = new Date(g.date)
     let comparisonDate = new Date(concreteDate)
-    if(comparisonDate<=lotteryDate){
+    if (comparisonDate <= lotteryDate) {
       nextDate = g.date
       break
     }
   }
   console.log(nextDate);
-  res.render('start',{nextDate:nextDate})
+  res.render('start', { nextDate: nextDate })
 })
 
 app.delete('/deleteVT/:id', async (req, res) => {//test

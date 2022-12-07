@@ -20,16 +20,20 @@ html
             input.inputField(type="number", id= "winner3", min = 1, max = 25)
 
         #submitButton
-            button.buttonSubmit(onclick='javascript: tilfVT(\''+ game.docID +'\')') TILFØJ
+            button.buttonSubmit(onclick='javascript: tilfVT('+ JSON.stringify(game) +')') TILFØJ
         #definiteWinningNumbersText 
             h2='ENDELIGE VINDERTAL'
         #definiteWinningNumbers
-            h3=game.Vindertal
+            h3=game.winnerArray
         #winningRows 
             h2= 'VINDERRÆKKE(R)'
         #winningNames 
             h2= 'VINDER(E)'
         #winningRowsUL 
+            each row in game.winnerRows 
+                ul= row
         #winningNameUL
+            each winner in game.winners
+                ul= winner
 
 

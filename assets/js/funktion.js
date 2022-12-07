@@ -26,13 +26,13 @@ async function print(id) {
       */
 }
 
-async function tilfVT(id) {
+async function tilfVT(game) {
   console.log("tilfVT(id) start");
   let a = document.getElementById("winner1").value
   let b = document.getElementById("winner2").value
   let c = document.getElementById("winner3").value
 
-  const responce = await fetch(`/game/${id}/${a}/${b}/${c}`, {
+  const responce = await fetch(`/game/${game.docID}/${a}/${b}/${c}`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
