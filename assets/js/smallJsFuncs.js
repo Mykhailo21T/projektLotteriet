@@ -62,7 +62,7 @@ export function searchMemberByName(name="", list) {
     
     }
 
-
+/*
     let buttonSubmit = document.querySelector('buttonSubmit')
 
     
@@ -80,7 +80,7 @@ export function searchMemberByName(name="", list) {
 
   
 
-
+*/
 
 
 
