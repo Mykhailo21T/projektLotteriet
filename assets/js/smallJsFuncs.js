@@ -26,7 +26,35 @@ export function searchMemberByName(name="", list) {
     return results;
   }
 
-  let button = document.getElementById("but1")
-  button.addEventListener("click", (event)=> {
-    const infoNode = document.
-  })
+  export async function firebaseGameConverter(gID) {
+    // Firestore data converter
+    const gameConverter = {
+        toFirestore: (game) => {
+            return game 
+        },
+        fromFirestore: (snapshot) => {
+            const data = snapshot.data();
+            return new Game(data.highestNum, data.lowestNum, data.amountOfWinningNums,data.winnerArray,data.date,data.participantList,data.concreteWinners);
+        }
+    };
+    const ref = doc(db, "Games", gID ).withConverter(gameConverter);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      // Convert to City object
+      const game = docSnap.data();
+      // Use a City instance method
+      console.log("G: "+game.toString());
+    } else {
+      console.log("No such document!");
+    }
+    
+        return docSnap
+    }
+
+    export async function addVinderTal(lid, a, b, c) {
+      console.log("vindertal tilføjes start");
+      const docRef = doc(db, "Games", lid)
+      const opdatere = await updateDoc(docRef, { winnerArray: [a, b, c] })
+      console.log("vindertal tilføjes slut");
+    
+    }
