@@ -25,3 +25,8 @@ export function searchMemberByName(name="", list) {
 
     return results;
   }
+
+  let button = document.getElementById("but1")
+  button.addEventListener("click", (event)=> {
+    const infoNode = document.
+  })

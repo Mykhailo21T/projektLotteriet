@@ -209,10 +209,13 @@ async function getGameParticipants(lID) {
 /// gameParticipants slut////////////////////////////////////
 
 //--------------VINDERTAL_START---------------------
-async function addVinderTal(lid, a, b, c) {
+async function addVinderTal(gID, a, b, c) {
+  const game = await firebaseGameConverter(gID)
+  let gameX = game.data()
+  gameX.winnerArray = [a,b,c]
   console.log("vindertal tilføjes start");
-  const docRef = doc(db, "Games", lid)
-  const opdatere = await updateDoc(docRef, { winnerArray: [a, b, c] })
+  const docRef = doc(db, "Games", gID)
+  const opdatere = await updateDoc(docRef, gameX)
   console.log("vindertal tilføjes slut");
 
 }
