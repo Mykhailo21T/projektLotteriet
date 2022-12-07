@@ -14,14 +14,14 @@ html
         #winningRow
             h2='VÆLG VINDERTAL'
         #intInput1
-            input.inputField(type="number", min = 1, max = 25)
+            input.inputField(type="number", id= winner1, min = 1, max = 25)
         #intInput2
-            input.inputField(type="number", min = 1, max = 25)
+            input.inputField(type="number", id= winner2, min = 1, max = 25)
         #intInput3    
-            input.inputField(type="number", min = 1, max = 25)
+            input.inputField(type="number", id= winner3, min = 1, max = 25)
 
         #submitButton
-            button.buttonSubmit(href='javascript: tilfVT(\''+ game.docID +'\')', onclick="javascript: disableInputField") TILFØJ
+            button.buttonSubmit(href='javascript: tilfVT(\''+ game.docID +'\')', id= but1, onclick="javascript: disableInputField") TILFØJ
         #definiteWinningNumbersText 
             h2='ENDELIGE VINDERTAL'
         #definiteWinningNumbers
