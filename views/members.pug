@@ -1,15 +1,16 @@
 html 
     head 
         title Members 
+        script(src="/js/funktion.js")
         link(rel="stylesheet" type="text/css" href="/css/medlemmer.css")
     body 
         #container 
             #backButton
                 a.buttonBack(href="/")= 'Startside'
             #memberTitle Medlems-oversigt
-            #searchForMembers Søg efter medlem 
+            #searchForMembers Søg efter medlem      
             #searchField
-                input.txtSearch(type="text", name="searchBar", class="search", placeholder= "Indtast navn")
+                input.txtSearch(id="sercher",type="text", name="searchBar", class="search", placeholder= "Indtast navn", onkeyup="findMember();")
             #memberArea
                 each member in members
                     a.memberButton(href='/member/' + member.docID)= member.fornavn
