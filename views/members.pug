@@ -13,7 +13,10 @@ html
                 input.txtSearch(id="sercher",type="text", name="searchBar", class="search", placeholder= "Indtast navn", onkeyup="findMember();")
             #memberArea
                 each member in members
-                    a.memberButton(href='/member/' + member.docID)= member.fornavn
+                    a.memberButton(href="/member/"+member.docID,id=`${member.fornavn}`,onclick='javascript: visMemberRows('+JSON.stringify(member)+')')=member.fornavn
+                    
+                    
+                    
                      
             
                         
