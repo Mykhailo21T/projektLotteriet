@@ -234,6 +234,7 @@ async function addVinderTal(id, a, b, c) {
       console.log("n "+n);
       if (n == 3) {
         console.log("row "+participant.rows[row]);
+        if(!winners.includes(participant.member))
         winners.push(participant.member)
         winnerRows[Object.keys(winnerRows).length]=(participant.rows[row])
         console.log("winners "+winners+" rows "+winnerRows);
