@@ -39,6 +39,11 @@ h3 {
   text-shadow: 2pt 0 0 #000, 0 -1px 0 #000, 0 1pt 0 #000, -1px 0 0 #000;
 }
 
+.finalWinningNumbers {
+  font-size: 40pt;
+  margin-top: 79pt;
+}
+
 #backButton {
     grid-area: a;
 }
@@ -209,7 +214,17 @@ h3 {
   }
 
   #winningNameUL {
-    
+    grid-area: m;
+  }
+
+  .winnerRow {
+    font-size: 30pt;
+    margin-left: -60pt;
+  }
+
+  .winnerName {
+    font-size: 30pt;
+    margin-left: 19pt;
   }
 
 

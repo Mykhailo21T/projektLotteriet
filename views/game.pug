@@ -24,16 +24,16 @@ html
         #definiteWinningNumbersText 
             h2='ENDELIGE VINDERTAL'
         #definiteWinningNumbers
-            h3=game.winnerArray
+            h3.finalWinningNumbers=game.winnerArray
         #winningRows 
             h2= 'VINDERRÆKKE(R)'
         #winningNames 
             h2= 'VINDER(E)'
         #winningRowsUL 
             each row in game.winnerRows 
-                ul= row
+                h3.winnerRow= row
         #winningNameUL
             each winner in game.winners
-                ul= winner
+                h3.winnerName=winner
 
 
